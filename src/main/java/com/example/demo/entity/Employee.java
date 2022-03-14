@@ -5,9 +5,10 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
+
 @Entity
-@Table(name = "Admin")
-public class Admin {
+@Table(name = "Employee")
+public class Employee {
 
     @Id
     private UUID id;
@@ -18,20 +19,22 @@ public class Admin {
     private  String  login;
     @Column(name = "password", nullable = false)
     private String password;
-    @OneToMany(mappedBy = "admin")
-    private List<Employee> employees;
-    @OneToMany(mappedBy = "admin")
-    private List<Info> infos;
+    @ManyToOne
+    @JoinColumn(name = "admin")
+    private Admin admin;
+    @OneToMany(mappedBy = "employee")
+    private List<Client> clients;
 
-    public Admin(UUID id, String name, String login, String password, List<Employee> employees) {
+    public Employee() {
+    }
+
+    public Employee(UUID id, String name, String login, String password, Admin admin, List<Client> clients) {
         this.id = id;
         this.name = name;
         this.login = login;
         this.password = password;
-        this.employees = employees;
-    }
-
-    public Admin() {
+        this.admin = admin;
+        this.clients = clients;
     }
 
     public UUID getId() {
@@ -66,39 +69,49 @@ public class Admin {
         this.password = password;
     }
 
-    public List<Employee> getEmployees() {
-        return employees;
+    public Admin getAdmin() {
+        return admin;
     }
 
-    public void setEmployees(List<Employee> employees) {
-        this.employees = employees;
+    public void setAdmin(Admin admin) {
+        this.admin = admin;
+    }
+
+    public List<Client> getClients() {
+        return clients;
+    }
+
+    public void setClients(List<Client> clients) {
+        this.clients = clients;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Admin admin = (Admin) o;
-        return Objects.equals(id, admin.id) &&
-                Objects.equals(name, admin.name) &&
-                Objects.equals(login, admin.login) &&
-                Objects.equals(password, admin.password) &&
-                Objects.equals(employees, admin.employees);
+        Employee employee = (Employee) o;
+        return Objects.equals(id, employee.id) &&
+                Objects.equals(name, employee.name) &&
+                Objects.equals(login, employee.login) &&
+                Objects.equals(password, employee.password) &&
+                Objects.equals(admin, employee.admin) &&
+                Objects.equals(clients, employee.clients);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, login, password, employees);
+        return Objects.hash(id, name, login, password, admin, clients);
     }
 
     @Override
     public String toString() {
-        return "Admin{" +
+        return "Employee{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
-                ", employees=" + employees +
+                ", admin=" + admin +
+                ", clients=" + clients +
                 '}';
     }
 }
