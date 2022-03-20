@@ -30,16 +30,13 @@ public class Info {
     @ManyToOne
     @JoinColumn(name = "admin")
     private Admin admin;
-    @OneToMany(mappedBy = "info")
-    private List<Credit> credits;
-    @OneToMany(mappedBy = "info")
-    private List<Deposit> deposits;
+
 
     public Info() {
     }
 
     public Info(UUID id, Type type, String name, double minSumm, double maxSumm,
-                double rate, Currency currency, Admin admin, List<Credit> credits, List<Deposit> deposits) {
+                double rate, Currency currency, Admin admin) {
         this.id = id;
         this.type = type;
         this.name = name;
@@ -48,8 +45,7 @@ public class Info {
         this.rate = rate;
         this.currency = currency;
         this.admin = admin;
-        this.credits = credits;
-        this.deposits = deposits;
+
     }
 
     public UUID getId() {
@@ -116,21 +112,7 @@ public class Info {
         this.admin = admin;
     }
 
-    public List<Credit> getCredits() {
-        return credits;
-    }
 
-    public void setCredits(List<Credit> credits) {
-        this.credits = credits;
-    }
-
-    public List<Deposit> getDeposits() {
-        return deposits;
-    }
-
-    public void setDeposits(List<Deposit> deposits) {
-        this.deposits = deposits;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -144,14 +126,12 @@ public class Info {
                 type == info.type &&
                 Objects.equals(name, info.name) &&
                 currency == info.currency &&
-                Objects.equals(admin, info.admin) &&
-                Objects.equals(credits, info.credits) &&
-                Objects.equals(deposits, info.deposits);
+                Objects.equals(admin, info.admin);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, type, name, minSumm, maxSumm, rate, currency, admin, credits, deposits);
+        return Objects.hash(id, type, name, minSumm, maxSumm, rate, currency, admin);
     }
 
     @Override
@@ -165,8 +145,6 @@ public class Info {
                 ", rate=" + rate +
                 ", currency=" + currency +
                 ", employee=" + admin +
-                ", credits=" + credits +
-                ", deposits=" + deposits +
                 '}';
     }
 }

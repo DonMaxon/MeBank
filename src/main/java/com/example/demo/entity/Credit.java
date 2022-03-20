@@ -27,10 +27,10 @@ public class Credit {
     private boolean isActive;
     @ManyToOne
     @JoinColumn(name = "client")
-    private Employee client;
+    private Client client;
     @ManyToOne
     @JoinColumn(name = "info")
-    private Employee info;
+    private Info info;
     @OneToMany(mappedBy = "credit")
     private List<Pay> pays;
 
@@ -38,7 +38,7 @@ public class Credit {
     }
 
     public Credit(UUID id, double summ, Date openDate, Date endDate, Date lastPayDate,
-                  double summOfNextPay, boolean isActive, Employee client, Employee info, List<Pay> pays) {
+                  double summOfNextPay, boolean isActive, Client client, Info info, List<Pay> pays) {
         this.id = id;
         this.summ = summ;
         this.openDate = openDate;
@@ -107,19 +107,19 @@ public class Credit {
         isActive = active;
     }
 
-    public Employee getClient() {
+    public Client getClient() {
         return client;
     }
 
-    public void setClient(Employee client) {
+    public void setClient(Client client) {
         this.client = client;
     }
 
-    public Employee getInfo() {
+    public Info getInfo() {
         return info;
     }
 
-    public void setInfo(Employee info) {
+    public void setInfo(Info info) {
         this.info = info;
     }
 
