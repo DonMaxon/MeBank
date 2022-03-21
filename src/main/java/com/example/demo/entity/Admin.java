@@ -1,9 +1,14 @@
 package com.example.demo.entity;
 
+import com.example.demo.AllRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+
 import javax.persistence.*;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Entity
 @Table(name = "Admin")
@@ -23,12 +28,13 @@ public class Admin {
     @OneToMany(mappedBy = "admin")
     private List<Info> infos;
 
-    public Admin(UUID id, String name, String login, String password, List<Employee> employees) {
+    public Admin(UUID id, String name, String login, String password, List<Employee> employees, List<Info> infos) {
         this.id = id;
         this.name = name;
         this.login = login;
         this.password = password;
         this.employees = employees;
+        this.infos = infos;
     }
 
     public Admin() {
@@ -72,6 +78,38 @@ public class Admin {
 
     public void setEmployees(List<Employee> employees) {
         this.employees = employees;
+    }
+
+    public List<Info> getInfos() {
+        return infos;
+    }
+
+    public void setInfos(List<Info> infos) {
+        this.infos = infos;
+    }
+
+    public String serialize() throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+        String json = mapper.writeValueAsString(this);
+        System.out.println(json);
+        return json;
+    }
+
+    public Admin deserialize(String json) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode jn = mapper.readTree(json);
+        UUID uuid = UUID.fromString(jn.get("id").asText());
+        String name = jn.get("name").asText();
+        String login = jn.get("login").asText();
+        String password = jn.get("password").asText();
+        String js = jn.get("employees").asText();
+        List<Employee> employees;
+        employees = js.equals("") ? new ArrayList<>(): Arrays.asList(new ObjectMapper().readValue(js, Employee[].class));
+        js = jn.get("infos").asText();
+        List<Info> infos;
+        infos = js.equals("") ? new ArrayList<>(): Arrays.asList(new ObjectMapper().readValue(js, Info[].class));
+        return new Admin(uuid, name, login, password, employees, infos);
     }
 
     @Override

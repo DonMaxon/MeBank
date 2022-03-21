@@ -1,9 +1,16 @@
 package com.example.demo.entity;
 
+import com.example.demo.AllRepository;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+
 import javax.persistence.*;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 
 @Entity
@@ -21,6 +28,7 @@ public class Employee {
     private String password;
     @ManyToOne
     @JoinColumn(name = "admin")
+    @JsonIgnore
     private Admin admin;
     @OneToMany(mappedBy = "employee")
     private List<Client> clients;
@@ -84,6 +92,35 @@ public class Employee {
     public void setClients(List<Client> clients) {
         this.clients = clients;
     }
+
+    @JsonGetter
+    public UUID getAdminID() {
+        return admin.getId();
+    }
+
+    public String serialize() throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+        String json = mapper.writeValueAsString(this);
+        System.out.println(json);
+        return json;
+    }
+
+    public Employee deserialize(String json) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode jn = mapper.readTree(json);
+        UUID uuid = UUID.fromString(jn.get("id").asText());
+        String name = jn.get("name").asText();
+        String login = jn.get("login").asText();
+        String password = jn.get("password").asText();
+        Admin admin = AllRepository.findAdminByID(UUID.fromString(jn.get("adminID").asText()));
+        String js = jn.get("clients").asText();
+        List<Client> clients;
+        clients = js.equals("") ? new ArrayList<>(): Arrays.asList(new ObjectMapper().readValue(js, Client[].class));
+        return new Employee(uuid, name, login, password, admin, clients);
+    }
+
+
 
     @Override
     public boolean equals(Object o) {

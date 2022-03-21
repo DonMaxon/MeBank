@@ -1,10 +1,17 @@
 package com.example.demo.entity;
 
+import com.example.demo.AllRepository;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+
 import javax.persistence.*;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Entity
 @Table(name = "Client")
@@ -33,6 +40,7 @@ public class Client {
     private Date creatingDate;
     @ManyToOne
     @JoinColumn(name = "employee")
+    @JsonIgnore
     private Employee employee;
     @OneToMany(mappedBy = "client")
     private List<Credit> credits;
@@ -163,6 +171,43 @@ public class Client {
 
     public void setDeposits(List<Deposit> deposits) {
         this.deposits = deposits;
+    }
+
+    @JsonGetter
+    public UUID getEmployeeID() {
+        return employee.getId();
+    }
+
+    public String serialize() throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+        mapper.setDateFormat(new SimpleDateFormat("dd-MM-yyyy"));
+        String json = mapper.writeValueAsString(this);
+        System.out.println(json);
+        return json;
+    }
+
+    public Client deserialize(String json) throws JsonProcessingException, ParseException {
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode jn = mapper.readTree(json);
+        UUID uuid = UUID.fromString(jn.get("id").asText());
+        String name = jn.get("name").asText();
+        String login = jn.get("login").asText();
+        String password = jn.get("password").asText();
+        String passportSeries = jn.get("passportSeries").asText();
+        String passportNumber = jn.get("passportNumber").asText();
+        String passportIssueBy = jn.get("passportIssueBy").asText();
+        Date passportIssueDate = new SimpleDateFormat("dd-MM-yyyy").parse(jn.get("passportIssueDate").asText());
+        String phone = jn.get("phone").asText();
+        Date creatingDate = new SimpleDateFormat("dd-MM-yyyy").parse(jn.get("creatingDate").asText());
+        Employee employee = AllRepository.findEmployeeByID(UUID.fromString(jn.get("employeeID").asText()));
+        String js = jn.get("credits").asText();
+        List<Credit> credits;
+        credits = js.equals("") ? new ArrayList<>(): Arrays.asList(new ObjectMapper().readValue(js, Credit[].class));
+        js = jn.get("deposits").asText();
+        List<Deposit> deposits;
+        deposits = js.equals("")? new ArrayList<>(): Arrays.asList(new ObjectMapper().readValue(js, Deposit[].class));
+        return new Client(uuid, name, login, password, passportSeries, passportNumber, passportIssueBy, passportIssueDate, phone, creatingDate, employee, credits, deposits);
     }
 
     @Override

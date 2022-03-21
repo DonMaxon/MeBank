@@ -1,11 +1,18 @@
 package com.example.demo.entity;
 
 
+import com.example.demo.AllRepository;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+
 import javax.persistence.*;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Entity
 @Table(name = "Credit")
@@ -27,9 +34,11 @@ public class Credit {
     private boolean isActive;
     @ManyToOne
     @JoinColumn(name = "client")
+    @JsonIgnore
     private Client client;
     @ManyToOne
     @JoinColumn(name = "info")
+    @JsonIgnore
     private Info info;
     @OneToMany(mappedBy = "credit")
     private List<Pay> pays;
@@ -129,6 +138,44 @@ public class Credit {
 
     public void setPays(List<Pay> pays) {
         this.pays = pays;
+    }
+
+    @JsonGetter
+    public UUID getClientID() {
+        return client.getId();
+    }
+
+    @JsonGetter
+    public UUID getInfoID() {
+        return info.getId();
+    }
+
+
+    public String serialize() throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+        mapper.setDateFormat(new SimpleDateFormat("dd-MM-yyyy"));
+        String json = mapper.writeValueAsString(this);
+        System.out.println(json);
+        return json;
+    }
+
+    public Credit deserialize(String json) throws JsonProcessingException, ParseException {
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode jn = mapper.readTree(json);
+        UUID uuid = UUID.fromString(jn.get("id").asText());
+        double summ = Double.parseDouble(jn.get("summ").asText());
+        Date openDate = new SimpleDateFormat("dd-MM-yyyy").parse(jn.get("openDate").asText());
+        Date endDate = new SimpleDateFormat("dd-MM-yyyy").parse(jn.get("endDate").asText());
+        Date lastPayDate = new SimpleDateFormat("dd-MM-yyyy").parse(jn.get("lastPayDate").asText());
+        double summOfNextPay = Double.parseDouble(jn.get("summOfNextPay").asText());
+        boolean isActive = Boolean.parseBoolean(jn.get("active").asText());
+        Client client = AllRepository.findClientByID(UUID.fromString(jn.get("clientID").asText()));
+        Info info = AllRepository.findInfoByID(UUID.fromString(jn.get("infoID").asText()));
+        String js = jn.get("pays").asText();
+        List<Pay> pays;
+        pays = js.equals("") ? new ArrayList<>(): Arrays.asList(new ObjectMapper().readValue(js, Pay[].class));
+        return new Credit(uuid, summ, openDate, endDate, lastPayDate, summOfNextPay, isActive, client, info, pays);
     }
 
     @Override
