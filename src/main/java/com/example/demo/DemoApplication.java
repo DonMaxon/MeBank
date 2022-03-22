@@ -21,7 +21,7 @@ public class DemoApplication {
 		System.out.println(date);
 		Admin admin = new Admin(UUID.randomUUID(), "John", "dungeon_master", "1234", new ArrayList<>(), new ArrayList<>());
 		Admin admin1 = new Admin(UUID.randomUUID(), "Peter", "boss_of_this_gym", "5678", new ArrayList<>(), new ArrayList<>());
-		Info info = new Info(new UUID(2, 1), Info.Type.CREDIT, "cool", 1, 100, 20, Info.Currency.RUB, admin);
+		Info info = new Info(UUID.randomUUID(), Info.Type.CREDIT, "cool", 1, 100, 20, Info.Currency.RUB, admin);
 		Info dep = new Info(UUID.randomUUID(), Info.Type.DEPOSIT, "cool", 1, 100, 20, Info.Currency.RUB, admin);
 		Info dep1 = new Info(UUID.randomUUID(), Info.Type.DEPOSIT, "cooler", 1, 1000, 21, Info.Currency.RUB, admin1);
 		Employee emp1 = new Employee(UUID.randomUUID(), "Will", "best_banker", "1234", admin, new ArrayList<>());
@@ -55,14 +55,14 @@ public class DemoApplication {
 		AllRepository.addCredit(credcl1);
 		AllRepository.addPay(pay1);
 
-		info.deserialize(info.serialize()).serialize();
-		admin.deserialize(admin.serialize()).serialize();
-		emp1.deserialize(emp1.serialize()).serialize();
-		emp2.deserialize(emp2.serialize()).serialize();
-		cl1.deserialize(cl1.serialize()).serialize();
-		cl2.deserialize(cl2.serialize()).serialize();
-		depcl1.deserialize(depcl1.serialize()).serialize();
-		credcl1.deserialize(credcl1.serialize()).serialize();
+		System.out.println(info.deserialize(info.serialize()).equals(info));
+		System.out.println(admin.deserialize(admin.serialize()).equals(admin));
+		System.out.println(emp1.deserialize(emp1.serialize()).equals(emp1));
+		System.out.println(emp2.deserialize(emp2.serialize()).equals(emp2));
+		System.out.println(cl1.deserialize(cl1.serialize()).equals(cl1));
+		System.out.println(cl2.deserialize(cl2.serialize()).equals(cl2));
+		System.out.println(depcl1.deserialize(depcl1.serialize()).equals(depcl1));
+		System.out.println(credcl1.deserialize(credcl1.serialize()).equals(credcl1));
 
 	}
 

@@ -189,6 +189,7 @@ public class Client {
 
     public Client deserialize(String json) throws JsonProcessingException, ParseException {
         ObjectMapper mapper = new ObjectMapper();
+        mapper.setDateFormat(new SimpleDateFormat("dd-MM-yyyy"));
         JsonNode jn = mapper.readTree(json);
         UUID uuid = UUID.fromString(jn.get("id").asText());
         String name = jn.get("name").asText();

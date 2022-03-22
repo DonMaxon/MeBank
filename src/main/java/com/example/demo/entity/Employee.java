@@ -101,6 +101,7 @@ public class Employee {
     public String serialize() throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
+        mapper.setDateFormat(new SimpleDateFormat("dd-MM-yyyy"));
         String json = mapper.writeValueAsString(this);
         System.out.println(json);
         return json;
@@ -108,6 +109,7 @@ public class Employee {
 
     public Employee deserialize(String json) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
+        mapper.setDateFormat(new SimpleDateFormat("dd-MM-yyyy"));
         JsonNode jn = mapper.readTree(json);
         UUID uuid = UUID.fromString(jn.get("id").asText());
         String name = jn.get("name").asText();
@@ -116,7 +118,7 @@ public class Employee {
         Admin admin = AllRepository.findAdminByID(UUID.fromString(jn.get("adminID").asText()));
         String js = jn.get("clients").asText();
         List<Client> clients;
-        clients = js.equals("") ? new ArrayList<>(): Arrays.asList(new ObjectMapper().readValue(js, Client[].class));
+        clients = js.equals("") ? new ArrayList<>(): Arrays.asList(mapper.readValue(js, Client[].class));
         return new Employee(uuid, name, login, password, admin, clients);
     }
 
