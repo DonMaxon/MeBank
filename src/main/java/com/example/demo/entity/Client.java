@@ -187,7 +187,7 @@ public class Client {
         return json;
     }
 
-    public Client deserialize(String json) throws JsonProcessingException, ParseException {
+    public static Client deserialize(String json) throws JsonProcessingException, ParseException {
         ObjectMapper mapper = new ObjectMapper();
         mapper.setDateFormat(new SimpleDateFormat("dd-MM-yyyy"));
         JsonNode jn = mapper.readTree(json);

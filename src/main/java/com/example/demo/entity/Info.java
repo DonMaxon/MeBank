@@ -136,7 +136,7 @@ public class Info {
         return json;
     }
 
-    public Info deserialize(String json) throws JsonProcessingException {
+    public static Info deserialize(String json) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         JsonNode jn = mapper.readTree(json);
         UUID uuid = UUID.fromString(jn.get("id").asText());

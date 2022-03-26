@@ -160,7 +160,7 @@ public class Credit {
         return json;
     }
 
-    public Credit deserialize(String json) throws JsonProcessingException, ParseException {
+    public static Credit deserialize(String json) throws JsonProcessingException, ParseException {
         ObjectMapper mapper = new ObjectMapper();
         mapper.setDateFormat(new SimpleDateFormat("dd-MM-yyyy"));
         JsonNode jn = mapper.readTree(json);

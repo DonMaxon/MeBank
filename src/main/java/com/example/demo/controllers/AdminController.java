@@ -1,10 +1,10 @@
 package com.example.demo.controllers;
 
 
-import com.example.demo.entity.Deposit;
-import com.example.demo.entity.Employee;
-import com.example.demo.services.DepositService;
-import com.example.demo.services.EmployeeService;
+import com.example.demo.entity.Admin;
+import com.example.demo.entity.Client;
+import com.example.demo.services.AdminService;
+import com.example.demo.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,34 +19,34 @@ import java.text.ParseException;
 import java.util.UUID;
 
 @Controller
-@RequestMapping("/deposit")
-public class DepositController {
+@RequestMapping("/admin")
+public class AdminController {
 
     @Autowired
-    DepositService depositService;
+    AdminService adminService;
 
     @RequestMapping(value = "/",
             method = RequestMethod.DELETE)
-    public ResponseEntity deleteDeposit(@PathVariable("id") UUID id){
-        depositService.delete(id);
+    public ResponseEntity deleteAdmin(@PathVariable("id") UUID id){
+        adminService.delete(id);
         return new ResponseEntity(HttpStatus.ACCEPTED);
     }
 
     @RequestMapping(value = "/",
             method = RequestMethod.GET)
-    public Deposit getDeposit(@PathVariable("id") UUID id){
-        return depositService.findById(id);
+    public Admin getAdmin(@PathVariable("id") UUID id){
+        return adminService.findById(id);
     }
 
     @RequestMapping(value = "/",
             method = RequestMethod.POST)
-    public ResponseEntity postDeposit(@RequestBody String depositString){
+    public ResponseEntity postAdmin(@RequestBody String adminString){
         try {
-            Deposit deposit = Deposit.deserialize(depositString);
-            depositService.save(deposit);
-            return new ResponseEntity(deposit, HttpStatus.ACCEPTED);
+            Admin admin = Admin.deserialize(adminString);
+            adminService.save(admin);
+            return new ResponseEntity(admin, HttpStatus.ACCEPTED);
         }
-        catch (IOException| ParseException e){
+        catch (IOException  e){
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
 

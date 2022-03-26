@@ -127,7 +127,7 @@ public class Deposit {
         return json;
     }
 
-    public Deposit deserialize(String json) throws JsonProcessingException, ParseException {
+    public static Deposit deserialize(String json) throws JsonProcessingException, ParseException {
         ObjectMapper mapper = new ObjectMapper();
         mapper.setDateFormat(new SimpleDateFormat("dd-MM-yyyy"));
         JsonNode jn = mapper.readTree(json);

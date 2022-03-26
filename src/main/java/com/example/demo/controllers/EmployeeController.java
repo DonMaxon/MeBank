@@ -1,10 +1,9 @@
 package com.example.demo.controllers;
 
-
-import com.example.demo.entity.Deposit;
 import com.example.demo.entity.Employee;
-import com.example.demo.services.DepositService;
+import com.example.demo.entity.Info;
 import com.example.demo.services.EmployeeService;
+import com.example.demo.services.InfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,38 +14,37 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.UUID;
 
 @Controller
-@RequestMapping("/deposit")
-public class DepositController {
+@RequestMapping("/employee")
+public class EmployeeController {
 
     @Autowired
-    DepositService depositService;
+    EmployeeService employeeService;
 
     @RequestMapping(value = "/",
             method = RequestMethod.DELETE)
-    public ResponseEntity deleteDeposit(@PathVariable("id") UUID id){
-        depositService.delete(id);
+    public ResponseEntity deleteEmployee(@PathVariable("id") UUID id){
+        employeeService.delete(id);
         return new ResponseEntity(HttpStatus.ACCEPTED);
     }
 
     @RequestMapping(value = "/",
             method = RequestMethod.GET)
-    public Deposit getDeposit(@PathVariable("id") UUID id){
-        return depositService.findById(id);
+    public Employee getEmployee(@PathVariable("id") UUID id){
+        return employeeService.findById(id);
     }
 
     @RequestMapping(value = "/",
             method = RequestMethod.POST)
-    public ResponseEntity postDeposit(@RequestBody String depositString){
+    public ResponseEntity postEmployee(@RequestBody String employeeString){
         try {
-            Deposit deposit = Deposit.deserialize(depositString);
-            depositService.save(deposit);
-            return new ResponseEntity(deposit, HttpStatus.ACCEPTED);
+            Employee employee = Employee.deserialize(employeeString);
+            employeeService.save(employee);
+            return new ResponseEntity(employee, HttpStatus.ACCEPTED);
         }
-        catch (IOException| ParseException e){
+        catch (IOException e){
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
 

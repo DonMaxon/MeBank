@@ -97,7 +97,7 @@ public class Admin {
         return json;
     }
 
-    public Admin deserialize(String json) throws JsonProcessingException {
+    public static Admin deserialize(String json) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         mapper.setDateFormat(new SimpleDateFormat("dd-MM-yyyy"));
         JsonNode jn = mapper.readTree(json);

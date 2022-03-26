@@ -1,10 +1,10 @@
 package com.example.demo.controllers;
 
 
-import com.example.demo.entity.Deposit;
-import com.example.demo.entity.Employee;
-import com.example.demo.services.DepositService;
-import com.example.demo.services.EmployeeService;
+import com.example.demo.entity.Client;
+import com.example.demo.entity.Credit;
+import com.example.demo.services.ClientService;
+import com.example.demo.services.CreditService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,34 +19,34 @@ import java.text.ParseException;
 import java.util.UUID;
 
 @Controller
-@RequestMapping("/deposit")
-public class DepositController {
+@RequestMapping("/client")
+public class ClientController {
 
     @Autowired
-    DepositService depositService;
+    ClientService clientService;
 
     @RequestMapping(value = "/",
             method = RequestMethod.DELETE)
-    public ResponseEntity deleteDeposit(@PathVariable("id") UUID id){
-        depositService.delete(id);
+    public ResponseEntity deleteClient(@PathVariable("id") UUID id){
+        clientService.delete(id);
         return new ResponseEntity(HttpStatus.ACCEPTED);
     }
 
     @RequestMapping(value = "/",
             method = RequestMethod.GET)
-    public Deposit getDeposit(@PathVariable("id") UUID id){
-        return depositService.findById(id);
+    public Client getClient(@PathVariable("id") UUID id){
+        return clientService.findById(id);
     }
 
     @RequestMapping(value = "/",
             method = RequestMethod.POST)
-    public ResponseEntity postDeposit(@RequestBody String depositString){
+    public ResponseEntity postClient(@RequestBody String clientString){
         try {
-            Deposit deposit = Deposit.deserialize(depositString);
-            depositService.save(deposit);
-            return new ResponseEntity(deposit, HttpStatus.ACCEPTED);
+            Client client = Client.deserialize(clientString);
+            clientService.save(client);
+            return new ResponseEntity(client, HttpStatus.ACCEPTED);
         }
-        catch (IOException| ParseException e){
+        catch (IOException | ParseException e){
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
 
