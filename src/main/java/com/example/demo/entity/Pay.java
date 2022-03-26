@@ -89,6 +89,7 @@ public class Pay {
 
     public Pay deserialize(String json) throws JsonProcessingException, ParseException {
         ObjectMapper mapper = new ObjectMapper();
+        mapper.setDateFormat(new SimpleDateFormat("dd-MM-yyyy"));
         JsonNode jn = mapper.readTree(json);
         UUID uuid = UUID.fromString(jn.get("id").asText());
         Date date = new SimpleDateFormat("dd-MM-yyyy").parse(jn.get("date").asText());

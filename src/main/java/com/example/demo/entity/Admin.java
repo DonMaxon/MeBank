@@ -90,6 +90,7 @@ public class Admin {
 
     public String serialize() throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
+        mapper.setDateFormat(new SimpleDateFormat("dd-MM-yyyy"));
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
         String json = mapper.writeValueAsString(this);
         System.out.println(json);
@@ -98,6 +99,7 @@ public class Admin {
 
     public Admin deserialize(String json) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
+        mapper.setDateFormat(new SimpleDateFormat("dd-MM-yyyy"));
         JsonNode jn = mapper.readTree(json);
         UUID uuid = UUID.fromString(jn.get("id").asText());
         String name = jn.get("name").asText();
@@ -105,10 +107,10 @@ public class Admin {
         String password = jn.get("password").asText();
         String js = jn.get("employees").asText();
         List<Employee> employees;
-        employees = js.equals("") ? new ArrayList<>(): Arrays.asList(new ObjectMapper().readValue(js, Employee[].class));
+        employees = js.equals("") ? new ArrayList<>(): new ArrayList<>(Arrays.asList(mapper.readValue(js, Employee[].class)));
         js = jn.get("infos").asText();
         List<Info> infos;
-        infos = js.equals("") ? new ArrayList<>(): Arrays.asList(new ObjectMapper().readValue(js, Info[].class));
+        infos = js.equals("") ? new ArrayList<>(): new ArrayList<>(Arrays.asList(mapper.readValue(js, Info[].class)));
         return new Admin(uuid, name, login, password, employees, infos);
     }
 
@@ -117,16 +119,12 @@ public class Admin {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Admin admin = (Admin) o;
-        return Objects.equals(id, admin.id) &&
-                Objects.equals(name, admin.name) &&
-                Objects.equals(login, admin.login) &&
-                Objects.equals(password, admin.password) &&
-                Objects.equals(employees, admin.employees);
+        return id.equals(admin.id) && name.equals(admin.name) && login.equals(admin.login) && password.equals(admin.password) && employees.equals(admin.employees) && infos.equals(admin.infos);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, login, password, employees);
+        return Objects.hash(id, name, login, password, employees, infos);
     }
 
     @Override

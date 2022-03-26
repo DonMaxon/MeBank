@@ -55,14 +55,14 @@ public class DemoApplication {
 		AllRepository.addCredit(credcl1);
 		AllRepository.addPay(pay1);
 
-		info.deserialize(info.serialize()).serialize();
-		admin.deserialize(admin.serialize()).serialize();
-		emp1.deserialize(emp1.serialize()).serialize();
-		emp2.deserialize(emp2.serialize()).serialize();
-		cl1.deserialize(cl1.serialize()).serialize();
-		cl2.deserialize(cl2.serialize()).serialize();
-		depcl1.deserialize(depcl1.serialize()).serialize();
-		credcl1.deserialize(credcl1.serialize()).serialize();
+		System.out.println(info.deserialize(info.serialize()).equals(info));
+		System.out.println(admin.deserialize(admin.serialize()).equals(admin));
+		System.out.println(emp1.deserialize(emp1.serialize()).equals(emp1));
+		System.out.println(emp2.deserialize(emp2.serialize()).equals(emp2));
+		System.out.println(cl1.deserialize(cl1.serialize()).equals(cl1));
+		System.out.println(cl2.deserialize(cl2.serialize()).equals(cl2));
+		System.out.println(depcl1.deserialize(depcl1.serialize()).equals(depcl1));
+		System.out.println(credcl1.deserialize(credcl1.serialize()).equals(credcl1));
 
 	}
 
