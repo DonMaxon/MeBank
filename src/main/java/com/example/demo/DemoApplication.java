@@ -21,7 +21,7 @@ public class DemoApplication {
 		System.out.println(date);
 		Admin admin = new Admin(UUID.randomUUID(), "John", "dungeon_master", "1234", new ArrayList<>(), new ArrayList<>());
 		Admin admin1 = new Admin(UUID.randomUUID(), "Peter", "boss_of_this_gym", "5678", new ArrayList<>(), new ArrayList<>());
-		Info info = new Info(new UUID(2, 1), Info.Type.CREDIT, "cool", 1, 100, 20, Info.Currency.RUB, admin);
+		Info info = new Info(UUID.randomUUID(), Info.Type.CREDIT, "cool", 1, 100, 20, Info.Currency.RUB, admin);
 		Info dep = new Info(UUID.randomUUID(), Info.Type.DEPOSIT, "cool", 1, 100, 20, Info.Currency.RUB, admin);
 		Info dep1 = new Info(UUID.randomUUID(), Info.Type.DEPOSIT, "cooler", 1, 1000, 21, Info.Currency.RUB, admin1);
 		Employee emp1 = new Employee(UUID.randomUUID(), "Will", "best_banker", "1234", admin, new ArrayList<>());

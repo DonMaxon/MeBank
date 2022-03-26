@@ -36,4 +36,9 @@ public class AdminService {
     public void deleteAll(){
         adminRepository.deleteAll();
     }
+
+    public void post (Admin admin){
+        adminRepository.save(admin);
+    }
+
 }
