@@ -1,5 +1,7 @@
 package com.example.demo.controllers;
 
+import com.example.demo.entity.Client;
+import com.example.demo.entity.Credit;
 import com.example.demo.entity.Employee;
 import com.example.demo.entity.Info;
 import com.example.demo.services.EmployeeService;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -35,6 +38,13 @@ public class EmployeeController {
         return employeeService.findById(id);
     }
 
+    @RequestMapping(value = "/{id}",
+            method = RequestMethod.GET)
+    @ResponseBody
+    public List<Client> getClientsOfEmployee(@PathVariable("id") UUID id){
+        return employeeService.findById(id).getClients();
+    }
+
     @RequestMapping(value = "/",
             method = RequestMethod.POST)
     public ResponseEntity postEmployee(@RequestBody String employeeString){
@@ -47,5 +57,13 @@ public class EmployeeController {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
 
+    }
+
+
+    @RequestMapping(value = "/all",
+            method = RequestMethod.GET)
+    public ResponseEntity getAllEmployees(){
+        List<Employee> res = employeeService.findAll();
+        return new ResponseEntity(res, HttpStatus.ACCEPTED);
     }
 }

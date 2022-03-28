@@ -3,6 +3,7 @@ package com.example.demo.controllers;
 
 import com.example.demo.entity.Client;
 import com.example.demo.entity.Credit;
+import com.example.demo.entity.Employee;
 import com.example.demo.services.ClientService;
 import com.example.demo.services.CreditService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -48,6 +50,14 @@ public class ClientController {
         catch (IOException | ParseException e){
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
-
     }
+
+    @RequestMapping(value = "/all",
+            method = RequestMethod.GET)
+    public ResponseEntity getAllEmployees(){
+        List<Client> res = clientService.findAll();
+        return new ResponseEntity(res, HttpStatus.ACCEPTED);
+    }
+
+
 }

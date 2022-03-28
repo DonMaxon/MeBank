@@ -7,6 +7,8 @@ import com.example.demo.repositories.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -31,6 +33,12 @@ public class EmployeeService {
 
     public Employee findById(UUID id){
         return employeeRepository.findById(id).orElseThrow(NotFoundException::new);
+    }
+
+    public List<Employee> findAll(){
+        List<Employee> res = new ArrayList<>();
+        employeeRepository.findAll().forEach(res::add);
+        return res;
     }
 
     public void deleteAll(){

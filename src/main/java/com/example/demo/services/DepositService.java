@@ -7,6 +7,8 @@ import com.example.demo.repositories.DepositRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -35,5 +37,11 @@ public class DepositService {
 
     public void deleteAll(){
         depositRepository.deleteAll();
+    }
+
+    public List<Deposit> findAll(){
+        List<Deposit> res = new ArrayList<>();
+        depositRepository.findAll().forEach(res::add);
+        return res;
     }
 }

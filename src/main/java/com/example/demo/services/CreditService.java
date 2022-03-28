@@ -1,11 +1,14 @@
 package com.example.demo.services;
 
+import com.example.demo.entity.Client;
 import com.example.demo.entity.Credit;
 import com.example.demo.exceptions.NotFoundException;
 import com.example.demo.repositories.CreditRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -34,5 +37,11 @@ public class CreditService {
 
     public void deleteAll(){
         creditRepository.deleteAll();
+    }
+
+    public List<Credit> findAll(){
+        List<Credit> res = new ArrayList<>();
+        creditRepository.findAll().forEach(res::add);
+        return res;
     }
 }

@@ -2,12 +2,15 @@ package com.example.demo.services;
 
 import com.example.demo.entity.Admin;
 import com.example.demo.entity.Client;
+import com.example.demo.entity.Employee;
 import com.example.demo.exceptions.NotFoundException;
 import com.example.demo.repositories.AdminRepository;
 import com.example.demo.repositories.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -37,5 +40,11 @@ public class ClientService {
 
     public void deleteAll(){
         clientRepository.deleteAll();
+    }
+
+    public List<Client> findAll(){
+        List<Client> res = new ArrayList<>();
+        clientRepository.findAll().forEach(res::add);
+        return res;
     }
 }
