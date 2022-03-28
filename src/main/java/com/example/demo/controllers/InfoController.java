@@ -22,15 +22,17 @@ public class InfoController {
     @Autowired
     InfoService infoService;
 
-    @RequestMapping(value = "/",
+    @RequestMapping(value = "/{id}",
             method = RequestMethod.DELETE)
+    @ResponseBody
     public ResponseEntity deleteInfo(@PathVariable("id") UUID id){
         infoService.delete(id);
         return new ResponseEntity(HttpStatus.ACCEPTED);
     }
 
-    @RequestMapping(value = "/",
+    @RequestMapping(value = "/{id}",
             method = RequestMethod.GET)
+    @ResponseBody
     public Info getInfo(@PathVariable("id") UUID id){
         return infoService.findById(id);
     }

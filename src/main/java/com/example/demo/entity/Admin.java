@@ -23,9 +23,9 @@ public class Admin {
     private  String  login;
     @Column(name = "password", nullable = false)
     private String password;
-    @OneToMany(mappedBy = "admin")
+    @OneToMany(mappedBy = "admin",  cascade = CascadeType.ALL)
     private List<Employee> employees;
-    @OneToMany(mappedBy = "admin")
+    @OneToMany(mappedBy = "admin",  cascade = CascadeType.ALL)
     private List<Info> infos;
 
     public Admin(UUID id, String name, String login, String password, List<Employee> employees, List<Info> infos) {

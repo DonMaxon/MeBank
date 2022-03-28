@@ -40,7 +40,7 @@ public class Credit {
     @JoinColumn(name = "info")
     @JsonIgnore
     private Info info;
-    @OneToMany(mappedBy = "credit")
+    @OneToMany(mappedBy = "credit",  cascade = CascadeType.ALL)
     private List<Pay> pays;
 
     public Credit() {

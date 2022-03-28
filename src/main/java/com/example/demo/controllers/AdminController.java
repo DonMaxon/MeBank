@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -25,15 +22,17 @@ public class AdminController {
     @Autowired
     AdminService adminService;
 
-    @RequestMapping(value = "/",
+    @RequestMapping(value = "/{id}",
             method = RequestMethod.DELETE)
+    @ResponseBody
     public ResponseEntity deleteAdmin(@PathVariable("id") UUID id){
         adminService.delete(id);
         return new ResponseEntity(HttpStatus.ACCEPTED);
     }
 
-    @RequestMapping(value = "/",
+    @RequestMapping(value = "/{id}",
             method = RequestMethod.GET)
+    @ResponseBody
     public Admin getAdmin(@PathVariable("id") UUID id){
         return adminService.findById(id);
     }

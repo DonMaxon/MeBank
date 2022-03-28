@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -25,15 +22,17 @@ public class DepositController {
     @Autowired
     DepositService depositService;
 
-    @RequestMapping(value = "/",
+    @RequestMapping(value = "/{id}",
             method = RequestMethod.DELETE)
+    @ResponseBody
     public ResponseEntity deleteDeposit(@PathVariable("id") UUID id){
         depositService.delete(id);
         return new ResponseEntity(HttpStatus.ACCEPTED);
     }
 
-    @RequestMapping(value = "/",
+    @RequestMapping(value = "/{id}",
             method = RequestMethod.GET)
+    @ResponseBody
     public Deposit getDeposit(@PathVariable("id") UUID id){
         return depositService.findById(id);
     }

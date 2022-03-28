@@ -30,7 +30,7 @@ public class Employee {
     @JoinColumn(name = "admin")
     @JsonIgnore
     private Admin admin;
-    @OneToMany(mappedBy = "employee")
+    @OneToMany(mappedBy = "employee",  cascade = CascadeType.ALL)
     private List<Client> clients;
 
     public Employee() {

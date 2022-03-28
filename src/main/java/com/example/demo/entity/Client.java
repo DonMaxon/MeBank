@@ -42,9 +42,9 @@ public class Client {
     @JoinColumn(name = "employee")
     @JsonIgnore
     private Employee employee;
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "client",  cascade = CascadeType.ALL)
     private List<Credit> credits;
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "client",  cascade = CascadeType.ALL)
     private List<Deposit> deposits;
 
     public Client() {
