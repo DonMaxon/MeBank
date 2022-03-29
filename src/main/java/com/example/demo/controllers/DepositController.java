@@ -4,6 +4,7 @@ package com.example.demo.controllers;
 import com.example.demo.entity.Credit;
 import com.example.demo.entity.Deposit;
 import com.example.demo.entity.Employee;
+import com.example.demo.serializers.DepositSerializer;
 import com.example.demo.services.DepositService;
 import com.example.demo.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,11 +44,11 @@ public class DepositController {
             method = RequestMethod.POST)
     public ResponseEntity postDeposit(@RequestBody String depositString){
         try {
-            Deposit deposit = Deposit.deserialize(depositString);
+            Deposit deposit = DepositSerializer.deserialize(depositString);
             depositService.save(deposit);
             return new ResponseEntity(deposit, HttpStatus.ACCEPTED);
         }
-        catch (IOException| ParseException e){
+        catch (IOException e){
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
 

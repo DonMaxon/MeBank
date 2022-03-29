@@ -5,6 +5,7 @@ import com.example.demo.entity.Credit;
 import com.example.demo.entity.Deposit;
 import com.example.demo.entity.Employee;
 import com.example.demo.entity.Pay;
+import com.example.demo.serializers.CreditSerializer;
 import com.example.demo.services.CreditService;
 import com.example.demo.services.DepositService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,11 +45,11 @@ public class CreditController {
             method = RequestMethod.POST)
     public ResponseEntity postClient(@RequestBody String creditString){
         try {
-            Credit credit = Credit.deserialize(creditString);
+            Credit credit = CreditSerializer.deserialize(creditString);
             creditService.save(credit);
             return new ResponseEntity(credit, HttpStatus.ACCEPTED);
         }
-        catch (IOException | ParseException e){
+        catch (IOException e){
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
 

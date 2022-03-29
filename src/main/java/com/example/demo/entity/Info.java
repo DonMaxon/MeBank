@@ -1,21 +1,15 @@
 package com.example.demo.entity;
 
-
-import com.example.demo.AllRepository;
+import com.example.demo.deserializers.InfoDeserializer;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
+@JsonDeserialize(using = InfoDeserializer.class)
 @Entity
 @Table(name = "Info")
 public class Info {
@@ -126,28 +120,6 @@ public class Info {
     @JsonGetter
     private UUID getAdminID() {
         return admin.getId();
-    }
-
-    public String serialize() throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.enable(SerializationFeature.INDENT_OUTPUT);
-        String json = mapper.writeValueAsString(this);
-        System.out.println(json);
-        return json;
-    }
-
-    public static Info deserialize(String json) throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
-        JsonNode jn = mapper.readTree(json);
-        UUID uuid = UUID.fromString(jn.get("id").asText());
-        Type type = Type.valueOf(jn.get("type").asText());
-        String name = jn.get("name").asText();
-        double min_summ = Double.parseDouble(jn.get("minSumm").asText());
-        double max_summ = Double.parseDouble(jn.get("maxSumm").asText());
-        double rate = Double.parseDouble(jn.get("rate").asText());
-        Currency currency = Currency.valueOf(jn.get("currency").asText());
-        Admin admin = AllRepository.findAdminByID(UUID.fromString(jn.get("adminID").asText()));
-        return new Info(uuid, type, name, min_summ, max_summ, rate, currency, admin);
     }
 
     @Override

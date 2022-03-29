@@ -3,6 +3,7 @@ package com.example.demo.controllers;
 
 import com.example.demo.entity.Info;
 import com.example.demo.entity.Pay;
+import com.example.demo.serializers.InfoSerializer;
 import com.example.demo.services.InfoService;
 import com.example.demo.services.PayService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,7 @@ public class InfoController {
             method = RequestMethod.POST)
     public ResponseEntity postInfo(@RequestBody String infoString){
         try {
-            Info info = Info.deserialize(infoString);
+            Info info = InfoSerializer.deserialize(infoString);
             infoService.save(info);
             return new ResponseEntity(info, HttpStatus.ACCEPTED);
         }

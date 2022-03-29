@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 import com.example.demo.entity.Pay;
+import com.example.demo.serializers.PaySerializer;
 import com.example.demo.services.PayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,11 +39,11 @@ public class PayController {
             method = RequestMethod.POST)
     public ResponseEntity postPay(@RequestBody String payString){
         try {
-            Pay pay = Pay.deserialize(payString);
+            Pay pay = PaySerializer.deserialize(payString);
             payService.save(pay);
             return new ResponseEntity(pay, HttpStatus.ACCEPTED);
         }
-        catch (IOException| ParseException e){
+        catch (IOException e){
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
 

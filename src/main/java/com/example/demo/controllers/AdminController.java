@@ -3,6 +3,7 @@ package com.example.demo.controllers;
 
 import com.example.demo.entity.Admin;
 import com.example.demo.entity.Client;
+import com.example.demo.serializers.AdminSerializer;
 import com.example.demo.services.AdminService;
 import com.example.demo.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,7 @@ public class AdminController {
             method = RequestMethod.POST)
     public ResponseEntity postAdmin(@RequestBody String adminString){
         try {
-            Admin admin = Admin.deserialize(adminString);
+            Admin admin = AdminSerializer.deserialize(adminString);
             adminService.save(admin);
             return new ResponseEntity(admin, HttpStatus.ACCEPTED);
         }

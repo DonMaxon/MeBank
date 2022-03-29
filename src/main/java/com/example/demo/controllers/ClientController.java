@@ -2,6 +2,7 @@ package com.example.demo.controllers;
 
 
 import com.example.demo.entity.*;
+import com.example.demo.serializers.ClientSerializer;
 import com.example.demo.services.ClientService;
 import com.example.demo.services.CreditService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,11 +43,11 @@ public class ClientController {
             method = RequestMethod.POST)
     public ResponseEntity postClient(@RequestBody String clientString){
         try {
-            Client client = Client.deserialize(clientString);
+            Client client = ClientSerializer.deserialize(clientString);
             clientService.save(client);
             return new ResponseEntity(client, HttpStatus.ACCEPTED);
         }
-        catch (IOException | ParseException e){
+        catch (IOException e){
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
     }

@@ -4,6 +4,7 @@ import com.example.demo.entity.Client;
 import com.example.demo.entity.Credit;
 import com.example.demo.entity.Employee;
 import com.example.demo.entity.Info;
+import com.example.demo.serializers.EmployeeSerializer;
 import com.example.demo.services.EmployeeService;
 import com.example.demo.services.InfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +50,7 @@ public class EmployeeController {
             method = RequestMethod.POST)
     public ResponseEntity postEmployee(@RequestBody String employeeString){
         try {
-            Employee employee = Employee.deserialize(employeeString);
+            Employee employee = EmployeeSerializer.deserialize(employeeString);
             employeeService.save(employee);
             return new ResponseEntity(employee, HttpStatus.ACCEPTED);
         }

@@ -1,7 +1,10 @@
 package com.example.demo;
 
 import com.example.demo.entity.*;
+import com.example.demo.serializers.AdminSerializer;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -17,8 +20,6 @@ public class DemoApplication {
 
 	public static void main(String[] args) throws JsonProcessingException, ParseException {
 		SpringApplication.run(DemoApplication.class, args);
-		Date date = new SimpleDateFormat("dd-MM-yyyy").parse("21-01-2022");
-		System.out.println(date);
 		Admin admin = new Admin(UUID.randomUUID(), "John", "dungeon_master", "1234", new ArrayList<>(), new ArrayList<>());
 		Admin admin1 = new Admin(UUID.randomUUID(), "Peter", "boss_of_this_gym", "5678", new ArrayList<>(), new ArrayList<>());
 		Info info = new Info(UUID.randomUUID(), Info.Type.CREDIT, "cool", 1, 100, 20, Info.Currency.RUB, admin);
@@ -55,14 +56,13 @@ public class DemoApplication {
 		AllRepository.addCredit(credcl1);
 		AllRepository.addPay(pay1);
 
-		System.out.println(info.deserialize(info.serialize()).equals(info));
-		System.out.println(admin.deserialize(admin.serialize()).equals(admin));
-		System.out.println(emp1.deserialize(emp1.serialize()).equals(emp1));
-		System.out.println(emp2.deserialize(emp2.serialize()).equals(emp2));
-		System.out.println(cl1.deserialize(cl1.serialize()).equals(cl1));
-		System.out.println(cl2.deserialize(cl2.serialize()).equals(cl2));
-		System.out.println(depcl1.deserialize(depcl1.serialize()).equals(depcl1));
-		System.out.println(credcl1.deserialize(credcl1.serialize()).equals(credcl1));
+		String j3 = AdminSerializer.getInstance().serialize(admin);
+		System.out.println();
+		System.out.println(j3);
+		Admin a2 = AdminSerializer.deserialize(j3);
+		System.out.println();
+		System.out.println(AdminSerializer.getInstance().serialize(a2));
+		int i;
 
 	}
 
