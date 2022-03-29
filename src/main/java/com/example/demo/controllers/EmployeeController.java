@@ -38,7 +38,7 @@ public class EmployeeController {
         return employeeService.findById(id);
     }
 
-    @RequestMapping(value = "/{id}",
+    @RequestMapping(value = "/clients/{id}",
             method = RequestMethod.GET)
     @ResponseBody
     public List<Client> getClientsOfEmployee(@PathVariable("id") UUID id){

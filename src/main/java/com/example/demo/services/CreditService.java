@@ -2,6 +2,7 @@ package com.example.demo.services;
 
 import com.example.demo.entity.Client;
 import com.example.demo.entity.Credit;
+import com.example.demo.entity.Info;
 import com.example.demo.exceptions.NotFoundException;
 import com.example.demo.repositories.CreditRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,4 +45,5 @@ public class CreditService {
         creditRepository.findAll().forEach(res::add);
         return res;
     }
+
 }

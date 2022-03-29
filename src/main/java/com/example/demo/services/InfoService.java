@@ -7,6 +7,7 @@ import com.example.demo.repositories.InfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -35,5 +36,13 @@ public class InfoService {
 
     public void deleteAll(){
         infoRepository.deleteAll();
+    }
+
+    public List<Info> getCredits(){
+        return infoRepository.getByType(Info.Type.CREDIT);
+    }
+
+    public List<Info> getDeposits(){
+        return infoRepository.getByType(Info.Type.DEPOSIT);
     }
 }

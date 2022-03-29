@@ -4,6 +4,7 @@ package com.example.demo.controllers;
 import com.example.demo.entity.Credit;
 import com.example.demo.entity.Deposit;
 import com.example.demo.entity.Employee;
+import com.example.demo.entity.Pay;
 import com.example.demo.services.CreditService;
 import com.example.demo.services.DepositService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,4 +60,15 @@ public class CreditController {
         List<Credit> res = creditService.findAll();
         return new ResponseEntity(res, HttpStatus.ACCEPTED);
     }
+
+    @RequestMapping(value = "/pays/{id}",
+            method = RequestMethod.GET)
+    @ResponseBody
+    public List<Pay> getPaysOfCredit(@PathVariable("id") UUID id){
+        return creditService.findById(id).getPays();
+    }
+
+
+
+
 }

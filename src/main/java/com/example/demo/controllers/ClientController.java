@@ -1,9 +1,7 @@
 package com.example.demo.controllers;
 
 
-import com.example.demo.entity.Client;
-import com.example.demo.entity.Credit;
-import com.example.demo.entity.Employee;
+import com.example.demo.entity.*;
 import com.example.demo.services.ClientService;
 import com.example.demo.services.CreditService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -58,6 +57,33 @@ public class ClientController {
         List<Client> res = clientService.findAll();
         return new ResponseEntity(res, HttpStatus.ACCEPTED);
     }
+
+    @RequestMapping(value = "/deposits/{id}",
+            method = RequestMethod.GET)
+    @ResponseBody
+    public List<Deposit> getDepositsOfClient(@PathVariable("id") UUID id){
+        return clientService.findById(id).getDeposits();
+    }
+
+    @RequestMapping(value = "/credits/{id}",
+            method = RequestMethod.GET)
+    @ResponseBody
+    public List<Credit> getCreditsOfClient(@PathVariable("id") UUID id){
+        return clientService.findById(id).getCredits();
+    }
+
+    @RequestMapping(value = "/credits/pays/{id}",
+            method = RequestMethod.GET)
+    @ResponseBody
+    public List<Pay> getPaysOfClient(@PathVariable("id") UUID id){
+        List<Credit> credits = clientService.findById(id).getCredits();
+        List<Pay> pays = new ArrayList<>();
+        for (int i =0; i < credits.size(); ++i){
+            pays.addAll(credits.get(i).getPays());
+        }
+        return pays;
+    }
+
 
 
 }

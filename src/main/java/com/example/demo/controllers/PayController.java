@@ -19,13 +19,13 @@ public class PayController {
     @Autowired
     PayService payService;
 
-    @RequestMapping(value = "/{id}",
+    /*@RequestMapping(value = "/{id}",
             method = RequestMethod.DELETE)
     @ResponseBody
     public ResponseEntity deletePay(@PathVariable("id") UUID id){
         payService.delete(id);
         return new ResponseEntity(HttpStatus.ACCEPTED);
-    }
+    }*/
 
     @RequestMapping(value = "/{id}",
             method = RequestMethod.GET)

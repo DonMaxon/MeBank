@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -50,4 +51,19 @@ public class InfoController {
         }
 
     }
+
+    @RequestMapping(value = "/credits",
+            method = RequestMethod.GET)
+    @ResponseBody
+    public List<Info> getCreditsInfo(){
+        return infoService.getCredits();
+    }
+
+    @RequestMapping(value = "/deposits",
+            method = RequestMethod.GET)
+    @ResponseBody
+    public List<Info> getDepositsInfo(){
+        return infoService.getDeposits();
+    }
+
 }
