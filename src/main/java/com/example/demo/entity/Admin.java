@@ -41,6 +41,10 @@ public class Admin {
     public Admin() {
     }
 
+    public Admin(UUID adminID) {
+        id = adminID;
+    }
+
     public UUID getId() {
         return id;
     }

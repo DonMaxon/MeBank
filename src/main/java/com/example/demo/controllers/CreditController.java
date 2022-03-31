@@ -25,6 +25,8 @@ public class CreditController {
 
     @Autowired
     CreditService creditService;
+    @Autowired
+    CreditSerializer creditSerializer;
 
     @RequestMapping(value = "/{id}",
             method = RequestMethod.DELETE)
@@ -45,7 +47,7 @@ public class CreditController {
             method = RequestMethod.POST)
     public ResponseEntity postClient(@RequestBody String creditString){
         try {
-            Credit credit = CreditSerializer.deserialize(creditString);
+            Credit credit = creditSerializer.deserialize(creditString);
             creditService.save(credit);
             return new ResponseEntity(credit, HttpStatus.ACCEPTED);
         }

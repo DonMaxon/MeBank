@@ -1,15 +1,22 @@
 package com.example.demo.serializers;
 
 import com.example.demo.entity.Deposit;
+import com.example.demo.services.ClientService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 
+@Service
 public class DepositSerializer {
 
-    private static DepositSerializer instance = null;
+    @Autowired
+    ClientService clientService;
+
+    /*private static DepositSerializer instance = null;
 
     private DepositSerializer() {
 
@@ -20,7 +27,7 @@ public class DepositSerializer {
             instance = new DepositSerializer();
         }
         return instance;
-    }
+    }*/
 
     public String serialize(Deposit deposit) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
@@ -29,9 +36,11 @@ public class DepositSerializer {
         return mapper.writeValueAsString(deposit);
     }
 
-    public static Deposit deserialize(String json) throws JsonProcessingException {
+    public Deposit deserialize(String json) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         mapper.setDateFormat(new SimpleDateFormat("dd-MM-yyyy"));
-        return mapper.readValue(json, Deposit.class);
+        Deposit deposit = mapper.readValue(json, Deposit.class);
+        deposit.setClient(clientService.findById(deposit.getClientID()));
+        return deposit;
     }
 }

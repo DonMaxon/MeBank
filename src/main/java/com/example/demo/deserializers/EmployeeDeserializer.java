@@ -37,7 +37,8 @@ public class EmployeeDeserializer extends StdDeserializer<Employee> {
         String name = jn.get("name").asText();
         String login = jn.get("login").asText();
         String password = jn.get("password").asText();
-        Admin admin = AllRepository.findAdminByID(UUID.fromString(jn.get("adminID").asText()));
+        //Admin admin = AllRepository.findAdminByID(UUID.fromString(jn.get("adminID").asText()));
+        Admin admin = new Admin(UUID.fromString(jn.get("adminID").asText()));
         String js = jn.get("clients").toString();
         List<Client> clients;
         clients = js.equals("") ? new ArrayList<>(): Arrays.asList(mapper.readValue(js, Client[].class));

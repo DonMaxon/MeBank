@@ -41,6 +41,10 @@ public class Credit {
     public Credit() {
     }
 
+    public Credit(UUID id) {
+        this.id = id;
+    }
+
     public Credit(UUID id, double summ, Date openDate, Date endDate, Date lastPayDate,
                   double summOfNextPay, boolean isActive, Client client, Info info, List<Pay> pays) {
         this.id = id;

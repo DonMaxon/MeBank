@@ -1,15 +1,25 @@
 package com.example.demo.serializers;
 
 import com.example.demo.entity.Credit;
+import com.example.demo.services.ClientService;
+import com.example.demo.services.InfoService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 
+@Service
 public class CreditSerializer {
 
-    private static CreditSerializer instance = null;
+    @Autowired
+    ClientService clientService;
+    @Autowired
+    InfoService infoService;
+
+    /*private static CreditSerializer instance = null;
 
     private CreditSerializer() {
 
@@ -20,7 +30,7 @@ public class CreditSerializer {
             instance = new CreditSerializer();
         }
         return instance;
-    }
+    }*/
 
     public String serialize(Credit credit) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
@@ -29,9 +39,12 @@ public class CreditSerializer {
         return mapper.writeValueAsString(credit);
     }
 
-    public static Credit deserialize(String json) throws JsonProcessingException {
+    public Credit deserialize(String json) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         mapper.setDateFormat(new SimpleDateFormat("dd-MM-yyyy"));
-        return mapper.readValue(json, Credit.class);
+        Credit credit = mapper.readValue(json, Credit.class);
+        credit.setClient(clientService.findById(credit.getClientID()));
+        credit.setInfo(infoService.findById(credit.getInfoID()));
+        return credit;
     }
 }

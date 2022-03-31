@@ -32,6 +32,10 @@ public class Employee {
     public Employee() {
     }
 
+    public Employee(UUID id) {
+        this.id = id;
+    }
+
     public Employee(UUID id, String name, String login, String password, Admin admin, List<Client> clients) {
         this.id = id;
         this.name = name;

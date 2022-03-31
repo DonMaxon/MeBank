@@ -39,7 +39,8 @@ public class PayDeserializer extends StdDeserializer<Pay> {
             e.printStackTrace();
         }
         double cash = Double.parseDouble(jn.get("cash").asText());
-        Credit credit = AllRepository.findCreditByID(UUID.fromString(jn.get("creditID").asText()));
+        //Credit credit = AllRepository.findCreditByID(UUID.fromString(jn.get("creditID").asText()));
+        Credit credit = new Credit(UUID.fromString(jn.get("creditID").asText()));
         return new Pay(uuid, date, cash, credit);
     }
 }

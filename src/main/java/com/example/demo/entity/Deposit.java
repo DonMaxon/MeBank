@@ -37,6 +37,10 @@ public class Deposit {
     public Deposit() {
     }
 
+    public Deposit(UUID id) {
+        this.id = id;
+    }
+
     public Deposit(UUID id, double summ, Date openDate, Date endDate, boolean isActive, Client client, Info info) {
         this.id = id;
         this.summ = summ;

@@ -40,6 +40,10 @@ public class Info {
     public Info() {
     }
 
+    public Info(UUID id) {
+        this.id = id;
+    }
+
     public Info(UUID id, Type type, String name, double minSumm, double maxSumm,
                 double rate, Currency currency, Admin admin) {
         this.id = id;

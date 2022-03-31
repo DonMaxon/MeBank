@@ -23,6 +23,8 @@ public class InfoController {
 
     @Autowired
     InfoService infoService;
+    @Autowired
+    InfoSerializer infoSerializer;
 
     @RequestMapping(value = "/{id}",
             method = RequestMethod.DELETE)
@@ -43,7 +45,7 @@ public class InfoController {
             method = RequestMethod.POST)
     public ResponseEntity postInfo(@RequestBody String infoString){
         try {
-            Info info = InfoSerializer.deserialize(infoString);
+            Info info = infoSerializer.deserialize(infoString);
             infoService.save(info);
             return new ResponseEntity(info, HttpStatus.ACCEPTED);
         }

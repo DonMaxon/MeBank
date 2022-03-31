@@ -23,6 +23,8 @@ public class EmployeeController {
 
     @Autowired
     EmployeeService employeeService;
+    @Autowired
+    EmployeeSerializer employeeSerializer;
 
     @RequestMapping(value = "/{id}",
             method = RequestMethod.DELETE)
@@ -50,7 +52,7 @@ public class EmployeeController {
             method = RequestMethod.POST)
     public ResponseEntity postEmployee(@RequestBody String employeeString){
         try {
-            Employee employee = EmployeeSerializer.deserialize(employeeString);
+            Employee employee = employeeSerializer.deserialize(employeeString);
             employeeService.save(employee);
             return new ResponseEntity(employee, HttpStatus.ACCEPTED);
         }

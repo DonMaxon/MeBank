@@ -29,6 +29,10 @@ public class Pay {
     public Pay() {
     }
 
+    public Pay(UUID id) {
+        this.id = id;
+    }
+
     public Pay(UUID id, Date date, double cash, Credit credit) {
         this.id = id;
         this.date = date;

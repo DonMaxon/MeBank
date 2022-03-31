@@ -54,8 +54,10 @@ public class CreditDeserializer extends StdDeserializer<Credit> {
         }
         double summOfNextPay = Double.parseDouble(jn.get("summOfNextPay").asText());
         boolean isActive = Boolean.parseBoolean(jn.get("active").asText());
-        Client client = AllRepository.findClientByID(UUID.fromString(jn.get("clientID").asText()));
-        Info info = AllRepository.findInfoByID(UUID.fromString(jn.get("infoID").asText()));
+        //Client client = AllRepository.findClientByID(UUID.fromString(jn.get("clientID").asText()));
+        //Info info = AllRepository.findInfoByID(UUID.fromString(jn.get("infoID").asText()));
+        Client client = new Client(UUID.fromString(jn.get("clientID").asText()));
+        Info info = new Info(UUID.fromString(jn.get("infoID").asText()));
         String js = jn.get("pays").toString();
         List<Pay> pays;
         pays = js.equals("") ? new ArrayList<>(): Arrays.asList(new ObjectMapper().readValue(js, Pay[].class));

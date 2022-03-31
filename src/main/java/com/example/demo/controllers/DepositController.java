@@ -24,6 +24,8 @@ public class DepositController {
 
     @Autowired
     DepositService depositService;
+    @Autowired
+    DepositSerializer depositSerializer;
 
     @RequestMapping(value = "/{id}",
             method = RequestMethod.DELETE)
@@ -44,7 +46,7 @@ public class DepositController {
             method = RequestMethod.POST)
     public ResponseEntity postDeposit(@RequestBody String depositString){
         try {
-            Deposit deposit = DepositSerializer.deserialize(depositString);
+            Deposit deposit = depositSerializer.deserialize(depositString);
             depositService.save(deposit);
             return new ResponseEntity(deposit, HttpStatus.ACCEPTED);
         }

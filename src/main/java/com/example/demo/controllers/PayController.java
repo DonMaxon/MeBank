@@ -19,6 +19,8 @@ public class PayController {
 
     @Autowired
     PayService payService;
+    @Autowired
+    PaySerializer paySerializer;
 
     /*@RequestMapping(value = "/{id}",
             method = RequestMethod.DELETE)
@@ -39,7 +41,7 @@ public class PayController {
             method = RequestMethod.POST)
     public ResponseEntity postPay(@RequestBody String payString){
         try {
-            Pay pay = PaySerializer.deserialize(payString);
+            Pay pay = paySerializer.deserialize(payString);
             payService.save(pay);
             return new ResponseEntity(pay, HttpStatus.ACCEPTED);
         }

@@ -5,8 +5,10 @@ import com.example.demo.serializers.AdminSerializer;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.annotation.AccessType;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -17,6 +19,8 @@ import java.util.UUID;
 
 @SpringBootApplication
 public class DemoApplication {
+
+
 
 	public static void main(String[] args) throws JsonProcessingException, ParseException {
 		SpringApplication.run(DemoApplication.class, args);
@@ -55,13 +59,13 @@ public class DemoApplication {
 		AllRepository.addDeposit(depcl1);
 		AllRepository.addCredit(credcl1);
 		AllRepository.addPay(pay1);
-
-		String j3 = AdminSerializer.getInstance().serialize(admin);
+		/*String j3 = serializer.serialize(admin);
 		System.out.println();
 		System.out.println(j3);
-		Admin a2 = AdminSerializer.deserialize(j3);
+
+		Admin a2 = serializer.deserialize(j3);
 		System.out.println();
-		System.out.println(AdminSerializer.getInstance().serialize(a2));
+		System.out.println(serializer.serialize(a2));*/
 		int i;
 
 	}

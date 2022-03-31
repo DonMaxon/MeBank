@@ -22,6 +22,8 @@ public class AdminController {
 
     @Autowired
     AdminService adminService;
+    @Autowired
+    AdminSerializer adminSerializer;
 
     @RequestMapping(value = "/{id}",
             method = RequestMethod.DELETE)
@@ -42,7 +44,8 @@ public class AdminController {
             method = RequestMethod.POST)
     public ResponseEntity postAdmin(@RequestBody String adminString){
         try {
-            Admin admin = AdminSerializer.deserialize(adminString);
+
+            Admin admin = adminSerializer.deserialize(adminString);
             adminService.save(admin);
             return new ResponseEntity(admin, HttpStatus.ACCEPTED);
         }

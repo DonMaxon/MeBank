@@ -1,15 +1,23 @@
 package com.example.demo.serializers;
 
 import com.example.demo.entity.Client;
+import com.example.demo.services.AdminService;
+import com.example.demo.services.EmployeeService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 
+@Service
 public class ClientSerializer{
 
-    private static ClientSerializer instance = null;
+    @Autowired
+    private EmployeeService employeeService;
+
+    /*private static ClientSerializer instance = null;
 
     private ClientSerializer() {
 
@@ -20,7 +28,7 @@ public class ClientSerializer{
             instance = new ClientSerializer();
         }
         return instance;
-    }
+    }*/
 
     public String serialize(Client client) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
@@ -29,9 +37,11 @@ public class ClientSerializer{
         return mapper.writeValueAsString(client);
     }
 
-    public static Client deserialize(String json) throws JsonProcessingException {
+    public Client deserialize(String json) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         mapper.setDateFormat(new SimpleDateFormat("dd-MM-yyyy"));
-        return mapper.readValue(json, Client.class);
+        Client client = mapper.readValue(json, Client.class);
+        client.setEmployee(employeeService.findById(client.getEmployeeID()));
+        return client;
     }
 }

@@ -52,7 +52,8 @@ public class ClientDeserializer extends StdDeserializer<Client> {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        Employee employee = AllRepository.findEmployeeByID(UUID.fromString(jn.get("employeeID").asText()));
+        //Employee employee = AllRepository.findEmployeeByID(UUID.fromString(jn.get("employeeID").asText()));
+        Employee employee = new Employee(UUID.fromString(jn.get("employeeID").asText()));
         String js = jn.get("credits").toString();
         List<Credit> credits;
         credits = js.equals("") ? new ArrayList<>(): Arrays.asList(new ObjectMapper().readValue(js, Credit[].class));

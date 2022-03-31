@@ -3,15 +3,19 @@ package com.example.demo.deserializers;
 import com.example.demo.AllRepository;
 import com.example.demo.entity.Admin;
 import com.example.demo.entity.Info;
+import com.example.demo.services.AdminService;
 import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.UUID;
+
 
 public class InfoDeserializer extends StdDeserializer<Info> {
 
@@ -34,7 +38,9 @@ public class InfoDeserializer extends StdDeserializer<Info> {
         double max_summ = Double.parseDouble(jn.get("maxSumm").asText());
         double rate = Double.parseDouble(jn.get("rate").asText());
         Info.Currency currency = Info.Currency.valueOf(jn.get("currency").asText());
-        Admin admin = AllRepository.findAdminByID(UUID.fromString(jn.get("adminID").asText()));
+        Admin admin = new Admin(UUID.fromString(jn.get("adminID").asText()));
+        //Admin admin = AllRepository.findAdminByID(UUID.fromString(jn.get("adminID").asText()));
+        //Admin admin = adminService.findById(UUID.fromString(jn.get("adminID").asText()));
         return new Info(uuid, type, name, min_summ, max_summ, rate, currency, admin);
     }
 }

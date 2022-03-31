@@ -47,8 +47,10 @@ public class DepositDeserializer extends StdDeserializer<Deposit> {
             e.printStackTrace();
         }
         boolean isActive = Boolean.parseBoolean(jn.get("active").asText());
-        Client client = AllRepository.findClientByID(UUID.fromString(jn.get("clientID").asText()));
-        Info info = AllRepository.findInfoByID(UUID.fromString(jn.get("infoID").asText()));
+        //Client client = AllRepository.findClientByID(UUID.fromString(jn.get("clientID").asText()));
+        //Info info = AllRepository.findInfoByID(UUID.fromString(jn.get("infoID").asText()));
+        Client client = new Client(UUID.fromString(jn.get("clientID").asText()));
+        Info info = new Info(UUID.fromString(jn.get("infoID").asText()));
         return new Deposit(uuid, summ, openDate, endDate, isActive, client, info);
     }
 }

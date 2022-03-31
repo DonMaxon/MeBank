@@ -23,6 +23,8 @@ public class ClientController {
 
     @Autowired
     ClientService clientService;
+    @Autowired
+    ClientSerializer clientSerializer;
 
     @RequestMapping(value = "/{id}",
             method = RequestMethod.DELETE)
@@ -43,7 +45,7 @@ public class ClientController {
             method = RequestMethod.POST)
     public ResponseEntity postClient(@RequestBody String clientString){
         try {
-            Client client = ClientSerializer.deserialize(clientString);
+            Client client = clientSerializer.deserialize(clientString);
             clientService.save(client);
             return new ResponseEntity(client, HttpStatus.ACCEPTED);
         }

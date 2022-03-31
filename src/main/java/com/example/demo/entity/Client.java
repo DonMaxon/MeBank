@@ -46,6 +46,10 @@ public class Client {
     public Client() {
     }
 
+    public Client(UUID id) {
+        this.id = id;
+    }
+
     public Client(UUID id, String name, String login, String password,
                   String passportSeries, String passportNumber, String passportIssueBy,
                   Date passportIssueDate, String phone, Date creatingDate, Employee employee,
