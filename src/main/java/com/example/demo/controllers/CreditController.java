@@ -8,6 +8,7 @@ import com.example.demo.entity.Pay;
 import com.example.demo.serializers.CreditSerializer;
 import com.example.demo.services.CreditService;
 import com.example.demo.services.DepositService;
+import com.example.demo.services.PayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,12 +27,17 @@ public class CreditController {
     @Autowired
     CreditService creditService;
     @Autowired
+    PayService payService;
+    @Autowired
     CreditSerializer creditSerializer;
 
     @RequestMapping(value = "/{id}",
             method = RequestMethod.DELETE)
     @ResponseBody
     public ResponseEntity deleteCredit(@PathVariable("id") UUID id){
+        for (Pay pay: creditService.findById(id).getPays()){
+            payService.delete(pay.getId());
+        }
         creditService.delete(id);
         return new ResponseEntity(HttpStatus.ACCEPTED);
     }
@@ -45,7 +51,7 @@ public class CreditController {
 
     @RequestMapping(value = "/",
             method = RequestMethod.POST)
-    public ResponseEntity postClient(@RequestBody String creditString){
+    public ResponseEntity postCredit(@RequestBody String creditString){
         try {
             Credit credit = creditSerializer.deserialize(creditString);
             creditService.save(credit);
@@ -55,6 +61,20 @@ public class CreditController {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
 
+    }
+
+    @RequestMapping(value = "/{id}",
+            method = RequestMethod.PUT)
+    @ResponseBody
+    public ResponseEntity updateInfo(@PathVariable("id") UUID id, @RequestBody String clientString){
+        if (creditService.findById(id)==null){
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+        else{
+            deleteCredit(id);
+            postCredit(clientString);
+        }
+        return new ResponseEntity(HttpStatus.ACCEPTED);
     }
 
     @RequestMapping(value = "/all",

@@ -30,6 +30,16 @@ public class EmployeeController {
             method = RequestMethod.DELETE)
     @ResponseBody
     public ResponseEntity deleteEmployee(@PathVariable("id") UUID id){
+        List<Employee> employees = employeeService.findAll();
+        if (employees.size()==1){
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+        if (employees.get(0).getId().equals(id)){
+            employees.get(1).getClients().addAll(employeeService.findById(id).getClients());
+        }
+        else{
+            employees.get(0).getClients().addAll(employeeService.findById(id).getClients());
+        }
         employeeService.delete(id);
         return new ResponseEntity(HttpStatus.ACCEPTED);
     }

@@ -56,6 +56,20 @@ public class DepositController {
 
     }
 
+    @RequestMapping(value = "/{id}",
+            method = RequestMethod.PUT)
+    @ResponseBody
+    public ResponseEntity updateDeposit(@PathVariable("id") UUID id, @RequestBody String clientString){
+        if (depositService.findById(id)==null){
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+        else{
+            deleteDeposit(id);
+            postDeposit(clientString);
+        }
+        return new ResponseEntity(HttpStatus.ACCEPTED);
+    }
+
     @RequestMapping(value = "/all",
             method = RequestMethod.GET)
     public ResponseEntity getAllDeposits(){

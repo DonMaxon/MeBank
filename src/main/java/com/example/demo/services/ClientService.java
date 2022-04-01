@@ -47,4 +47,5 @@ public class ClientService {
         clientRepository.findAll().forEach(res::add);
         return res;
     }
+
 }

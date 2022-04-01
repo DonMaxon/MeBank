@@ -5,6 +5,7 @@ import com.example.demo.entity.*;
 import com.example.demo.serializers.ClientSerializer;
 import com.example.demo.services.ClientService;
 import com.example.demo.services.CreditService;
+import com.example.demo.services.DepositService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,13 +25,44 @@ public class ClientController {
     @Autowired
     ClientService clientService;
     @Autowired
+    CreditService creditService;
+    @Autowired
+    DepositService depositService;
+    @Autowired
     ClientSerializer clientSerializer;
 
     @RequestMapping(value = "/{id}",
             method = RequestMethod.DELETE)
     @ResponseBody
     public ResponseEntity deleteClient(@PathVariable("id") UUID id){
+        if (clientService.findById(id).getCredits().size()>0){
+            for (Credit credit: clientService.findById(id).getCredits()){
+                if (credit.isActive()){
+                    return new ResponseEntity(HttpStatus.BAD_REQUEST);
+                }
+            }
+        }
+        for (Credit credit: clientService.findById(id).getCredits()){
+            creditService.delete(credit.getId());
+        }
+        for (Deposit deposit: clientService.findById(id).getDeposits()){
+            creditService.delete(deposit.getId());
+        }
         clientService.delete(id);
+        return new ResponseEntity(HttpStatus.ACCEPTED);
+    }
+
+    @RequestMapping(value = "/{id}",
+            method = RequestMethod.PUT)
+    @ResponseBody
+    public ResponseEntity updateClient(@PathVariable("id") UUID id, @RequestBody String clientString){
+        if (clientService.findById(id)==null){
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+        else{
+            deleteClient(id);
+            postClient(clientString);
+        }
         return new ResponseEntity(HttpStatus.ACCEPTED);
     }
 
