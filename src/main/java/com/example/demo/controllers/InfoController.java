@@ -102,11 +102,11 @@ public class InfoController {
         return new ResponseEntity(HttpStatus.ACCEPTED);
     }
 
-    @RequestMapping(value = "/countCredits/",
+    /*@RequestMapping(value = "/countCredits/",
             method = RequestMethod.GET)
     public ResponseEntity updateInfo(){
         return new ResponseEntity(infoService.getStatsCredits(), HttpStatus.ACCEPTED);
-    }
+    }*/
 
 
 }

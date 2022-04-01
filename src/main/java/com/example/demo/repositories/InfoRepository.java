@@ -12,12 +12,12 @@ public interface InfoRepository extends CrudRepository<Info, UUID> {
 
     List<Info> getByType(Info.Type type);
 
-    @Query("SELECT " +
+    /*@Query("SELECT " +
             "    new com.example.demo.utils.InfoStatisctics(c.answer, COUNT(c)) " +
             "FROM " +
             "    credit c " +
             "GROUP BY " +
             "    c.info")
-    List<InfoStatisctics> findSurveyCount();
+    List<InfoStatisctics> findSurveyCount();*/
 
 }

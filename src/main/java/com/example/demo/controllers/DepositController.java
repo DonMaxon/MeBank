@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Controller
@@ -76,4 +77,11 @@ public class DepositController {
         List<Deposit> res = depositService.findAll();
         return new ResponseEntity(res, HttpStatus.ACCEPTED);
     }
+
+    @RequestMapping(value = "/count/type", method = RequestMethod.GET)
+    public ResponseEntity countByType() {
+        List<?> res = depositService.countByType();
+        return new ResponseEntity(res, HttpStatus.ACCEPTED);
+    }
+
 }

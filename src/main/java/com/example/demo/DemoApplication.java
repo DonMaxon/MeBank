@@ -24,18 +24,18 @@ public class DemoApplication {
 
 	public static void main(String[] args) throws JsonProcessingException, ParseException {
 		SpringApplication.run(DemoApplication.class, args);
-		Admin admin = new Admin(UUID.randomUUID(), "John", "dungeon_master", "1234", new ArrayList<>(), new ArrayList<>());
-		Admin admin1 = new Admin(UUID.randomUUID(), "Peter", "boss_of_this_gym", "5678", new ArrayList<>(), new ArrayList<>());
-		Info info = new Info(UUID.randomUUID(), Info.Type.CREDIT, "cool", 1, 100, 20, Info.Currency.RUB, admin);
-		Info dep = new Info(UUID.randomUUID(), Info.Type.DEPOSIT, "cool", 1, 100, 20, Info.Currency.RUB, admin);
-		Info dep1 = new Info(UUID.randomUUID(), Info.Type.DEPOSIT, "cooler", 1, 1000, 21, Info.Currency.RUB, admin1);
-		Employee emp1 = new Employee(UUID.randomUUID(), "Will", "best_banker", "1234", admin, new ArrayList<>());
-		Employee emp2 = new Employee(UUID.randomUUID(), "Sue", "bts", "chonguk", admin, new ArrayList<>());
-		Client cl1 = new Client(UUID.randomUUID(), "JaSON", "json", "json", "1234", "567890", "ГУ МВД", new SimpleDateFormat("dd-MM-yyyy").parse("12-12-2012"), "89370000000", new SimpleDateFormat("dd-MM-yyyy").parse("11-11-2021"), emp1, new ArrayList<>(), new ArrayList<>());
-		Client cl2 = new Client(UUID.randomUUID(), "GaSON", "gson", "gson", "1235", "567890", "ГУ МВД", new SimpleDateFormat("dd-MM-yyyy").parse("09-12-1992"), "89171111111", new SimpleDateFormat("dd-MM-yyyy").parse("12-11-2021"), emp1, new ArrayList<>(), new ArrayList<>());
+		Admin admin = new Admin(UUID.randomUUID(), "Банковской Игорь", "dungeon_master", "1234", new ArrayList<>(), new ArrayList<>());
+		Admin admin1 = new Admin(UUID.randomUUID(), "Османов Сулейман Селимович", "boss_of_this_gym", "5678", new ArrayList<>(), new ArrayList<>());
+		Info info = new Info(UUID.randomUUID(), Info.Type.CREDIT, "Супер-кредит_100", 1, 100, 20, Info.Currency.RUB, admin);
+		Info dep = new Info(UUID.randomUUID(), Info.Type.DEPOSIT, "Супер-вклад_100", 1, 100, 20, Info.Currency.RUB, admin);
+		Info dep1 = new Info(UUID.randomUUID(), Info.Type.DEPOSIT, "Супер-вклад_1000", 1, 1000, 21, Info.Currency.RUB, admin1);
+		Employee emp1 = new Employee(UUID.randomUUID(), "Абрамович Роман", "best_banker", "1234", admin, new ArrayList<>());
+		Employee emp2 = new Employee(UUID.randomUUID(), "Корейчук Дарья", "bts", "chonguk", admin, new ArrayList<>());
+		Client cl1 = new Client(UUID.randomUUID(), "Нейтан Чен", "json", "json", "1234", "567890", "ГУ МВД России по Самарской области", new SimpleDateFormat("dd-MM-yyyy").parse("12-12-2000"), "89370000000", new SimpleDateFormat("dd-MM-yyyy").parse("11-11-2021"), emp1, new ArrayList<>(), new ArrayList<>());
+		Client cl2 = new Client(UUID.randomUUID(), "Гийом Сизерон", "gson", "gson", "1235", "567890", "ГУ МВД России по Самарской области", new SimpleDateFormat("dd-MM-yyyy").parse("09-12-1992"), "89171111111", new SimpleDateFormat("dd-MM-yyyy").parse("12-11-2021"), emp1, new ArrayList<>(), new ArrayList<>());
 		Deposit depcl1 = new Deposit(UUID.randomUUID(), 100, new SimpleDateFormat("dd-MM-yyyy").parse("12-12-2012"), new SimpleDateFormat("dd-MM-yyyy").parse("12-12-2013"), true, cl1, dep);
-		Credit credcl1 = new Credit(UUID.randomUUID(), 100, new SimpleDateFormat("dd-MM-yyyy").parse("12-12-2012"), new SimpleDateFormat("dd-MM-yyyy").parse("12-12-2013"), new SimpleDateFormat("dd-MM-yyyy").parse("12-01-2013"), 10, true, cl1, info, new ArrayList<>());
-		Pay pay1 = new Pay(UUID.randomUUID(), new SimpleDateFormat("dd-MM-yyyy").parse("12-12-2012"), 10, credcl1);
+		Credit credcl1 = new Credit(UUID.randomUUID(), 100, new SimpleDateFormat("dd-MM-yyyy").parse("09-10-2012"), new SimpleDateFormat("dd-MM-yyyy").parse("09-10-2013"), new SimpleDateFormat("dd-MM-yyyy").parse("09-12-2013"), 10, true, cl1, info, new ArrayList<>());
+		Pay pay1 = new Pay(UUID.randomUUID(), new SimpleDateFormat("dd-MM-yyyy").parse("09-11-2012"), 10, credcl1);
 		admin.getInfos().add(info);
 		admin.getInfos().add(dep);
 		admin1.getInfos().add(dep1);
@@ -66,7 +66,7 @@ public class DemoApplication {
 		Admin a2 = serializer.deserialize(j3);
 		System.out.println();
 		System.out.println(serializer.serialize(a2));*/
-		int i;
+
 
 	}
 

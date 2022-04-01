@@ -55,7 +55,7 @@ public class InfoService {
         return infoRepository.getByType(Info.Type.DEPOSIT);
     }
 
-    public List<InfoStatisctics> getStatsCredits(){
+    /*public List<InfoStatisctics> getStatsCredits(){
        List<InfoStatisctics> stats = infoRepository.findSurveyCount();
        stats.sort(new Comparator<InfoStatisctics>() {
            @Override
@@ -64,6 +64,6 @@ public class InfoService {
            }
        });
        return stats;
-    }
+    }*/
 
 }
