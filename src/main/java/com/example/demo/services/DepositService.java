@@ -50,4 +50,8 @@ public class DepositService {
         return depositRepository.countByType();
     }
 
+    public List<?> profitByType() {
+        List<?> infos = depositRepository.profitByType();
+        return infos;
+    }
 }

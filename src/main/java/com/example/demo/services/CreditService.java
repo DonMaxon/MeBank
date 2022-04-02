@@ -50,4 +50,9 @@ public class CreditService {
         return creditRepository.countByType();
     }
 
+    public List<?> profitByType() {
+        List<?> infos = creditRepository.profitByType();
+        return infos;
+    }
+
 }

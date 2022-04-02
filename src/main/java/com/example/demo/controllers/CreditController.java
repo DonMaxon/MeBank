@@ -97,5 +97,11 @@ public class CreditController {
         return new ResponseEntity(res, HttpStatus.ACCEPTED);
     }
 
+    @RequestMapping(value = "/profit/type", method = RequestMethod.GET)
+    public ResponseEntity profitByType() {
+        List<?> res = creditService.profitByType();
+        return new ResponseEntity(res, HttpStatus.ACCEPTED);
+    }
+
 
 }

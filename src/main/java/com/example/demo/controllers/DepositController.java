@@ -84,4 +84,10 @@ public class DepositController {
         return new ResponseEntity(res, HttpStatus.ACCEPTED);
     }
 
+    @RequestMapping(value = "/profit/type", method = RequestMethod.GET)
+    public ResponseEntity profitByType() {
+        List<?> res = depositService.profitByType();
+        return new ResponseEntity(res, HttpStatus.ACCEPTED);
+    }
+
 }
