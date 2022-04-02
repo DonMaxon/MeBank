@@ -11,4 +11,7 @@ import java.util.UUID;
 public interface CreditRepository extends CrudRepository<Credit, UUID> {
 
     List<Info> countByInfo(Info info);
+
+    @Query(value = "SELECT info.name, count(*) FROM Credit GROUP BY info.name ORDER BY count(*) DESC")
+    public List<?> countByType();
 }

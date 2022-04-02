@@ -46,4 +46,8 @@ public class CreditService {
         return res;
     }
 
+    public List<?> countByType() {
+        return creditRepository.countByType();
+    }
+
 }

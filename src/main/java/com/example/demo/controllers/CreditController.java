@@ -91,7 +91,11 @@ public class CreditController {
         return creditService.findById(id).getPays();
     }
 
-
+    @RequestMapping(value = "/count/type", method = RequestMethod.GET)
+    public ResponseEntity countByType() {
+        List<?> res = creditService.countByType();
+        return new ResponseEntity(res, HttpStatus.ACCEPTED);
+    }
 
 
 }
