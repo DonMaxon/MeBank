@@ -10,12 +10,12 @@ import java.util.UUID;
 
 public interface CreditRepository extends CrudRepository<Credit, UUID> {
 
-    List<Info> countByInfo(Info info);
+    //List<Info> countByInfo(Info info);
 
     @Query(value = "SELECT info.name, count(*) FROM Credit GROUP BY info.name ORDER BY count(*) DESC")
     public List<?> countByType();
 
-    @Query(value = "SELECT info.name, info.maxSumm*(info.rate/100+1)*count(*) FROM Credit GROUP BY info.name, info.maxSumm, info.rate ORDER BY info.maxSumm*count(*) DESC")
+    @Query(value = "SELECT info.name, info.maxSumm*(info.rate/100+1)*count(*) FROM Credit GROUP BY info.name, info.maxSumm, info.rate ORDER BY info.maxSumm*(info.rate/100+1)*count(*) DESC")
     public List<?> profitByType();
 
 }
