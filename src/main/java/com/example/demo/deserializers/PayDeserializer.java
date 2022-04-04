@@ -1,6 +1,5 @@
 package com.example.demo.deserializers;
 
-import com.example.demo.AllRepository;
 import com.example.demo.entity.Credit;
 import com.example.demo.entity.Pay;
 import com.fasterxml.jackson.core.JacksonException;

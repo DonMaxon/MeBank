@@ -16,19 +16,6 @@ public class EmployeeSerializer {
     @Autowired
     AdminService adminService;
 
-    /*private static EmployeeSerializer instance = null;
-
-    private EmployeeSerializer() {
-
-    }
-
-    public static EmployeeSerializer getInstance() {
-        if (instance == null) {
-            instance = new EmployeeSerializer();
-        }
-        return instance;
-    }*/
-
     public String serialize(Employee employee) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         mapper.setDateFormat(new SimpleDateFormat("dd-MM-yyyy"));

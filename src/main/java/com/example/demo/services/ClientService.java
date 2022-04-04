@@ -1,10 +1,7 @@
 package com.example.demo.services;
 
-import com.example.demo.entity.Admin;
 import com.example.demo.entity.Client;
-import com.example.demo.entity.Employee;
 import com.example.demo.exceptions.NotFoundException;
-import com.example.demo.repositories.AdminRepository;
 import com.example.demo.repositories.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

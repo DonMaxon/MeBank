@@ -19,19 +19,6 @@ public class CreditSerializer {
     @Autowired
     InfoService infoService;
 
-    /*private static CreditSerializer instance = null;
-
-    private CreditSerializer() {
-
-    }
-
-    public static CreditSerializer getInstance() {
-        if (instance == null) {
-            instance = new CreditSerializer();
-        }
-        return instance;
-    }*/
-
     public String serialize(Credit credit) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         mapper.setDateFormat(new SimpleDateFormat("dd-MM-yyyy"));

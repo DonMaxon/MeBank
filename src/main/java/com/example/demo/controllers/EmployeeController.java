@@ -1,12 +1,9 @@
 package com.example.demo.controllers;
 
 import com.example.demo.entity.Client;
-import com.example.demo.entity.Credit;
 import com.example.demo.entity.Employee;
-import com.example.demo.entity.Info;
 import com.example.demo.serializers.EmployeeSerializer;
 import com.example.demo.services.EmployeeService;
-import com.example.demo.services.InfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

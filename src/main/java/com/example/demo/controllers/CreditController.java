@@ -2,12 +2,9 @@ package com.example.demo.controllers;
 
 
 import com.example.demo.entity.Credit;
-import com.example.demo.entity.Deposit;
-import com.example.demo.entity.Employee;
 import com.example.demo.entity.Pay;
 import com.example.demo.serializers.CreditSerializer;
 import com.example.demo.services.CreditService;
-import com.example.demo.services.DepositService;
 import com.example.demo.services.PayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.List;
 import java.util.UUID;
 

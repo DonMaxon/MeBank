@@ -1,6 +1,5 @@
 package com.example.demo.services;
 
-import com.example.demo.entity.Deposit;
 import com.example.demo.entity.Employee;
 import com.example.demo.exceptions.NotFoundException;
 import com.example.demo.repositories.EmployeeRepository;

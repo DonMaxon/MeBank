@@ -1,6 +1,5 @@
 package com.example.demo.services;
 
-import com.example.demo.entity.Credit;
 import com.example.demo.entity.Deposit;
 import com.example.demo.exceptions.NotFoundException;
 import com.example.demo.repositories.DepositRepository;
@@ -9,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 @Service

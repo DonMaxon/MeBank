@@ -13,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -46,7 +45,7 @@ public class ClientController {
             creditService.delete(credit.getId());
         }
         for (Deposit deposit: clientService.findById(id).getDeposits()){
-            creditService.delete(deposit.getId());
+            depositService.delete(deposit.getId());
         }
         clientService.delete(id);
         return new ResponseEntity(HttpStatus.ACCEPTED);

@@ -1,7 +1,6 @@
 package com.example.demo.serializers;
 
 import com.example.demo.entity.Client;
-import com.example.demo.services.AdminService;
 import com.example.demo.services.EmployeeService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,19 +15,6 @@ public class ClientSerializer{
 
     @Autowired
     private EmployeeService employeeService;
-
-    /*private static ClientSerializer instance = null;
-
-    private ClientSerializer() {
-
-    }
-
-    public static ClientSerializer getInstance() {
-        if (instance == null) {
-            instance = new ClientSerializer();
-        }
-        return instance;
-    }*/
 
     public String serialize(Client client) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();

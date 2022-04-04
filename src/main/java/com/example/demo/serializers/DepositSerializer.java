@@ -16,19 +16,6 @@ public class DepositSerializer {
     @Autowired
     ClientService clientService;
 
-    /*private static DepositSerializer instance = null;
-
-    private DepositSerializer() {
-
-    }
-
-    public static DepositSerializer getInstance() {
-        if (instance == null) {
-            instance = new DepositSerializer();
-        }
-        return instance;
-    }*/
-
     public String serialize(Deposit deposit) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         mapper.setDateFormat(new SimpleDateFormat("dd-MM-yyyy"));

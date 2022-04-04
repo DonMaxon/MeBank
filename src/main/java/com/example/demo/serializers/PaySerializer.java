@@ -15,19 +15,7 @@ public class PaySerializer {
 
     @Autowired
     CreditService creditService;
-    /*private static PaySerializer instance = null;
 
-    private PaySerializer() {
-
-    }
-
-    public static PaySerializer getInstance() {
-        if (instance == null) {
-            instance = new PaySerializer();
-        }
-        return instance;
-    }
-*/
     public String serialize(Pay pay) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         mapper.setDateFormat(new SimpleDateFormat("dd-MM-yyyy"));

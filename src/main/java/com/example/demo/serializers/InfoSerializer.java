@@ -15,18 +15,6 @@ public class InfoSerializer {
 
     @Autowired
     private AdminService adminService;
-    /*private static InfoSerializer instance = null;
-
-    private InfoSerializer() {
-
-    }
-
-    public static InfoSerializer getInstance() {
-        if (instance == null) {
-            instance = new InfoSerializer();
-        }
-        return instance;
-    }*/
 
     public String serialize(Info info) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();

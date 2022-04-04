@@ -1,6 +1,5 @@
 package com.example.demo.services;
 
-import com.example.demo.entity.Info;
 import com.example.demo.entity.Pay;
 import com.example.demo.exceptions.NotFoundException;
 import com.example.demo.repositories.PayRepository;

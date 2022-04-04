@@ -1,15 +1,12 @@
 package com.example.demo.services;
 
-import com.example.demo.entity.Employee;
 import com.example.demo.entity.Info;
 import com.example.demo.exceptions.NotFoundException;
 import com.example.demo.repositories.InfoRepository;
-import com.example.demo.utils.InfoStatisctics;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 
@@ -54,16 +51,5 @@ public class InfoService {
     public List<Info> getDeposits(){
         return infoRepository.getByType(Info.Type.DEPOSIT);
     }
-
-    /*public List<InfoStatisctics> getStatsCredits(){
-       List<InfoStatisctics> stats = infoRepository.findSurveyCount();
-       stats.sort(new Comparator<InfoStatisctics>() {
-           @Override
-           public int compare(InfoStatisctics o1, InfoStatisctics o2) {
-               return (int)(o1.getNum()-o2.getNum());
-           }
-       });
-       return stats;
-    }*/
 
 }

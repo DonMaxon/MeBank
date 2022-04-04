@@ -5,7 +5,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 public interface DepositRepository extends CrudRepository<Deposit, UUID> {

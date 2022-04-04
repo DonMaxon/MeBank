@@ -1,13 +1,9 @@
 package com.example.demo.entity;
 
 import com.example.demo.deserializers.AdminDeserializer;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import javax.persistence.*;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 @JsonDeserialize(using = AdminDeserializer.class)

@@ -4,28 +4,12 @@ import com.example.demo.entity.Admin;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 
 @Service
 public class AdminSerializer {
-
-
-
-    /*private static AdminSerializer instance = null;
-
-    private AdminSerializer() {
-
-    }
-
-    public static AdminSerializer getInstance() {
-        if (instance == null) {
-            instance = new AdminSerializer();
-        }
-        return instance;
-    }*/
 
     public String serialize(Admin admin) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
