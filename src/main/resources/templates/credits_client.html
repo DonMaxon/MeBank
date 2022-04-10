@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Кредиты</title>
+</head>
+<body>
+<header>
+    <div>
+        <a>
+            <img th:src="@{/images/pr_logo.jpg}">
+        </a>
+        <nav>
+            <div>
+                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
+                    О нас
+                </a>
+                <a href="index.html">
+                    Сменить пользователя
+                </a>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<div>
+    <h1>
+        <span>Кредиты
+            <span th:text="${client.name}">
+            </span>
+        </span>
+    </h1>
+</div>
+
+<div>
+    <table border="1">
+        <tr>
+            <th>Название кредита</th>
+            <th>Текущий остаток</th>
+            <th>Дата открытия</th>
+            <th>Дата окончания</th>
+            <th>Дата последнего платежа</th>
+            <th>Следующий платёж</th>
+            <th>Процентная ставка</th>
+            <th>Валюта</th>
+        </tr>
+        <tr th:each="crd : ${client.credits}">
+            <td th:utext="${crd.info.name}">Название вклада</td>
+            <td th:utext="${crd.summ}">Текущая сумма</td>
+            <td th:utext="${crd.openDate}">Дата открытия</td>
+            <td th:utext="${crd.endDate}">Дата окончания</td>
+            <td th:utext="${crd.lastPayDate}">Дата последнего платежа</td>
+            <td th:utext="${crd.summOfNextPay}">Слежующий платёж</td>
+            <td th:utext="${crd.info.rate}">Процентная ставка</td>
+            <td th:utext="${crd.info.currency}">Валюта</td>
+        </tr>
+
+    </table>
+</div>
+
+<footer>
+    <div>
+        <p>Коза слабее льва и тигра, но коза в цирке не выступает!</p>
+    </div>
+</footer>
+</body>
+</html>

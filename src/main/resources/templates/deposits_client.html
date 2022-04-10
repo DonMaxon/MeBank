@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная</title>
+</head>
+<body>
+<header>
+    <div>
+        <a>
+            <img th:src="@{/images/pr_logo.jpg}">
+        </a>
+        <nav>
+            <div>
+                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
+                    О нас
+                </a>
+                <a href="index.html">
+                    Сменить пользователя
+                </a>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<div>
+    <h1>
+        <span>
+            <span th:text="${client.name}">
+            </span>, Ваши вклады:
+        </span>
+    </h1>
+</div>
+
+<div>
+    <table border="1">
+        <tr>
+            <th>Название вклада</th>
+            <th>Текущая сумма</th>
+            <th>Дата открытия</th>
+            <th>Дата окончания</th>
+            <th>Процентная ставка</th>
+            <th>Валюта</th>
+        </tr>
+        <tr th:each="dep : ${client.deposits}">
+            <td th:utext="${dep.info.name}">Название вклада</td>
+            <td th:utext="${dep.summ}">Текущая сумма</td>
+            <td th:utext="${dep.openDate}">Дата открытия</td>
+            <td th:utext="${dep.endDate}">Дата окончания</td>
+            <td th:utext="${dep.info.rate}">Процентная ставка</td>
+            <td th:utext="${dep.info.currency}">Валюта</td>
+        </tr>
+
+    </table>
+</div>
+
+<footer>
+    <div>
+        <p>Коза слабее льва и тигра, но коза в цирке не выступает!</p>
+    </div>
+</footer>
+</body>
+</html>

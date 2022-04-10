@@ -41,9 +41,7 @@ public class CreditController {
     @RequestMapping(value = "/{id}",
             method = RequestMethod.GET)
     @ResponseBody
-    public Credit getCredit(@PathVariable("id") UUID id){
-        return creditService.findById(id);
-    }
+    public Credit getCredit(@PathVariable("id") UUID id) { return creditService.findById(id); }
 
     @RequestMapping(value = "/",
             method = RequestMethod.POST)
