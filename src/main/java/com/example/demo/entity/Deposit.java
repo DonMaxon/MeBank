@@ -1,11 +1,13 @@
 package com.example.demo.entity;
 
 import com.example.demo.deserializers.DepositDeserializer;
+import com.example.demo.utils.DepositUtil;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import javax.persistence.*;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 import java.util.UUID;
@@ -49,6 +51,18 @@ public class Deposit {
         this.isActive = isActive;
         this.client = client;
         this.info = info;
+    }
+
+    public Deposit(DepositUtil util, Client clt, Info inf) {
+        id = UUID.randomUUID();
+        summ = util.getSumm();
+        Calendar cal = Calendar.getInstance();
+        openDate = cal.getTime();
+        cal.add(Calendar.MONTH, util.getMonths());
+        endDate = cal.getTime();
+        isActive = true;
+        client = clt;
+        info = inf;
     }
 
     public UUID getId() {

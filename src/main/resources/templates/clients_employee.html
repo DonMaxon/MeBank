@@ -2,7 +2,7 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
-    <title>Главная</title>
+    <title>Клиенты</title>
 </head>
 <body>
 <header>
@@ -25,16 +25,29 @@
 
 <div>
     <h1>
-        <span>
-            Здравствуйте,
+        <span>Клиенты сотрудника
             <span th:text="${employee.name}">
-            </span>!
+            </span>.
         </span>
     </h1>
 </div>
 
 <div>
-    <a th:href="@{/clients(employee = ${employee.id})}" target="_blank">Клиенты</a>
+    <table border="1">
+        <tr>
+            <th>№</th>
+            <th>ФИО</th>
+            <th>Вклады</th>
+            <th>Кредиты</th>
+        </tr>
+        <tr th:each="clt : ${employee.clients}">
+            <td th:utext="${employee.clients.indexOf(clt)+1}">Название вклада</td>
+            <td th:utext="${clt.name}">Текущая сумма</td>
+            <td><a th:href="@{/deposits(client = ${clt.id})}" target="_blank">Вклады</a></td>
+            <td><a th:href="@{/credits(client = ${clt.id})}" target="_blank">Кредиты</a></td>
+        </tr>
+
+    </table>
 </div>
 
 <footer>
