@@ -1,24 +1,15 @@
 package com.example.demo.controllers;
 
-import com.example.demo.entity.Client;
-import com.example.demo.entity.Deposit;
-import com.example.demo.entity.Employee;
-import com.example.demo.entity.Info;
+import com.example.demo.entity.*;
 import com.example.demo.repositories.ClientRepository;
-import com.example.demo.services.ClientService;
-import com.example.demo.services.DepositService;
-import com.example.demo.services.EmployeeService;
-import com.example.demo.services.InfoService;
-import com.example.demo.utils.DepositUtil;
+import com.example.demo.services.*;
+import com.example.demo.utils.DepCredUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Controller
 public class WebController {
@@ -31,6 +22,10 @@ public class WebController {
     InfoService infoService;
     @Autowired
     DepositService depositService;
+    @Autowired
+    CreditService creditService;
+    @Autowired
+    AdminService adminService;
 
     @GetMapping("/")
     public String index(Model model) {
@@ -73,15 +68,98 @@ public class WebController {
         model.addAttribute("client", client);
         List<Info> deposits = infoService.getDeposits();
         model.addAttribute("infos", deposits);
-        model.addAttribute("deposit", new DepositUtil());
+        model.addAttribute("deposit", new DepCredUtil());
         return "new_deposit";
     }
     @PostMapping("/new_dep")
-    public String createNewDeposit(@RequestParam("client") UUID uuid, @ModelAttribute DepositUtil depositUtil, Model model) {
+    public String createNewDeposit(@RequestParam("client") UUID uuid, @ModelAttribute DepCredUtil depositUtil, Model model) {
         Client client = clientService.findById(uuid);
         Info info = infoService.findById(depositUtil.getInfoID());
         Deposit deposit = new Deposit(depositUtil, client, info);
         depositService.save(deposit);
         return "redirect:/deposits?client="+uuid.toString();
+    }
+    @GetMapping("/new_cred")
+    public String newCredit(@RequestParam("client") UUID uuid, Model model) {
+        Client client = clientService.findById(uuid);
+        model.addAttribute("client", client);
+        List<Info> credits = infoService.getCredits();
+        model.addAttribute("infos", credits);
+        model.addAttribute("credit", new DepCredUtil());
+        return "new_credit";
+    }
+    @PostMapping("/new_cred")
+    public String createNewCredit(@RequestParam("client") UUID uuid, @ModelAttribute DepCredUtil creditUtil, Model model) {
+        Client client = clientService.findById(uuid);
+        Info info = infoService.findById(creditUtil.getInfoID());
+        Credit credit = new Credit(creditUtil, client, info);
+        creditService.save(credit);
+        return "redirect:/credits?client="+uuid.toString();
+    }
+    @GetMapping("/main_admin")
+    public String adminMain(@RequestParam("admin") UUID uuid, Model model) {
+        Admin admin = adminService.findById(uuid);
+        model.addAttribute("admin", admin);
+        return "main_admin";
+    }
+    @GetMapping("/all_info")
+    public String allInfo(@RequestParam("admin") UUID uuid, Model model) {
+        Admin admin = adminService.findById(uuid);
+        model.addAttribute("admin", admin);
+        List<Info> deposits = infoService.getDeposits();
+        model.addAttribute("infodep", deposits);
+        List<Info> credits = infoService.getCredits();
+        model.addAttribute("infocrd", credits);
+        return "all_info";
+    }
+    @GetMapping("/upd_info")
+    public String updInfo(@RequestParam("info") UUID uuid, @RequestParam("admin") UUID id, Model model) {
+        Info info = infoService.findById(uuid);
+        model.addAttribute("info", info);
+        Admin admin = adminService.findById(id);
+        model.addAttribute("admin", admin);
+        return "upd_info";
+    }
+    @PostMapping("upd_info")
+    public String updInfoParams(@RequestParam("info") UUID id, @RequestParam("admin") UUID uuid, Model model, @ModelAttribute Info info) {
+        Info toUpd = infoService.findById(id);
+        info.setAdmin(adminService.findById(uuid));
+        info.setType(Info.Type.DEPOSIT);
+        try {
+            infoService.delete(id);
+        }
+        catch(Exception e) {
+            return "redirect:/new_info?admin="+uuid.toString();
+        }
+        infoService.save(info);
+        return "redirect:/all_info?admin="+uuid.toString();
+    }
+    @GetMapping("new_info")
+    public String newInfo(@RequestParam("admin") UUID uuid, Model model) {
+        model.addAttribute("admin", adminService.findById(uuid));
+        model.addAttribute("types", Info.Type.values());
+        model.addAttribute("currencies", Info.Currency.values());
+        model.addAttribute("info", new Info());
+        return "new_info";
+    }
+    @PostMapping("new_info")
+    public String newInfoCreate(@RequestParam("admin") UUID uuid, Model model, @ModelAttribute Info info) {
+        info.setAdmin(adminService.findById(uuid));
+        info.setId(UUID.randomUUID());
+        if (info.getType().equals(Info.Type.DEPOSIT)) {
+            List<Info> deps = infoService.getDeposits();
+            for (Info dep: deps) {
+                if (info.getName().equals(dep.getName()))
+                    return "redirect:/new_info?admin="+uuid.toString();
+            }
+        } else {
+            List<Info> creds = infoService.getCredits();
+            for (Info crd: creds) {
+                if (info.getName().equals(crd.getName()))
+                    return "redirect:/new_info?admin=" + uuid.toString();
+            }
+        }
+        infoService.save(info);
+        return "redirect:/all_info?admin="+uuid.toString();
     }
 }

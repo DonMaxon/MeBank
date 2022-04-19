@@ -15,7 +15,7 @@ import java.util.UUID;
 public class Info {
 
     public enum Type  {DEPOSIT, CREDIT}
-    public enum Currency {RUB, EUR, USD}
+    public enum Currency {RUB, EUR, USD, CNY}
 
     @Id
     private UUID id;

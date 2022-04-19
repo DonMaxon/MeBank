@@ -1,7 +1,7 @@
 package com.example.demo.entity;
 
 import com.example.demo.deserializers.DepositDeserializer;
-import com.example.demo.utils.DepositUtil;
+import com.example.demo.utils.DepCredUtil;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -53,7 +53,7 @@ public class Deposit {
         this.info = info;
     }
 
-    public Deposit(DepositUtil util, Client clt, Info inf) {
+    public Deposit(DepCredUtil util, Client clt, Info inf) {
         id = UUID.randomUUID();
         summ = util.getSumm();
         Calendar cal = Calendar.getInstance();

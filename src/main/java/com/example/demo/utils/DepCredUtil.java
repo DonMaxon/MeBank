@@ -2,15 +2,15 @@ package com.example.demo.utils;
 
 import java.util.UUID;
 
-public class DepositUtil {
+public class DepCredUtil {
     private UUID infoID;
     private double summ;
     private int months;
 
-    public DepositUtil() {
+    public DepCredUtil() {
     }
 
-    public DepositUtil(UUID infoID, double summ, int months) {
+    public DepCredUtil(UUID infoID, double summ, int months) {
         this.infoID = infoID;
         this.summ = summ;
         this.months = months;

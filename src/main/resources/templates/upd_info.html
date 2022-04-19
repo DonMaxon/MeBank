@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная</title>
+</head>
+<body>
+<header>
+    <div>
+        <a>
+            <img th:src="@{/images/pr_logo.jpg}">
+        </a>
+        <nav>
+            <div>
+                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
+                    О нас
+                </a>
+                <a href="index.html">
+                    Сменить пользователя
+                </a>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<h2>
+    <span>
+        Обновление информации о вкладе "
+        <span th:text="${info.name}"></span>"
+    </span>
+</h2>
+
+<form th:method="put" th:object="${info}" th:action="@{/upd_info(info=${info.id},admin=${admin.id})}">
+    <input type="hidden" required="required" readonly="readonly" th:value="${info.name}"/>
+    <br/>
+    <label>
+        Минимальная сумма
+    </label>
+    <input type="number" required="required" th:value="${info.minSumm}" min="1" th:field="*{minSumm}"/>
+   <br/>
+    <label>
+        Максимальная сумма
+    </label>
+    <input type="number" required="required" th:value="${info.maxSumm}" min="1" th:field="*{maxSumm}"/>
+    <br/>
+    <label>
+        Ставка
+    </label>
+    <input type="number" required="required" th:value="${info.rate}" min="1" max="100" th:field="*{rate}"/>
+    <br/>
+    <label>
+        Валюта
+    </label>
+    <input type="text" required="required" readonly="readonly" th:value="${info.currency}" min="1"/>
+    <br/>
+    <button type="submit">Сохранить</button>
+</form>
+
+<footer>
+    <div>
+        <p>Коза слабее льва и тигра, но коза в цирке не выступает!</p>
+    </div>
+</footer>
+</body>
+</html>

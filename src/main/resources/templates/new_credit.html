@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Новый вклад</title>
+</head>
+<body>
+<header>
+    <div>
+        <a>
+            <img th:src="@{/images/pr_logo.jpg}">
+        </a>
+        <nav>
+            <div>
+                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
+                    О нас
+                </a>
+                <a href="index.html">
+                    Сменить пользователя
+                </a>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<div>
+    <h1>
+        Открытие нового кредита для клиента
+        <span th:text="${client.name}">
+        </span>
+    </h1>
+</div>
+
+
+<p>Список доступных кредитов</p>
+<table border="1">
+    <tr>
+        <th>Название кредита</th>
+        <th>Минимальная сумма</th>
+        <th>Максимальная сумма</th>
+        <th>Процентная ставка</th>
+        <th>Валюта</th>
+    </tr>
+    <tr th:each="inf: ${infos}">
+        <td th:utext="${inf.name}">Название кредита</td>
+        <td th:utext="${inf.minSumm}">Минимальная сумма</td>
+        <td th:utext="${inf.maxSumm}">Максимальная сумма</td>
+        <td th:utext="${inf.rate}">Процентная ставка</td>
+        <td th:utext="${inf.currency}">Валюта</td>
+    </tr>
+
+</table>
+
+
+
+<form method="post" th:object="${credit}" th:action="@{/new_cred(client=${client.id})}">
+    <label>
+        Тип кредита
+    </label>
+    <select required="required" th:field="*{infoID}">
+        <option  th:each="inf : ${infos}" th:text="${inf.name}" th:value="${inf.id}">Вклад</option>
+    </select>
+    <br/>
+    <label>
+        Сумма
+    </label>
+    <input type="number" placeholder="100000" required="required" min="1" th:field="*{summ}"/>
+    <br/>
+    <label>
+        Срок (мес.)
+    </label>
+    <input type="number" placeholder="12" required="required" min="1" th:field="*{months}"/>
+    <br/>
+    <button type="submit">Взять кредит</button>
+    <button type="reset">Очистить</button>
+</form>
+
+<footer>
+    <div>
+        <p>Коза слабее льва и тигра, но коза в цирке не выступает!</p>
+    </div>
+</footer>
+</body>
+</html>

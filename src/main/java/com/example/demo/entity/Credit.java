@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 import com.example.demo.deserializers.CreditDeserializer;
+import com.example.demo.utils.DepCredUtil;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -57,6 +58,22 @@ public class Credit {
         this.client = client;
         this.info = info;
         this.pays = pays;
+    }
+
+    public Credit(DepCredUtil util, Client clt, Info inf) {
+        id = UUID.randomUUID();
+        summ = util.getSumm();
+        Calendar cal = Calendar.getInstance();
+        openDate = cal.getTime();
+        cal.add(Calendar.MONTH, util.getMonths());
+        endDate = cal.getTime();
+        lastPayDate = (Date)openDate.clone();
+        info = inf;
+        double r = info.getRate()/12/100;
+        summOfNextPay = Math.round(summ*r*Math.pow(1+r, util.getMonths())/(Math.pow(1+r, util.getMonths())-1)*100)/100.;
+        isActive = true;
+        client = clt;
+        pays = new ArrayList<>();
     }
 
     public UUID getId() {

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная</title>
+</head>
+<body>
+<header>
+    <div>
+        <a>
+            <img th:src="@{/images/pr_logo.jpg}">
+        </a>
+        <nav>
+            <div>
+                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
+                    О нас
+                </a>
+                <a href="index.html">
+                    Сменить пользователя
+                </a>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<div>
+    <h1>
+        <span>
+            Здравствуйте,
+            <span th:text="${admin.name}">
+            </span>!
+        </span>
+    </h1>
+</div>
+
+<div>
+    <a th:href="@{/all_info(admin=${admin.id})}">Информация по вкладам и кредитам</a>
+    <a>Сотрудники</a>
+    <a>Клиенты</a>
+</div>
+
+<footer>
+    <div>
+        <p>Коза слабее льва и тигра, но коза в цирке не выступает!</p>
+    </div>
+</footer>
+</body>
+</html>
