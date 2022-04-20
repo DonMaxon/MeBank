@@ -2,7 +2,7 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
-    <title>Главная</title>
+    <title>Новый вклад</title>
 </head>
 <body>
 <header>
@@ -25,17 +25,30 @@
 
 <div>
     <h1>
-        <span>
-            Здравствуйте,
-            <span th:text="${employee.name}">
-            </span>!
-        </span>
+        Клиенты
     </h1>
 </div>
 
-<div>
-    <a th:href="@{/clients(employee = ${employee.id})}" target="_blank">Клиенты</a>
-</div>
+
+<table border="1">
+    <tr>
+        <th>№</th>
+        <th>ФИО</th>
+        <th>Серия и номер паспорта</th>
+        <th>Редактировать</th>
+        <th>Удалить</th>
+    </tr>
+    <tr th:each="clt, cltIter: ${clients}">
+        <td th:utext="${cltIter.index}+1">№</td>
+        <td th:utext="${clt.name}">ФИО</td>
+        <td th:utext="${clt.passportSeries}+' '+${clt.passportNumber}">Серия и номер паспорта</td>
+        <td>Редактировать</td>
+        <td>Удалить</td>
+    </tr>
+
+</table>
+
+<a th:href="@{/new_client(creator=${admin.id})}">Добавить нового клиента</a>
 
 <footer>
     <div>

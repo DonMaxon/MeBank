@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация клиента</title>
+</head>
+<body>
+<header>
+    <div>
+        <a>
+            <img th:src="@{/images/pr_logo.jpg}">
+        </a>
+        <nav>
+            <div>
+                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
+                    О нас
+                </a>
+                <a th:href="@{/}">
+                    Сменить пользователя
+                </a>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<div>
+    <h1>
+        Регистрация нового клиента
+    </h1>
+</div>
+
+<form method="post" th:object="${client}" th:action="@{/new_client(creator=${creator.id})}">
+    <label>
+        ФИО
+    </label>
+    <input type="text" placeholder="Иванов Иван Иванович" required="required" th:field="*{name}">
+    <br/>
+    <label>
+        Серия паспорта
+    </label>
+    <input type="text" placeholder="1234" required="required" pattern="[0-9]{4}" th:field="*{passportSeries}">
+    <br/>
+    <label>
+        Номер паспорта
+    </label>
+    <input type="text" placeholder="567890" required="required" pattern="[0-9]{6}" th:field="*{passportNumber}">
+    <br/>
+    <label>
+        Место выдачи паспорта
+    </label>
+    <input type="text" placeholder="ГУ МВД России по Самарской области" required="required" th:field="*{passportIssueBy}">
+    <br/>
+    <label>
+        Дата выдачи паспорта
+    </label>
+    <input type="date" placeholder="01.01.2001" required="required" th:field="*{passportSeries}">
+    <br/>
+    <label>
+        Номер телефона
+    </label>
+    <input type="tel" placeholder="89371234567" required="required" pattern="[8]{1}[0-9]{10}" th:field="*{phone}">
+    <br/>
+    <label>
+        Логин
+    </label>
+    <input type="text" required="required" th:field="*{login}">
+    <br/>
+    <label>
+        Пароль
+    </label>
+    <input type="text" required="required" pattern="[a-zA-Z0-9]{6,}" th:field="*{password}">
+    <br/>
+    <button type="submit">Создать</button>
+    <button type="reset">Очистить</button>
+</form>
+
+<footer>
+    <div>
+        <p>Коза слабее льва и тигра, но коза в цирке не выступает!</p>
+    </div>
+</footer>
+</body>
+</html>

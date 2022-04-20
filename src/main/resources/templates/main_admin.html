@@ -17,7 +17,7 @@
                 <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
                     О нас
                 </a>
-                <a href="index.html">
+                <a th:href="@{/}">
                     Сменить пользователя
                 </a>
             </div>
@@ -38,7 +38,7 @@
 <div>
     <a th:href="@{/all_info(admin=${admin.id})}">Информация по вкладам и кредитам</a>
     <a>Сотрудники</a>
-    <a>Клиенты</a>
+    <a th:href="@{/all_clients(admin=${admin.id})}">Клиенты</a>
 </div>
 
 <footer>

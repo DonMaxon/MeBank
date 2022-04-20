@@ -162,4 +162,16 @@ public class WebController {
         infoService.save(info);
         return "redirect:/all_info?admin="+uuid.toString();
     }
+    @GetMapping("all_clients")
+    public String allClients(@RequestParam("admin") UUID uuid, Model model) {
+        model.addAttribute("clients", clientService.findAll());
+        model.addAttribute("admin", adminService.findById(uuid));
+        return "all_clients";
+    }
+    @GetMapping("new_client")
+    public String newClient(@RequestParam("creator") UUID uuid, Model model) {
+        model.addAttribute("creator", adminService.findById(uuid));
+        model.addAttribute("client", new Client());
+        return "new_client";
+    }
 }
