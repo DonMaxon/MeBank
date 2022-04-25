@@ -8,16 +8,16 @@
 
 <body>
 <header>
-    <div>
-        <a>
-            <img th:src="@{/images/pr_logo.jpg}">
-        </a>
+    <div >
         <nav>
-            <div class="hmm">
-                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
+            <div class="up">
+                <a>
+                    <img  class="pic" th:src="@{/images/pr_logo.png}">
+                </a>
+                <a class = "up_text" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
                     О нас
                 </a>
-                <a th:href="@{/}">
+                <a class = "up_text" th:href="@{/}">
                     Сменить пользователя
                 </a>
             </div>
@@ -25,9 +25,9 @@
     </div>
 </header>
 
-<div>
+<div class = "hello">
     <h1>
-        <span>
+        <span class = "hello_text">
             Здравствуйте,
             <span th:text="${admin.name}">
             </span>!
@@ -35,17 +35,17 @@
     </h1>
 </div>
 
-<div>
-    <a th:href="@{/all_info(admin=${admin.id})}">Информация по вкладам и кредитам</a>
-    <a th:href="@{/all_employees(admin=${admin.id})}">Сотрудники</a>
-    <!--a th:href="@{/all_clients(admin=${admin.id})}">Клиенты</a-->
-    <a th:href="@{stats(admin=${admin.id})}">Статистика</a>
+<div class = "admin_info">
+    <a class="admin_info_text" th:href="@{/all_info(admin=${admin.id})}">Информация по вкладам и кредитам</a>
+    <a class = "admin_info_text" th:href="@{/all_employees(admin=${admin.id})}">Сотрудники</a>
+    <!--a class="admin_info_text"th:href="@{/all_clients(admin=${admin.id})}">Клиенты</a-->
+    <a class = "admin_info_text" th:href="@{stats(admin=${admin.id})}">Статистика</a>
 </div>
 
-<footer>
+<div class = "down">
     <div>
-        <p>Коза слабее льва и тигра, но коза в цирке не выступает!</p>
+        <p class = "down_text">Коза слабее льва и тигра, но коза в цирке не выступает!</p>
     </div>
-</footer>
+</div>
 </body>
 </html>
