@@ -2,7 +2,7 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
-    <title>Новый вклад</title>
+    <title>Регистрация сотрудника</title>
 </head>
 <body>
 <header>
@@ -25,28 +25,19 @@
 
 <div>
     <h1>
-        Клиенты
+        Внесение выплаты
     </h1>
 </div>
 
-
-<table border="1">
-    <tr>
-        <th>№</th>
-        <th>ФИО</th>
-        <th>Серия и номер паспорта</th>
-        <th>Редактировать</th>
-        <th>Удалить</th>
-    </tr>
-    <tr th:each="clt, cltIter: ${clients}">
-        <td th:utext="${cltIter.index}+1">№</td>
-        <td th:utext="${clt.name}">ФИО</td>
-        <td th:utext="${clt.passportSeries}+' '+${clt.passportNumber}">Серия и номер паспорта</td>
-        <td>Редактировать</td>
-        <td>Удалить</td>
-    </tr>
-
-</table>
+<form method="post" th:object="${pay}" th:action="@{/new_pay(credit=${credit.id})}">
+    <label>
+        Сумма
+    </label>
+    <input type="number" placeholder="10000" required="required" th:field="*{cash}" min="1">
+    <br/>
+    <button type="submit">Внести выплату</button>
+    <button type="reset">Очистить</button>
+</form>
 
 <footer>
     <div>

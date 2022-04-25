@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Статистика</title>
+</head>
+<body>
+<header>
+    <div>
+        <a>
+            <img th:src="@{/images/pr_logo.jpg}">
+        </a>
+        <nav>
+            <div>
+                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
+                    О нас
+                </a>
+                <a th:href="@{/}">
+                    Сменить пользователя
+                </a>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<div>
+    <h1>
+        Статистика
+    </h1>
+</div>
+
+<br/>
+<br/>
+
+<h2>По популярности среди клиентов</h2>
+<h3>Вклады</h3>
+<table border="1">
+    <tr>
+        <th>№</th>
+        <th>Название вклада</th>
+        <th>Число клиентов</th>
+    </tr>
+    <tr th:each="dep, depIter: ${depCount}">
+        <td th:utext="${depIter.index}+1">№</td>
+        <td th:utext="${dep[0]}">Название вклада</td>
+        <td th:utext="${dep[1]}">Число клиентов</td>
+    </tr>
+</table>
+<h3>Кредиты</h3>
+<table border="1">
+    <tr>
+        <th>№</th>
+        <th>Название кредита</th>
+        <th>Число клиентов</th>
+    </tr>
+    <tr th:each="crd, crdIter: ${crdCount}">
+        <td th:utext="${crdIter.index}+1">№</td>
+        <td th:utext="${crd[0]}">Название кредита</td>
+        <td th:utext="${crd[1]}">Число клиентов</td>
+    </tr>
+</table>
+
+<br/>
+<br/>
+
+<h2>По доходности</h2>
+<h3>Вклады</h3>
+<table border="1">
+    <tr>
+        <th>№</th>
+        <th>Название вклада</th>
+        <th>Доходность</th>
+    </tr>
+    <tr th:each="dep, depIter: ${depProfit}">
+        <td th:utext="${depIter.index}+1">№</td>
+        <td th:utext="${dep[0]}">Название вклада</td>
+        <td th:utext="${dep[1]}">Доходность</td>
+    </tr>
+</table>
+<h3>Кредиты</h3>
+<table border="1">
+    <tr>
+        <th>№</th>
+        <th>Название кредита</th>
+        <th>Число клиентов</th>
+    </tr>
+    <tr th:each="crd, crdIter: ${crdProfit}">
+        <td th:utext="${crdIter.index}+1">№</td>
+        <td th:utext="${crd[0]}">Название кредита</td>
+        <td th:utext="${crd[1]}">Доходность</td>
+    </tr>
+</table>
+
+
+<footer>
+    <div>
+        <p>Коза слабее льва и тигра, но коза в цирке не выступает!</p>
+    </div>
+</footer>
+</body>
+</html>

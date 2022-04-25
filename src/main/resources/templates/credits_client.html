@@ -43,6 +43,8 @@
             <th>Следующий платёж</th>
             <th>Процентная ставка</th>
             <th>Валюта</th>
+            <th>Внесение выплаты</th>
+            <th>Закрытие</th>
         </tr>
         <tr th:each="crd : ${client.credits}">
             <td th:utext="${crd.info.name}">Название вклада</td>
@@ -53,6 +55,8 @@
             <td th:utext="${crd.summOfNextPay}">Слежующий платёж</td>
             <td th:utext="${crd.info.rate}">Процентная ставка</td>
             <td th:utext="${crd.info.currency}">Валюта</td>
+            <td th:href="@{/new_pay(credit=${crd.id})}">Внести</td>
+            <td>Удалить</td>
         </tr>
 
     </table>

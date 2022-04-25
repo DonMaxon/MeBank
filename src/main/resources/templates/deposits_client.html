@@ -41,6 +41,7 @@
             <th>Дата окончания</th>
             <th>Процентная ставка</th>
             <th>Валюта</th>
+            <th>Закрытие</th>
         </tr>
         <tr th:each="dep : ${client.deposits}">
             <td th:utext="${dep.info.name}">Название вклада</td>
@@ -49,6 +50,7 @@
             <td th:utext="${dep.endDate}">Дата окончания</td>
             <td th:utext="${dep.info.rate}">Процентная ставка</td>
             <td th:utext="${dep.info.currency}">Валюта</td>
+            <td>Удалить</td>
         </tr>
 
     </table>

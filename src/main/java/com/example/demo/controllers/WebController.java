@@ -32,6 +32,9 @@ public class WebController {
         return "index";
     }
 
+    @GetMapping("/error")
+    public String error(Model model) { return "error"; }
+
     @GetMapping("/main_client")
     public String clientMain(@RequestParam("client") UUID uuid, Model model) {
         Client client = clientService.findById(uuid);
@@ -170,8 +173,79 @@ public class WebController {
     }
     @GetMapping("new_client")
     public String newClient(@RequestParam("creator") UUID uuid, Model model) {
-        model.addAttribute("creator", adminService.findById(uuid));
+        model.addAttribute("creator", employeeService.findById(uuid));
         model.addAttribute("client", new Client());
         return "new_client";
     }
+    @PostMapping("new_client")
+    public String newClientCreate(@RequestParam("creator") UUID uuid, Model model, @ModelAttribute Client client) {
+        client.setId(UUID.randomUUID());
+        client.setEmployee(employeeService.findById(uuid));
+        client.setCreatingDate(new Date());
+        client.setCredits(new ArrayList<>());
+        client.setDeposits(new ArrayList<>());
+        clientService.save(client);
+        return "redirect:/clients?employee="+uuid.toString();
+    }
+    @GetMapping("upd_client")
+    public String updClient(@RequestParam("client") UUID uuid, @RequestParam("employee") UUID id, Model model) {
+        model.addAttribute("client", clientService.findById(uuid));
+        model.addAttribute("employee", employeeService.findById(id));
+        return "upd_client";
+    }
+    @GetMapping("del_client")
+    public String delClient(@RequestParam("client") UUID uuid, @RequestParam("employee") UUID id, Model model) {
+        clientService.delete(uuid);
+        return "redirect:/clients?employee="+id.toString();
+    }
+    @GetMapping("delete_info")
+    public String delInfo(@RequestParam("info") UUID uuid, @RequestParam("admin") UUID id, Model model) {
+        infoService.delete(uuid);
+        return "redirect:/all_info?admin="+id.toString();
+    }
+    @GetMapping("all_employees")
+    public String allEmp(@RequestParam("admin") UUID uuid, Model model) {
+        model.addAttribute("admin", adminService.findById(uuid));
+        model.addAttribute("employees", employeeService.findAll());
+        return "all_employees";
+    }
+    @GetMapping("upd_employee")
+    public String updEmp(@RequestParam("employee") UUID uuid, @RequestParam("creator") UUID id, Model model) {
+        model.addAttribute("creator", adminService.findById(id));
+        model.addAttribute("employee", employeeService.findById(uuid));
+        return "upd_employee";
+    }
+    @PostMapping("upd_employee")
+    public String updEmpParams(@RequestParam("creator") UUID id, Model model, @ModelAttribute Employee employee) {
+        return "redirect:/all_employees?admin="+id.toString();
+    }
+    @GetMapping("del_employee")
+    public String delEmp(@RequestParam("employee") UUID uuid, @RequestParam("admin") UUID id, Model model) {
+        employeeService.delete(uuid);
+        return "redirect:/all_employees?admin="+id.toString();
+    }
+    @GetMapping("new_employee")
+    public String newEmp(@RequestParam("creator") UUID uuid, Model model) {
+        model.addAttribute("admin", adminService.findById(uuid));
+        model.addAttribute("employee", new Employee());
+        return "new_employee";
+    }
+    @PostMapping("new_employee")
+    public String newEmpCreate(@RequestParam("creator") UUID uuid, Model model, @ModelAttribute Employee employee) {
+        employee.setId(UUID.randomUUID());
+        employee.setAdmin(adminService.findById(uuid));
+        employee.setClients(new ArrayList<>());
+        employeeService.save(employee);
+        return "redirect:/all_employees?admin="+uuid.toString();
+    }
+    @GetMapping("stats")
+    public String stats(@RequestParam("admin") UUID uuid, Model model) {
+        model.addAttribute("admin", adminService.findById(uuid));
+        model.addAttribute("depCount", depositService.countByType());
+        model.addAttribute("crdCount", creditService.countByType());
+        model.addAttribute("depProfit", depositService.profitByType());
+        model.addAttribute("crdProfit", creditService.profitByType());
+        return "stats";
+    }
+
 }

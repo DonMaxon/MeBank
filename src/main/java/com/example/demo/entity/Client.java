@@ -4,6 +4,7 @@ import com.example.demo.deserializers.ClientDeserializer;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.*;
@@ -29,6 +30,7 @@ public class Client {
     @Column (name = "passport_issue_by", nullable = false)
     private String passportIssueBy;
     @Column (name = "passport_issue_date", nullable = false)
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date passportIssueDate;
     @Column (name = "phone", nullable = false)
     private String phone;

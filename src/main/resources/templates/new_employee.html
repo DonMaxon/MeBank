@@ -2,7 +2,7 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
-    <title>Регистрация клиента</title>
+    <title>Регистрация сотрудника</title>
 </head>
 <body>
 <header>
@@ -29,36 +29,11 @@
     </h1>
 </div>
 
-<form method="post" th:object="${client}" th:action="@{/new_client(creator=${creator.id})}">
+<form method="post" th:object="${employee}" th:action="@{/new_employee(creator=${admin.id})}">
     <label>
         ФИО
     </label>
     <input type="text" placeholder="Иванов Иван Иванович" required="required" th:field="*{name}">
-    <br/>
-    <label>
-        Серия паспорта
-    </label>
-    <input type="text" placeholder="1234" required="required" pattern="[0-9]{4}" th:field="*{passportSeries}">
-    <br/>
-    <label>
-        Номер паспорта
-    </label>
-    <input type="text" placeholder="567890" required="required" pattern="[0-9]{6}" th:field="*{passportNumber}">
-    <br/>
-    <label>
-        Место выдачи паспорта
-    </label>
-    <input type="text" placeholder="ГУ МВД России по Самарской области" required="required" th:field="*{passportIssueBy}">
-    <br/>
-    <label>
-        Дата выдачи паспорта
-    </label>
-    <input type="date" required="required" th:field="*{passportIssueDate}">
-    <br/>
-    <label>
-        Номер телефона
-    </label>
-    <input type="tel" placeholder="89371234567" required="required" pattern="[8]{1}[0-9]{10}" th:field="*{phone}">
     <br/>
     <label>
         Логин

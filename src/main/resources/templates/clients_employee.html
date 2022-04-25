@@ -39,16 +39,21 @@
             <th>ФИО</th>
             <th>Вклады</th>
             <th>Кредиты</th>
+            <th>Редактирование</th>
+            <th>Удаление</th>
         </tr>
         <tr th:each="clt : ${employee.clients}">
-            <td th:utext="${employee.clients.indexOf(clt)+1}">Название вклада</td>
-            <td th:utext="${clt.name}">Текущая сумма</td>
+            <td th:utext="${employee.clients.indexOf(clt)+1}">№</td>
+            <td th:utext="${clt.name}">Иванов Иван Иванович</td>
             <td><a th:href="@{/deposits(client = ${clt.id})}" target="_blank">Вклады</a></td>
             <td><a th:href="@{/credits(client = ${clt.id})}" target="_blank">Кредиты</a></td>
+            <td><a th:href="@{/upd_client(client=${clt.id},employee=${employee.id})}">Редактировать персональные данные</a></td>
+            <td><a th:href="@{/del_client(client=${clt.id},employee=${employee.id})}">Удалить</a></td>
         </tr>
-
     </table>
 </div>
+
+<a th:href="@{/new_client(creator=${employee.id})}">Добавить нового клиента</a>
 
 <footer>
     <div>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование данных сотрудника</title>
+</head>
+<body>
+<header>
+    <div>
+        <a>
+            <img th:src="@{/images/pr_logo.jpg}">
+        </a>
+        <nav>
+            <div>
+                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
+                    О нас
+                </a>
+                <a th:href="@{/}">
+                    Сменить пользователя
+                </a>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<div>
+    <h1>
+        Редактирование данных сотрудника
+    </h1>
+</div>
+
+<form method="put" th:object="${employee}" th:action="@{/upd_employee(creator=${creator.id})}">
+    <label>
+        ФИО
+    </label>
+    <input type="text" required="required" th:value="${employee.name}" th:field="*{name}">
+    <br/>
+    <label>
+        Логин
+    </label>
+    <input type="text" required="required" th:value="${employee.login}" th:field="*{login}">
+    <br/>
+    <label>
+        Пароль
+    </label>
+    <input type="text" required="required" pattern="[a-zA-Z0-9]{6,}" th:value="${employee.password}" th:field="*{password}">
+    <br/>
+    <button type="submit">Создать</button>
+    <button type="reset">Очистить</button>
+</form>
+
+<footer>
+    <div>
+        <p>Коза слабее льва и тигра, но коза в цирке не выступает!</p>
+    </div>
+</footer>
+</body>
+</html>

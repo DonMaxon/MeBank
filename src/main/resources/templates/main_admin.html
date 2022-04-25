@@ -37,8 +37,9 @@
 
 <div>
     <a th:href="@{/all_info(admin=${admin.id})}">Информация по вкладам и кредитам</a>
-    <a>Сотрудники</a>
-    <a th:href="@{/all_clients(admin=${admin.id})}">Клиенты</a>
+    <a th:href="@{/all_employees(admin=${admin.id})}">Сотрудники</a>
+    <!--a th:href="@{/all_clients(admin=${admin.id})}">Клиенты</a-->
+    <a th:href="@{stats(admin=${admin.id})}">Статистика</a>
 </div>
 
 <footer>

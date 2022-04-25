@@ -2,7 +2,7 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
-    <title>Новый вклад</title>
+    <title>Сотрудники</title>
 </head>
 <body>
 <header>
@@ -25,25 +25,30 @@
 
 <div>
     <h1>
-        Клиенты
+        Сотрудники
     </h1>
 </div>
 
+<br/>
+<br/>
+
+<a th:href="@{/new_employee(creator=${admin.id})}">Новый сотрудник</a>
+
+<br/>
+<br/>
 
 <table border="1">
     <tr>
         <th>№</th>
         <th>ФИО</th>
-        <th>Серия и номер паспорта</th>
         <th>Редактировать</th>
         <th>Удалить</th>
     </tr>
-    <tr th:each="clt, cltIter: ${clients}">
-        <td th:utext="${cltIter.index}+1">№</td>
-        <td th:utext="${clt.name}">ФИО</td>
-        <td th:utext="${clt.passportSeries}+' '+${clt.passportNumber}">Серия и номер паспорта</td>
-        <td>Редактировать</td>
-        <td>Удалить</td>
+    <tr th:each="emp, empIter: ${employees}">
+        <td th:utext="${empIter.index}+1">№</td>
+        <td th:utext="${emp.name}">ФИО</td>
+        <td><a th:href="@{/upd_employee(employee=${emp.id},creator=${admin.id})}">Редактировать</a></td>
+        <td><a th:href="@{/del_employee(employee=${emp.id},admin=${admin.id})}" th:method="delete">Удалить</a></td>
     </tr>
 
 </table>

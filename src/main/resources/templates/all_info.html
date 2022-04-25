@@ -36,6 +36,11 @@
 <br/>
 <br/>
 
+<a th:href="@{/new_info(admin=${admin.id})}">Создать новый</a>
+
+<br/>
+<br/>
+
 <h2>Вклады</h2>
 <table border="1">
     <tr>
@@ -46,6 +51,7 @@
         <th>Процентная ставка</th>
         <th>Валюта</th>
         <th>Обновить</th>
+        <th>Удалить</th>
         <th>Добавил</th>
     </tr>
     <tr th:each="inf, infIter: ${infodep}">
@@ -56,6 +62,7 @@
         <td th:utext="${inf.rate}">Процентная ставка</td>
         <td th:utext="${inf.currency}">Валюта</td>
         <td><a th:href="@{/upd_info(info=${inf.id},admin=${admin.id})}">Обновить</a></td>
+        <td><a th:href="@{/delete_info(info=${inf.id},admin=${admin.id})}" th:method="delete">Удалить</a></td>
         <td th:utext="${inf.admin.name}">Добавил</td>
     </tr>
 </table>
@@ -72,6 +79,8 @@
         <th>Максимальная сумма</th>
         <th>Процентная ставка</th>
         <th>Валюта</th>
+        <th>Обновить</th>
+        <th>Удалить</th>
         <th>Добавил</th>
     </tr>
     <tr th:each="inf, infIter: ${infocrd}">
@@ -81,6 +90,8 @@
         <td th:utext="${inf.maxSumm}">Максимальная сумма</td>
         <td th:utext="${inf.rate}">Процентная ставка</td>
         <td th:utext="${inf.currency}">Валюта</td>
+        <td><a th:href="@{/upd_info(info=${inf.id},admin=${admin.id})}">Обновить</a></td>
+        <td><a th:href="@{/delete_info(info=${inf.id},admin=${admin.id})}" th:method="delete">Удалить</a></td>
         <td th:utext="${inf.admin.name}">Добавил</td>
     </tr>
 </table>
