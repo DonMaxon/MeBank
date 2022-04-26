@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>История выплат по кредитам</title>
+</head>
+<body>
+<header>
+    <div>
+        <a>
+            <img th:src="@{/images/pr_logo.jpg}">
+        </a>
+        <nav>
+            <div>
+                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
+                    О нас
+                </a>
+                <a th:href="@{/}">
+                    Сменить пользователя
+                </a>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<br/>
+<a th:href="@{/all_clients(admin=${admin.id})}">Назад</a>
+<br/>
+<a th:href="@{/main_admin(admin=${admin.id})}">На главную</a>
+<br/>
+
+<div>
+    <h1>
+        История выплат по кредитам клиента
+        <span th:text="${client.name}"></span>
+    </h1>
+</div>
+
+
+<table border="1">
+    <tr>
+        <th>Информация о кредите</th>
+        <th>Дата выплаты</th>
+        <th>Сумма выплаты</th>
+    </tr>
+    <tr th:each="cred: ${client.credits}">
+        <td rowspan="${cred.pays.size()}">
+            Тип кредита:
+            <span th:text="${cred.info.name}">
+            </span>
+            <br/>
+            Дата открытия:
+            <span th:text="${cred.openDate}">
+            </span>
+            <br/>
+            Дата закрытия:
+            <span th:text="${cred.endDate}">
+            </span>
+        </td>
+        <td>
+            <table>
+                <tr th:each="pay: ${cred.pays}">
+                    <td th:utext="${pay.date}">01.01.2001</td>
+                </tr>
+            </table>
+        </td>
+        <td>
+            <table>
+                <tr th:each="pay: ${cred.pays}">
+                    <td th:utext="${pay.cash}">0</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+
+</table>
+
+<footer>
+    <div>
+        <p>Коза слабее льва и тигра, но коза в цирке не выступает!</p>
+    </div>
+</footer>
+</body>
+</html>

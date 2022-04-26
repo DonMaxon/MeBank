@@ -2,7 +2,7 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
-    <title>Главная</title>
+    <title>Новый тип</title>
 </head>
 <body>
 <header>
@@ -28,6 +28,12 @@
         Создание нового типа вклада/кредита
     </span>
 </h2>
+
+<br/>
+<a th:href="@{/all_info(admin=${admin.id})}">Назад</a>
+<br/>
+<a th:href="@{/main_admin(admin=${admin.id})}">На главную</a>
+<br/>
 
 <form th:method="post" th:object="${info}" th:action="@{/new_info(admin=${admin.id})}">
     <label>

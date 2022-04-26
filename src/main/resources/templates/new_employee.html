@@ -25,9 +25,15 @@
 
 <div>
     <h1>
-        Регистрация нового клиента
+        Регистрация нового сотрудника
     </h1>
 </div>
+
+<br/>
+<a th:href="@{/all_employees(admin=${admin.id})}">Назад</a>
+<br/>
+<a th:href="@{/main_admin(admin=${admin.id})}">На главную</a>
+<br/>
 
 <form method="post" th:object="${employee}" th:action="@{/new_employee(creator=${admin.id})}">
     <label>

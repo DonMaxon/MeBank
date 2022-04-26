@@ -2,7 +2,7 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
-    <title>Главная</title>
+    <title>Редактирование информации</title>
 </head>
 <body>
 <header>
@@ -29,6 +29,12 @@
         <span th:text="${info.name}"></span>"
     </span>
 </h2>
+
+<br/>
+<a th:href="@{/all_info(admin=${admin.id})}">Назад</a>
+<br/>
+<a th:href="@{/main_admin(admin=${admin.id})}">На главную</a>
+<br/>
 
 <form th:method="put" th:object="${info}" th:action="@{/upd_info(info=${info.id},admin=${admin.id})}">
     <input type="hidden" required="required" readonly="readonly" th:value="${info.name}"/>

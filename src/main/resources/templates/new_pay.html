@@ -2,7 +2,7 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
-    <title>Регистрация сотрудника</title>
+    <title>Внесение выплаты</title>
 </head>
 <body>
 <header>
@@ -28,6 +28,10 @@
         Внесение выплаты
     </h1>
 </div>
+
+<br/>
+<a th:href="@{/credits_client(client=${credit.client.id})}">Назад</a>
+<br/>
 
 <form method="post" th:object="${pay}" th:action="@{/new_pay(credit=${credit.id})}">
     <label>

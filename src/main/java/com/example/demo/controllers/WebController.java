@@ -26,6 +26,8 @@ public class WebController {
     CreditService creditService;
     @Autowired
     AdminService adminService;
+    @Autowired
+    PayService payService;
 
     @GetMapping("/")
     public String index(Model model) {
@@ -247,5 +249,31 @@ public class WebController {
         model.addAttribute("crdProfit", creditService.profitByType());
         return "stats";
     }
-
+    @GetMapping("pays_history")
+    public String payHistory(@RequestParam("admin") UUID uuid, @RequestParam("client") UUID id, Model model) {
+        model.addAttribute("admin", adminService.findById(uuid));
+        model.addAttribute("client", clientService.findById(id));
+        return "pays_history";
+    }
+    @GetMapping("new_pay")
+    public String newPay(@RequestParam("credit") UUID uuid, Model model) {
+        model.addAttribute("credit", creditService.findById(uuid));
+        model.addAttribute("pay", new Pay());
+        return "new_pay";
+    }
+    @PostMapping("new_pay")
+    public String newPay(@RequestParam("credit") UUID uuid, Model model, @ModelAttribute Pay pay) {
+        pay.setId(UUID.randomUUID());
+        pay.setCredit(creditService.findById(uuid));
+        pay.setDate(new Date());
+        payService.save(pay);
+        return "redirect:/credits?client="+pay.getCredit().getClient().getId().toString();
+    }
+    @GetMapping("del_credit")
+    public String delCredit(@RequestParam("credit") UUID uuid, Model model) {
+        Credit credit = creditService.findById(uuid);
+        if (credit.getSumm()==0)
+            creditService.delete(uuid);
+        return "redirect:/credits?client="+credit.getClient().getId().toString();
+    }
 }

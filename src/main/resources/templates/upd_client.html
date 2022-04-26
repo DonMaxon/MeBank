@@ -29,6 +29,12 @@
     </h1>
 </div>
 
+<br/>
+<a th:href="@{/clients(employee=${employee.id})}">Назад</a>
+<br/>
+<a th:href="@{/main_employee(employee=${employee.id})}">На главную</a>
+<br/>
+
 <form method="put" th:object="${client}" th:action="@{/upd_client(client=${client.id})}">
     <label>
         ФИО

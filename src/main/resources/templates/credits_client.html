@@ -55,10 +55,9 @@
             <td th:utext="${crd.summOfNextPay}">Слежующий платёж</td>
             <td th:utext="${crd.info.rate}">Процентная ставка</td>
             <td th:utext="${crd.info.currency}">Валюта</td>
-            <td th:href="@{/new_pay(credit=${crd.id})}">Внести</td>
-            <td>Удалить</td>
+            <td><a th:href="@{/new_pay(credit=${crd.id})}">Внести</a></td>
+            <td><a th:href="@{/del_credit(credit=${crd.id})}">Удалить</a></td>
         </tr>
-
     </table>
 </div>
 
