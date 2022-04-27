@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Обновление данных клиента</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
 </head>
 <body>
 <header>
-    <div>
-        <a>
-            <img th:src="@{/images/pr_logo.jpg}">
-        </a>
+    <div >
         <nav>
-            <div>
-                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
+            <div class="up">
+                <a>
+                    <img  class="pic" th:src="@{/images/pr_logo.png}">
+                </a>
+                <a class = "up_text" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
                     О нас
                 </a>
-                <a th:href="@{/}">
+                <a class = "up_text" th:href="@{/}">
                     Сменить пользователя
                 </a>
             </div>
@@ -23,67 +24,78 @@
     </div>
 </header>
 
-<div>
+<div class = "hello">
     <h1>
         Обновление данных клиента
     </h1>
 </div>
 
-<br/>
-<a th:href="@{/clients(employee=${employee.id})}">Назад</a>
-<br/>
-<a th:href="@{/main_employee(employee=${employee.id})}">На главную</a>
-<br/>
+<div class = "admin_info">
+<a class = "admin_info_text" th:href="@{/clients(employee=${employee.id})}">Назад</a>
+<a class = "admin_info_text" th:href="@{/main_employee(employee=${employee.id})}">На главную</a>
+</div>
 
+<div class = "tables">
+    <div class = "new_info">
 <form method="put" th:object="${client}" th:action="@{/upd_client(client=${client.id})}">
-    <label>
+    <label class = "new_info_text">
         ФИО
     </label>
-    <input type="text" placeholder="Иванов Иван Иванович" required="required" th:value="${client.name}" th:field="*{name}">
+    <input  style="margin-left:150px;" type="text" placeholder="Иванов Иван Иванович" required="required" th:value="${client.name}" th:field="*{name}">
     <br/>
-    <label>
+    <br/>
+    <label class = "new_info_text">
         Серия паспорта
     </label>
-    <input type="text" placeholder="1234" required="required" pattern="[0-9]{4}" th:value="${client.passportSeries}" th:field="*{passportSeries}">
+    <input style="margin-left:65px;" type="text" placeholder="1234" required="required" pattern="[0-9]{4}" th:value="${client.passportSeries}" th:field="*{passportSeries}">
     <br/>
-    <label>
+    <br/>
+    <label class = "new_info_text">
         Номер паспорта
     </label>
-    <input type="text" placeholder="567890" required="required" pattern="[0-9]{6}" th:value="${client.passportNumber}" th:field="*{passportNumber}">
+    <input  style="margin-left:60px;" type="text" placeholder="567890" required="required" pattern="[0-9]{6}" th:value="${client.passportNumber}" th:field="*{passportNumber}">
     <br/>
-    <label>
+    <br/>
+    <label class = "new_info_text">
         Место выдачи паспорта
     </label>
     <input type="text" placeholder="ГУ МВД России по Самарской области" required="required" th:value="${client.passportIssueBy}" th:field="*{passportIssueBy}">
     <br/>
-    <label>
+    <br/>
+    <label class = "new_info_text">
         Дата выдачи паспорта
     </label>
-    <input type="date" required="required" th:value="${client.passportIssueDate}" th:field="*{passportSeries}">
+    <input style="margin-left:10px;"type="date" required="required" th:value="${client.passportIssueDate}" th:field="*{passportSeries}">
     <br/>
-    <label>
+    <br/>
+    <label class = "new_info_text">
         Номер телефона
     </label>
-    <input type="tel" placeholder="89371234567" required="required" pattern="[8]{1}[0-9]{10}" th:value="${client.phone}" th:field="*{phone}">
+    <input style="margin-left:55px;" type="tel" placeholder="89371234567" required="required" pattern="[8]{1}[0-9]{10}" th:value="${client.phone}" th:field="*{phone}">
     <br/>
-    <label>
+    <br/>
+    <label class = "new_info_text">
         Логин
     </label>
-    <input type="text" required="required" th:value="${client.login}" th:field="*{login}">
+    <input style="margin-left:140px;" type="text" required="required" th:value="${client.login}" th:field="*{login}">
     <br/>
-    <label>
+    <br/>
+    <label class = "new_info_text">
         Пароль
     </label>
-    <input type="text" required="required" pattern="[a-zA-Z0-9]{6,}" th:value="${client.password}" th:field="*{password}">
+    <input style="margin-left:130px;" type="text" required="required" pattern="[a-zA-Z0-9]{6,}" th:value="${client.password}" th:field="*{password}">
     <br/>
-    <button type="submit">Принять изменения</button>
-    <button type="reset">Очистить</button>
+    <br/>
+    <button class = "new_info_button"  type="submit">Принять изменения</button>
+    <button class = "new_info_button"  type="reset">Очистить</button>
 </form>
-
-<footer>
-    <div>
-        <p>Коза слабее льва и тигра, но коза в цирке не выступает!</p>
     </div>
-</footer>
+</div>
+
+<div class = "down">
+    <div>
+        <p class = "down_text">Коза слабее льва и тигра, но коза в цирке не выступает!</p>
+    </div>
+</div>
 </body>
 </html>

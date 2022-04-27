@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Главная</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
 </head>
 <body>
 <header>
-    <div>
-        <a>
-            <img th:src="@{/images/pr_logo.jpg}">
-        </a>
+    <div >
         <nav>
-            <div>
-                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
+            <div class="up">
+                <a>
+                    <img  class="pic" th:src="@{/images/pr_logo.png}">
+                </a>
+                <a class = "up_text" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
                     О нас
                 </a>
-                <a th:href="@{/}">
+                <a class = "up_text" th:href="@{/}">
                     Сменить пользователя
                 </a>
             </div>
@@ -23,7 +24,8 @@
     </div>
 </header>
 
-<div>
+
+<div class="hello">
     <h1>
         <span>
             Здравствуйте,
@@ -33,14 +35,14 @@
     </h1>
 </div>
 
-<div>
-    <a th:href="@{/clients(employee = ${employee.id})}" target="_blank">Клиенты</a>
+<div class = "admin_info">
+    <a class="admin_info_text" th:href="@{/clients(employee = ${employee.id})}" target="_blank">Клиенты</a>
 </div>
 
-<footer>
+<div class = "down">
     <div>
-        <p>Коза слабее льва и тигра, но коза в цирке не выступает!</p>
+        <p class = "down_text">Коза слабее льва и тигра, но коза в цирке не выступает!</p>
     </div>
-</footer>
+</div>
 </body>
 </html>

@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>История выплат по кредитам</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
 </head>
 <body>
 <header>
-    <div>
-        <a>
-            <img th:src="@{/images/pr_logo.jpg}">
-        </a>
+    <div >
         <nav>
-            <div>
-                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
+            <div class="up">
+                <a>
+                    <img  class="pic" th:src="@{/images/pr_logo.png}">
+                </a>
+                <a class = "up_text" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
                     О нас
                 </a>
-                <a th:href="@{/}">
+                <a class = "up_text" th:href="@{/}">
                     Сменить пользователя
                 </a>
             </div>
@@ -23,21 +24,22 @@
     </div>
 </header>
 
-<br/>
-<a th:href="@{/all_clients(admin=${admin.id})}">Назад</a>
-<br/>
-<a th:href="@{/main_admin(admin=${admin.id})}">На главную</a>
-<br/>
 
-<div>
+
+<div class = "hello">
     <h1>
         История выплат по кредитам клиента
         <span th:text="${client.name}"></span>
     </h1>
 </div>
 
+<div class = "admin_info">
+    <a class = "admin_info_text" th:href="@{/all_clients(admin=${admin.id})}">Назад</a>
+    <a class = "admin_info_text" th:href="@{/main_admin(admin=${admin.id})}">На главную</a>
+</div>
 
-<table border="1">
+<div class="tables">
+<table class="table">
     <tr>
         <th>Информация о кредите</th>
         <th>Дата выплаты</th>
@@ -58,27 +60,28 @@
             </span>
         </td>
         <td>
-            <table>
-                <tr th:each="pay: ${cred.pays}">
-                    <td th:utext="${pay.date}">01.01.2001</td>
+            <table class="no_border">
+                <tr class = "no_border" th:each="pay: ${cred.pays}">
+                    <td class = "no_border" th:utext="${pay.date}">01.01.2001</td>
                 </tr>
             </table>
         </td>
         <td>
-            <table>
-                <tr th:each="pay: ${cred.pays}">
-                    <td th:utext="${pay.cash}">0</td>
+            <table class="no_border">
+                <tr class = "no_border" th:each="pay: ${cred.pays}">
+                    <td class = "no_border" th:utext="${pay.cash}">0</td>
                 </tr>
             </table>
         </td>
     </tr>
 
 </table>
-
-<footer>
+</div>
+</div>
+<div class = "down">
     <div>
-        <p>Коза слабее льва и тигра, но коза в цирке не выступает!</p>
+        <p class = "down_text">Коза слабее льва и тигра, но коза в цирке не выступает!</p>
     </div>
-</footer>
+</div>
 </body>
 </html>

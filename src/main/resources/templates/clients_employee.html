@@ -24,7 +24,7 @@
     </div>
 </header>
 
-<div>
+<div class = "hello">
     <h1>
         <span>Клиенты сотрудника
             <span th:text="${employee.name}">
@@ -33,12 +33,12 @@
     </h1>
 </div>
 
-<br/>
-<a th:href="@{/main_employee(employee=${employee.id})}">На главную</a>
-<br/>
-
-<div>
-    <table border="1">
+<div class = "admin_info">
+<a class="admin_info_text" th:href="@{/main_employee(employee=${employee.id})}">На главную</a>
+<a class="admin_info_text" th:href="@{/new_client(creator=${employee.id})}">Добавить нового клиента</a>
+</div>
+<div class="tables">
+    <table class = "table">
         <tr>
             <th>№</th>
             <th>ФИО</th>
@@ -50,20 +50,20 @@
         <tr th:each="clt : ${employee.clients}">
             <td th:utext="${employee.clients.indexOf(clt)+1}">№</td>
             <td th:utext="${clt.name}">Иванов Иван Иванович</td>
-            <td><a th:href="@{/deposits(client = ${clt.id})}" target="_blank">Вклады</a></td>
-            <td><a th:href="@{/credits(client = ${clt.id})}" target="_blank">Кредиты</a></td>
-            <td><a th:href="@{/upd_client(client=${clt.id},employee=${employee.id})}">Редактировать персональные данные</a></td>
-            <td><a th:href="@{/del_client(client=${clt.id},employee=${employee.id})}">Удалить</a></td>
+            <td><a class="brown" th:href="@{/deposits(client = ${clt.id})}" target="_blank">Вклады</a></td>
+            <td><a class="brown" th:href="@{/credits(client = ${clt.id})}" target="_blank">Кредиты</a></td>
+            <td><a class="update_text" th:href="@{/upd_client(client=${clt.id},employee=${employee.id})}">Редактировать персональные данные</a></td>
+            <td><a class="delete_text" th:href="@{/del_client(client=${clt.id},employee=${employee.id})}">Удалить</a></td>
         </tr>
     </table>
 </div>
 
-<a th:href="@{/new_client(creator=${employee.id})}">Добавить нового клиента</a>
 
-<footer>
+
+<div class = "down">
     <div>
-        <p>Коза слабее льва и тигра, но коза в цирке не выступает!</p>
+        <p class = "down_text">Коза слабее льва и тигра, но коза в цирке не выступает!</p>
     </div>
-</footer>
+</div>
 </body>
 </html>

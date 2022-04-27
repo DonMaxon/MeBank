@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Внесение выплаты</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
 </head>
 <body>
 <header>
-    <div>
-        <a>
-            <img th:src="@{/images/pr_logo.jpg}">
-        </a>
+    <div >
         <nav>
-            <div>
-                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
+            <div class="up">
+                <a>
+                    <img  class="pic" th:src="@{/images/pr_logo.png}">
+                </a>
+                <a class = "up_text" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
                     О нас
                 </a>
-                <a th:href="@{/}">
+                <a class = "up_text" th:href="@{/}">
                     Сменить пользователя
                 </a>
             </div>
@@ -23,30 +24,33 @@
     </div>
 </header>
 
-<div>
+<div class="hello">
     <h1>
         Внесение выплаты
     </h1>
 </div>
 
-<br/>
-<a th:href="@{/credits_client(client=${credit.client.id})}">Назад</a>
-<br/>
-
+<div class = "admin_info">
+<a class = "admin_info_text" th:href="@{/credits_client(client=${credit.client.id})}">Назад</a>
+</div>
+<div class = "tables">
+    <div class = "new_info">
 <form method="post" th:object="${pay}" th:action="@{/new_pay(credit=${credit.id})}">
-    <label>
+    <label class = "new_info_text">
         Сумма
     </label>
-    <input type="number" placeholder="10000" required="required" th:field="*{cash}" min="1">
+    <input style="margin-left:130px;" type="number" placeholder="10000" required="required" th:field="*{cash}" min="1">
     <br/>
-    <button type="submit">Внести выплату</button>
-    <button type="reset">Очистить</button>
+    <br/>
+    <button class = "new_info_button" type="submit">Внести выплату</button>
+    <button class = "new_info_button" type="reset">Очистить</button>
 </form>
-
-<footer>
-    <div>
-        <p>Коза слабее льва и тигра, но коза в цирке не выступает!</p>
     </div>
-</footer>
+</div>
+<div class = "down">
+    <div>
+        <p class = "down_text">Коза слабее льва и тигра, но коза в цирке не выступает!</p>
+    </div>
+</div>
 </body>
 </html>

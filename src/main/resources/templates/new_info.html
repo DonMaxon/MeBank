@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Новый тип</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
 </head>
 <body>
 <header>
-    <div>
-        <a>
-            <img th:src="@{/images/pr_logo.jpg}">
-        </a>
+    <div >
         <nav>
-            <div>
-                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
+            <div class="up">
+                <a>
+                    <img  class="pic" th:src="@{/images/pr_logo.png}">
+                </a>
+                <a class = "up_text" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
                     О нас
                 </a>
-                <a th:href="@{/}">
+                <a class = "up_text" th:href="@{/}">
                     Сменить пользователя
                 </a>
             </div>
@@ -23,60 +24,69 @@
     </div>
 </header>
 
+<div class="hello">
 <h2>
     <span>
         Создание нового типа вклада/кредита
     </span>
 </h2>
+</div>
 
-<br/>
-<a th:href="@{/all_info(admin=${admin.id})}">Назад</a>
-<br/>
-<a th:href="@{/main_admin(admin=${admin.id})}">На главную</a>
-<br/>
-
+<div class = "admin_info">
+<a class="admin_info_text" th:href="@{/all_info(admin=${admin.id})}">Назад</a>
+<a class="admin_info_text" th:href="@{/main_admin(admin=${admin.id})}">На главную</a>
+</div>
+<div class = "tables">
+<div class = "new_info">
 <form th:method="post" th:object="${info}" th:action="@{/new_info(admin=${admin.id})}">
-    <label>
+    <label class = "new_info_text">
         Название
     </label>
-    <input type="text" required="required" th:field="*{name}"/>
+    <input type="text" style="margin-left: 100px;" required="required" th:field="*{name}"/>
     <br/>
-    <label>
+    <br/>
+    <label class = "new_info_text">
         Тип
     </label>
-    <select required="required" th:field="*{type}">
+    <select style="margin-left: 150px;"required="required" th:field="*{type}">
         <option  th:each="t : ${T(com.example.demo.entity.Info.Type).values()}" th:text="${t}" th:value="${t}">Тип</option>
     </select>
     <br/>
-    <label>
+    <br/>
+    <label class = "new_info_text">
         Минимальная сумма
     </label>
-    <input type="number" required="required" min="1" th:field="*{minSumm}"/>
+    <input style="margin-left: 10px;" type="number" required="required" min="1" th:field="*{minSumm}"/>
     <br/>
-    <label>
+    <br/>
+    <label class = "new_info_text">
         Максимальная сумма
     </label>
-    <input type="number" required="required" min="1" th:field="*{maxSumm}"/>
+    <input style="margin-left: 5px;" type="number" required="required" min="1" th:field="*{maxSumm}"/>
     <br/>
-    <label>
+    <br/>
+    <label class = "new_info_text">
         Ставка
     </label>
-    <input type="number" required="required" min="1" max="100" th:field="*{rate}"/>
+    <input style="margin-left: 125px;" type="number" required="required" min="1" max="100" th:field="*{rate}"/>
     <br/>
-    <label>
+    <br/>
+    <label class = "new_info_text">
         Валюта
     </label>
-    <select required="required" th:field="*{currency}">
+    <select style="margin-left: 120px;" required="required" th:field="*{currency}">
         <option th:each="c : ${T(com.example.demo.entity.Info.Currency).values()}" th:text="${c}" th:value="${c}">Валюта</option>
     </select>
     <br/>
-    <button type="submit">Сохранить</button>
+    <br/>
+    <button class="new_info_button" style="position: relative;left: 40%;transform: translate(-40%, 0);" type="submit">Сохранить</button>
 </form>
-
-<footer>
+</div>
+</div>
+<div class = "down">
     <div>
-        <p>Коза слабее льва и тигра, но коза в цирке не выступает!</p>
+        <p class = "down_text">Коза слабее льва и тигра, но коза в цирке не выступает!</p>
     </div>
-</footer>
+</div>
 </body>
 </html>
