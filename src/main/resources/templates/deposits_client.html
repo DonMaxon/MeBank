@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Главная</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
 </head>
 <body>
 <header>
-    <div>
-        <a>
-            <img th:src="@{/images/pr_logo.jpg}">
-        </a>
+    <div >
         <nav>
-            <div>
-                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
+            <div class="up">
+                <a>
+                    <img  class="pic" th:src="@{/images/pr_logo.png}">
+                </a>
+                <a class = "up_text" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
                     О нас
                 </a>
-                <a th:href="@{/}">
+                <a class = "up_text" th:href="@{/}">
                     Сменить пользователя
                 </a>
             </div>
@@ -23,7 +24,7 @@
     </div>
 </header>
 
-<div>
+<div class = "hello">
     <h1>
         <span>
             <span th:text="${client.name}">
@@ -32,8 +33,8 @@
     </h1>
 </div>
 
-<div>
-    <table border="1">
+<div class="tables">
+    <table class = "table">
         <tr>
             <th>Название вклада</th>
             <th>Текущая сумма</th>
@@ -50,20 +51,20 @@
             <td th:utext="${dep.endDate}">Дата окончания</td>
             <td th:utext="${dep.info.rate}">Процентная ставка</td>
             <td th:utext="${dep.info.currency}">Валюта</td>
-            <td>Удалить</td>
+            <td class="delete_text">Удалить</td>
         </tr>
 
     </table>
 </div>
 
-<div>
-    <a th:href="@{/new_dep(client = ${client.id})}">Открыть вклад</a>
+<div class = "admin_info">
+    <a class = "admin_info_text" th:href="@{/new_dep(client = ${client.id})}">Открыть вклад</a>
 </div>
 
-<footer>
+<div class = "down">
     <div>
-        <p>Коза слабее льва и тигра, но коза в цирке не выступает!</p>
+        <p class = "down_text">Коза слабее льва и тигра, но коза в цирке не выступает!</p>
     </div>
-</footer>
+</div>
 </body>
 </html>

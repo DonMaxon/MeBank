@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Сотрудники</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
 </head>
 <body>
 <header>
-    <div>
-        <a>
-            <img th:src="@{/images/pr_logo.jpg}">
-        </a>
+    <div >
         <nav>
-            <div>
-                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
+            <div class="up">
+                <a>
+                    <img  class="pic" th:src="@{/images/pr_logo.png}">
+                </a>
+                <a class = "up_text" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
                     О нас
                 </a>
-                <a th:href="@{/}">
+                <a class = "up_text" th:href="@{/}">
                     Сменить пользователя
                 </a>
             </div>
@@ -23,26 +24,20 @@
     </div>
 </header>
 
-<div>
+
+<div class = "hello">
     <h1>
         Сотрудники
     </h1>
 </div>
 
-<br/>
-<br/>
+<div class = "admin_info">
+    <a class="admin_info_text" th:href="@{/main_admin(admin=${admin.id})}">На главную</a>
+    <a class="admin_info_text" th:href="@{/new_employee(creator=${admin.id})}">Новый сотрудник</a>
+</div>
 
-<a th:href="@{/main_admin(admin=${admin.id})}">На главную</a>
-
-<br/>
-<br/>
-
-<a th:href="@{/new_employee(creator=${admin.id})}">Новый сотрудник</a>
-
-<br/>
-<br/>
-
-<table border="1">
+<div class="tables">
+<table class = "table">
     <tr>
         <th>№</th>
         <th>ФИО</th>
@@ -52,16 +47,16 @@
     <tr th:each="emp, empIter: ${employees}">
         <td th:utext="${empIter.index}+1">№</td>
         <td th:utext="${emp.name}">ФИО</td>
-        <td><a th:href="@{/upd_employee(employee=${emp.id},creator=${admin.id})}">Редактировать</a></td>
-        <td><a th:href="@{/del_employee(employee=${emp.id},admin=${admin.id})}" th:method="delete">Удалить</a></td>
+        <td><a class="update_text" th:href="@{/upd_employee(employee=${emp.id},creator=${admin.id})}">Редактировать</a></td>
+        <td><a class="delete_text" th:href="@{/del_employee(employee=${emp.id},admin=${admin.id})}" th:method="delete">Удалить</a></td>
     </tr>
 
 </table>
-
-<footer>
+</div>
+<div class = "down">
     <div>
-        <p>Коза слабее льва и тигра, но коза в цирке не выступает!</p>
+        <p class = "down_text">Коза слабее льва и тигра, но коза в цирке не выступает!</p>
     </div>
-</footer>
+</div>
 </body>
 </html>

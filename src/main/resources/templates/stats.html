@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Статистика</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
 </head>
 <body>
 <header>
-    <div>
-        <a>
-            <img th:src="@{/images/pr_logo.jpg}">
-        </a>
+    <div >
         <nav>
-            <div>
-                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
+            <div class="up">
+                <a>
+                    <img  class="pic" th:src="@{/images/pr_logo.png}">
+                </a>
+                <a class = "up_text" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
                     О нас
                 </a>
-                <a th:href="@{/}">
+                <a class = "up_text" th:href="@{/}">
                     Сменить пользователя
                 </a>
             </div>
@@ -23,7 +24,8 @@
     </div>
 </header>
 
-<div>
+
+<div class="hello">
     <h1>
         Статистика
     </h1>
@@ -32,14 +34,19 @@
 <br/>
 <br/>
 
-<a th:href="@{/main_admin(admin=${admin.id})}">На главную</a>
+<div class = "admin_info">
+    <a class="admin_info_text" th:href="@{/main_admin(admin=${admin.id})}">На главную</a>
+</div>
 
 <br/>
 <br/>
 
-<h2>По популярности среди клиентов</h2>
-<h3>Вклады</h3>
-<table border="1">
+<div class="tables">
+<h2 class="just_center">По популярности среди клиентов</h2>
+    <br/>
+<h3 class="just_center">Вклады</h3>
+    <br/>
+<table class="table">
     <tr>
         <th>№</th>
         <th>Название вклада</th>
@@ -51,8 +58,13 @@
         <td th:utext="${dep[1]}">Число клиентов</td>
     </tr>
 </table>
-<h3>Кредиты</h3>
-<table border="1">
+    <br/>
+    <br/>
+    <br/>
+
+<h3 class="just_center">Кредиты</h3>
+    <br/>
+<table class="table">
     <tr>
         <th>№</th>
         <th>Название кредита</th>
@@ -65,12 +77,15 @@
     </tr>
 </table>
 
+    <br/>
 <br/>
 <br/>
 
-<h2>По доходности</h2>
-<h3>Вклады</h3>
-<table border="1">
+<h2 class="just_center">По доходности</h2>
+    <br/>
+<h3 class="just_center">Вклады</h3>
+    <br/>
+<table class="table">
     <tr>
         <th>№</th>
         <th>Название вклада</th>
@@ -82,8 +97,12 @@
         <td th:utext="${dep[1]}">Доходность</td>
     </tr>
 </table>
-<h3>Кредиты</h3>
-<table border="1">
+    <br/>
+    <br/>
+    <br/>
+<h3 class="just_center">Кредиты</h3>
+    <br/>
+<table class="table">
     <tr>
         <th>№</th>
         <th>Название кредита</th>
@@ -95,12 +114,13 @@
         <td th:utext="${crd[1]}">Доходность</td>
     </tr>
 </table>
+</div>
 
 
-<footer>
+<div class = "down">
     <div>
-        <p>Коза слабее льва и тигра, но коза в цирке не выступает!</p>
+        <p class = "down_text">Коза слабее льва и тигра, но коза в цирке не выступает!</p>
     </div>
-</footer>
+</div>
 </body>
 </html>

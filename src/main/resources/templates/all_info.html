@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Информация</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
 </head>
 <body>
 <header>
-    <div>
-        <a>
-            <img th:src="@{/images/pr_logo.jpg}">
-        </a>
+    <div >
         <nav>
-            <div>
-                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
+            <div class="up">
+                <a>
+                    <img  class="pic" th:src="@{/images/pr_logo.png}">
+                </a>
+                <a class = "up_text" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
                     О нас
                 </a>
-                <a th:href="@{/}">
+                <a class = "up_text" th:href="@{/}">
                     Сменить пользователя
                 </a>
             </div>
@@ -23,7 +24,7 @@
     </div>
 </header>
 
-<div>
+<div class = "hello">
     <h1>
         <span>
             Здравствуйте,
@@ -32,77 +33,74 @@
         </span>
     </h1>
 </div>
-<br/>
-<br/>
-<a th:href="@{/main_admin(admin=${admin.id})}">На главную</a>
-<br/>
-<br/>
+<div class = "admin_info">
+    <a class="admin_info_text" th:href="@{/main_admin(admin=${admin.id})}">На главную</a>
+    <a class="admin_info_text" th:href="@{/new_info(admin=${admin.id})}">Создать новый</a>
+</div>
+<div class="tables">
+    <h2 class="just_center">Вклады</h2>
+        <br/>
+        <table class="table" >
+        <tr>
+            <th>№</th>
+            <th>Название вклада</th>
+            <th>Минимальная сумма</th>
+            <th>Максимальная сумма</th>
+            <th>Процентная ставка</th>
+            <th>Валюта</th>
+            <th>Обновить</th>
+            <th>Удалить</th>
+            <th>Добавил</th>
+        </tr>
+        <tr th:each="inf, infIter: ${infodep}">
+            <td th:utext="${infIter.index}+1">№</td>
+            <td th:utext="${inf.name}">Название вклада</td>
+            <td th:utext="${inf.minSumm}">Минимальная сумма</td>
+            <td th:utext="${inf.maxSumm}">Максимальная сумма</td>
+            <td th:utext="${inf.rate}">Процентная ставка</td>
+            <td th:utext="${inf.currency}">Валюта</td>
+            <td><a class="update_text" th:href="@{/upd_info(info=${inf.id},admin=${admin.id})}">Обновить</a></td>
+            <td><a class="delete_text" th:href="@{/delete_info(info=${inf.id},admin=${admin.id})}" th:method="delete">Удалить</a></td>
+            <td th:utext="${inf.admin.name}">Добавил</td>
+        </tr>
+    </table>
 
-<a th:href="@{/new_info(admin=${admin.id})}">Создать новый</a>
+    <br/>
+    <br/>
+    <br/>
 
-<br/>
-<br/>
+    <h2 class="just_center">Кредиты</h2>
+        <br/>
+        <table class="table">
+        <tr>
+            <th>№</th>
+            <th>Название кредита</th>
+            <th>Минимальная сумма</th>
+            <th>Максимальная сумма</th>
+            <th>Процентная ставка</th>
+            <th>Валюта</th>
+            <th>Обновить</th>
+            <th>Удалить</th>
+            <th>Добавил</th>
+        </tr>
+        <tr th:each="inf, infIter: ${infocrd}">
+            <td th:utext="${infIter.index}+1">№</td>
+            <td th:utext="${inf.name}">Название кредита</td>
+            <td th:utext="${inf.minSumm}">Минимальная сумма</td>
+            <td th:utext="${inf.maxSumm}">Максимальная сумма</td>
+            <td th:utext="${inf.rate}">Процентная ставка</td>
+            <td th:utext="${inf.currency}">Валюта</td>
+            <td><a class="update_text" th:href="@{/upd_info(info=${inf.id},admin=${admin.id})}">Обновить</a></td>
+            <td><a class="delete_text" th:href="@{/delete_info(info=${inf.id},admin=${admin.id})}" th:method="delete">Удалить</a></td>
+            <td th:utext="${inf.admin.name}">Добавил</td>
+        </tr>
+    </table>
+</div>
 
-<h2>Вклады</h2>
-<table border="1">
-    <tr>
-        <th>№</th>
-        <th>Название вклада</th>
-        <th>Минимальная сумма</th>
-        <th>Максимальная сумма</th>
-        <th>Процентная ставка</th>
-        <th>Валюта</th>
-        <th>Обновить</th>
-        <th>Удалить</th>
-        <th>Добавил</th>
-    </tr>
-    <tr th:each="inf, infIter: ${infodep}">
-        <td th:utext="${infIter.index}+1">№</td>
-        <td th:utext="${inf.name}">Название вклада</td>
-        <td th:utext="${inf.minSumm}">Минимальная сумма</td>
-        <td th:utext="${inf.maxSumm}">Максимальная сумма</td>
-        <td th:utext="${inf.rate}">Процентная ставка</td>
-        <td th:utext="${inf.currency}">Валюта</td>
-        <td><a th:href="@{/upd_info(info=${inf.id},admin=${admin.id})}">Обновить</a></td>
-        <td><a th:href="@{/delete_info(info=${inf.id},admin=${admin.id})}" th:method="delete">Удалить</a></td>
-        <td th:utext="${inf.admin.name}">Добавил</td>
-    </tr>
-</table>
-
-<br/>
-<br/>
-
-<h2>Кредиты</h2>
-<table border="1">
-    <tr>
-        <th>№</th>
-        <th>Название кредита</th>
-        <th>Минимальная сумма</th>
-        <th>Максимальная сумма</th>
-        <th>Процентная ставка</th>
-        <th>Валюта</th>
-        <th>Обновить</th>
-        <th>Удалить</th>
-        <th>Добавил</th>
-    </tr>
-    <tr th:each="inf, infIter: ${infocrd}">
-        <td th:utext="${infIter.index}+1">№</td>
-        <td th:utext="${inf.name}">Название кредита</td>
-        <td th:utext="${inf.minSumm}">Минимальная сумма</td>
-        <td th:utext="${inf.maxSumm}">Максимальная сумма</td>
-        <td th:utext="${inf.rate}">Процентная ставка</td>
-        <td th:utext="${inf.currency}">Валюта</td>
-        <td><a th:href="@{/upd_info(info=${inf.id},admin=${admin.id})}">Обновить</a></td>
-        <td><a th:href="@{/delete_info(info=${inf.id},admin=${admin.id})}" th:method="delete">Удалить</a></td>
-        <td th:utext="${inf.admin.name}">Добавил</td>
-    </tr>
-</table>
-
-
-<footer>
+<div class = "down">
     <div>
-        <p>Коза слабее льва и тигра, но коза в цирке не выступает!</p>
+        <p class = "down_text">Коза слабее льва и тигра, но коза в цирке не выступает!</p>
     </div>
-</footer>
+</div>
 </body>
 </html>

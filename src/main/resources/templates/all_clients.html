@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Клиенты</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
 </head>
 <body>
 <header>
-    <div>
-        <a>
-            <img th:src="@{/images/pr_logo.jpg}">
-        </a>
+    <div >
         <nav>
-            <div>
-                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
+            <div class="up">
+                <a>
+                    <img  class="pic" th:src="@{/images/pr_logo.png}">
+                </a>
+                <a class = "up_text" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
                     О нас
                 </a>
-                <a th:href="@{/}">
+                <a class = "up_text" th:href="@{/}">
                     Сменить пользователя
                 </a>
             </div>
@@ -23,15 +24,18 @@
     </div>
 </header>
 
-<div>
+<div class = "hello">
     <h1>
         Клиенты
     </h1>
 </div>
 
-<a th:href="@{/main_admin(admin=${admin.id})}">На главную</a>
+<div class = "admin_info">
+<a class="admin_info_text" th:href="@{/main_admin(admin=${admin.id})}">На главную</a>
+</div>
 
-<table border="1">
+<div class="tables">
+<table class="table">
     <tr>
         <th>№</th>
         <th>ФИО</th>
@@ -42,15 +46,16 @@
         <td th:utext="${cltIter.index}+1">№</td>
         <td th:utext="${clt.name}">ФИО</td>
         <td th:utext="${clt.passportSeries}+' '+${clt.passportNumber}">Серия и номер паспорта</td>
-        <td><a th:href="@{/pays_history(client=${clt.id},admin=${admin.id})}">История выплат</a></td>
+        <td><a class="update_text" th:href="@{/pays_history(client=${clt.id},admin=${admin.id})}">История выплат</a></td>
     </tr>
 
 </table>
+</div>
 
-<footer>
+<div class = "down">
     <div>
-        <p>Коза слабее льва и тигра, но коза в цирке не выступает!</p>
+        <p class = "down_text">Коза слабее льва и тигра, но коза в цирке не выступает!</p>
     </div>
-</footer>
+</div>
 </body>
 </html>

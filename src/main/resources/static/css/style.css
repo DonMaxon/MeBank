@@ -41,6 +41,7 @@ height:60px;
 .hello{
 text-align:center;
 margin-top:70px;
+width:100%;
 }
 
 .hello_text{
@@ -49,7 +50,8 @@ margin-top:70px;
 .admin_info{
 position:absolute;
 margin-top:120px;
-margin-left:450px;
+text-align: center;
+width: 100%;
 }
 
 .admin_info_text{
@@ -58,8 +60,45 @@ margin-left:450px;
     font-size: 22px;
     text-decoration:none;
     color:black;
-    margin-right:60px;
+    margin-right:30px;
+    margin-left:30px;
 }
+
+.tables{
+position: absolute;
+margin-top:200px;
+width: 100%;
+}
+
+.table{
+position:absolute;
+align: center;
+text-align: center;
+width: 100%;
+background: lightgrey;
+border-collapse: collapse;
+padding-bottom: 50px;
+}
+
+.just_center{
+text-align: center;
+}
+
+.delete_text{
+text-decoration:none;
+color: red;
+}
+
+.update_text{
+text-decoration:none;
+color: green;
+}
+
+td, th {
+    border-style: solid;
+    border-color: white;
+    border-width: 1px;
+    }
 
 .down{
     background-color: yellowgreen;
