@@ -3,55 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <title>Авторизация</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
 </head>
 <body>
 <header>
-    <div>
-        <a>
-            <img src="images/pr_logo.jpg">
-        </a>
+    <div >
         <nav>
-            <div>
-                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
+            <div class="up">
+                <a>
+                    <img  class="pic" th:src="@{/images/pr_logo.png}">
+                </a>
+                <a class = "up_text" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
                     О нас
                 </a>
-                <a th:href="@{/}">
+                <a class = "up_text" th:href="@{/}">
                     Сменить пользователя
                 </a>
             </div>
         </nav>
     </div>
 </header>
-<section>
-    <div>
-        <h1>Авторизация</h1>
+
+<div class = "tables">
+    <div class = "new_info">
+        <form>
+            <h1 class="just_center">Авторизация</h1>
+            <br/>
+            <br/>
         <div>
-            <form>
                 <div>
-                    <label>
+                    <label class = "new_info_text">
                         Логин
                     </label>
-                    <input type="text" placeholder="Логин" required="required">
+                    <input style="margin-left:120px;" type="text" placeholder="Логин" required="required">
                 </div>
+            <br/>
+            <br/>
                 <div>
-                    <label>
+                    <label class = "new_info_text">
                         Пароль
                     </label>
-                    <input type="text" placeholder="Пароль" required="required">
+                    <input style="margin-left:110px;"type="text" placeholder="Пароль" required="required">
                 </div>
-                <div>
+            <br/>
+            <br/>
+                <div class="just_center">
                     <a>
                         Войти
                     </a>
                 </div>
-            </form>
         </div>
+        </form>
     </div>
-</section>
-<footer>
+</div>
+
+<div class = "down">
     <div>
-        <p>Коза слабее льва и тигра, но коза в цирке не выступает!</p>
+        <p class = "down_text">Коза слабее льва и тигра, но коза в цирке не выступает!</p>
     </div>
-</footer>
+</div>
 </body>
 </html>
