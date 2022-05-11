@@ -41,37 +41,37 @@
     <label class = "new_info_text">
         ФИО
     </label>
-    <input  style="margin-left:150px;" type="text" placeholder="Иванов Иван Иванович" required="required" th:value="${client.name}" th:field="*{name}">
+    <input  style="margin-left:150px;" type="text" required="required" th:value="${client.name}" th:field="*{name}">
     <br/>
     <br/>
     <label class = "new_info_text">
         Серия паспорта
     </label>
-    <input style="margin-left:65px;" type="text" placeholder="1234" required="required" pattern="[0-9]{4}" th:value="${client.passportSeries}" th:field="*{passportSeries}">
+    <input style="margin-left:65px;" type="text" required="required" pattern="[0-9]{4}" th:value="${client.passportSeries}" th:field="*{passportSeries}">
     <br/>
     <br/>
     <label class = "new_info_text">
         Номер паспорта
     </label>
-    <input  style="margin-left:60px;" type="text" placeholder="567890" required="required" pattern="[0-9]{6}" th:value="${client.passportNumber}" th:field="*{passportNumber}">
+    <input  style="margin-left:60px;" type="text" required="required" pattern="[0-9]{6}" th:value="${client.passportNumber}" th:field="*{passportNumber}">
     <br/>
     <br/>
     <label class = "new_info_text">
         Место выдачи паспорта
     </label>
-    <input type="text" placeholder="ГУ МВД России по Самарской области" required="required" th:value="${client.passportIssueBy}" th:field="*{passportIssueBy}">
+    <input type="text" required="required" th:value="${client.passportIssueBy}" th:field="*{passportIssueBy}">
     <br/>
     <br/>
     <label class = "new_info_text">
         Дата выдачи паспорта
     </label>
-    <input style="margin-left:10px;"type="date" required="required" th:value="${client.passportIssueDate}" th:field="*{passportSeries}">
+    <input style="margin-left:10px;" type="date" required="required" th:value="${#dates.format(client.passportIssueDate, 'dd.mm.yyyy')}" th:field="*{passportSeries}">
     <br/>
     <br/>
     <label class = "new_info_text">
         Номер телефона
     </label>
-    <input style="margin-left:55px;" type="tel" placeholder="89371234567" required="required" pattern="[8]{1}[0-9]{10}" th:value="${client.phone}" th:field="*{phone}">
+    <input style="margin-left:55px;" type="tel" required="required" pattern="[8]{1}[0-9]{10}" th:value="${client.phone}" th:field="*{phone}">
     <br/>
     <br/>
     <label class = "new_info_text">
