@@ -6,7 +6,7 @@
     <link th:href="@{/css/style.css}" rel="stylesheet"/>
 </head>
 <body>
-<header>
+<header style="z-index: 999999">
     <div >
         <nav>
             <div class="up">
@@ -66,10 +66,6 @@
     <a class = "admin_info_text" th:href="@{/new_cred(client = ${client.id})}">Взять кредит</a>
 </div>
 
-<div class = "down">
-    <div>
-        <p class = "down_text">Коза слабее льва и тигра, но коза в цирке не выступает!</p>
-    </div>
-</div>
+
 </body>
 </html>

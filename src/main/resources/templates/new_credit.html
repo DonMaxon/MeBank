@@ -6,7 +6,7 @@
     <link th:href="@{/css/style.css}" rel="stylesheet"/>
 </head>
 <body>
-<header>
+<header style="z-index: 999999">
     <div >
         <nav>
             <div class="up">
@@ -32,11 +32,10 @@
     </h1>
 </div>
 
-<div class = "admin_info">
-<p class = "admin_info_text" >Список доступных кредитов</p>
-</div>
-    <div class = "tables">
-<table class="table">
+
+<table class = "tables">
+    <tr><td><p class = "admin_info_text" >Список доступных кредитов</p></td></tr>
+<tr><td><table class="table">
     <tr>
         <th>Название кредита</th>
         <th>Минимальная сумма</th>
@@ -51,14 +50,15 @@
         <td th:utext="${inf.rate}">Процентная ставка</td>
         <td th:utext="${inf.currency}">Валюта</td>
     </tr>
-
+    </td></tr>
 </table>
 
     <br/>
     <br/>
     <br/>
+    <tr><td>
     <div class = "new_info">
-<form method="post" th:object="${credit}" th:action="@{/new_cred(client=${client.id})}">
+    <form method="post" th:object="${credit}" th:action="@{/new_cred(client=${client.id})}">
     <label class = "new_info_text" style="margin-right:25px;">
         Тип кредита
     </label>
@@ -83,11 +83,8 @@
     <button class = "new_info_button" type="reset">Очистить</button>
 </form>
 </div>
-</div>
-<div class = "down">
-    <div>
-        <p class = "down_text">Коза слабее льва и тигра, но коза в цирке не выступает!</p>
-    </div>
-</div>
+</td></tr>
+</table>
+
 </body>
 </html>

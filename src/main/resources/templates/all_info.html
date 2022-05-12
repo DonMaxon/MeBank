@@ -6,7 +6,7 @@
     <link th:href="@{/css/style.css}" rel="stylesheet"/>
 </head>
 <body>
-<header>
+<header style="z-index: 999999">
     <div >
         <nav>
             <div class="up">
@@ -33,14 +33,17 @@
         </span>
     </h1>
 </div>
+
 <div class = "admin_info">
     <a class="admin_info_text" th:href="@{/main_admin(admin=${admin.id})}">На главную</a>
     <a class="admin_info_text" th:href="@{/new_info(admin=${admin.id})}">Создать новый</a>
 </div>
-<div class="tables">
-    <h2 class="just_center">Вклады</h2>
+
+<table class="tables" >
+    <tr>
+    <td><h2 class="just_center" >Вклады</h2></td></tr>
         <br/>
-        <table class="table" >
+    <tr><td><table class="table">
         <tr>
             <th>№</th>
             <th>Название вклада</th>
@@ -64,10 +67,15 @@
             <td th:utext="${inf.admin.name}">Добавил</td>
         </tr>
     </table>
+    </td>
+    </tr>
 
 
-    <h2 class="just_center">Кредиты</h2>
+
+    <tr><td><h2 class="just_center">Кредиты</h2></tr></td>
         <br/>
+    <tr>
+        <td>
         <table class="table">
         <tr>
             <th>№</th>
@@ -91,13 +99,11 @@
             <td><a class="delete_text" th:href="@{/delete_info(info=${inf.id},admin=${admin.id})}" th:method="delete">Удалить</a></td>
             <td th:utext="${inf.admin.name}">Добавил</td>
         </tr>
-    </table>
-</div>
 
-<div class = "down">
-    <div>
-        <p class = "down_text">Коза слабее льва и тигра, но коза в цирке не выступает!</p>
-    </div>
-</div>
+    </table>
+        </td>
+    </tr>
+</table>
+
 </body>
 </html>

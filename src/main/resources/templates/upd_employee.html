@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Редактирование данных сотрудника</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
 </head>
-<body>
-<header>
-    <div>
-        <a>
-            <img th:src="@{/images/pr_logo.jpg}">
-        </a>
+
+<header style="z-index: 999999">
+    <div >
         <nav>
-            <div>
-                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
+            <div class="up">
+                <a>
+                    <img  class="pic" th:src="@{/images/pr_logo.png}">
+                </a>
+                <a class = "up_text" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
                     О нас
                 </a>
-                <a th:href="@{/}">
+                <a class = "up_text" th:href="@{/}">
                     Сменить пользователя
                 </a>
             </div>
@@ -23,42 +24,49 @@
     </div>
 </header>
 
-<div>
+<div class = "hello">
     <h1>
         Редактирование данных сотрудника
     </h1>
 </div>
 
-<br/>
-<a th:href="@{/all_employees(admin=${creator.id})}">Назад</a>
-<br/>
-<a th:href="@{/main_admin(admin=${creator.id})}">На главную</a>
-<br/>
+<div class = "admin_info">
+    <a class = "admin_info_text" th:href="@{/all_employees(admin=${creator.id})}">Назад</a>
+    <a class = "admin_info_text" th:href="@{/main_admin(admin=${creator.id})}">На главную</a>
+</div>
 
-<form method="put" th:object="${employee}" th:action="@{/upd_employee(creator=${creator.id})}">
-    <label>
-        ФИО
-    </label>
-    <input type="text" required="required" th:value="${employee.name}" th:field="*{name}">
-    <br/>
-    <label>
-        Логин
-    </label>
-    <input type="text" required="required" th:value="${employee.login}" th:field="*{login}">
-    <br/>
-    <label>
-        Пароль
-    </label>
-    <input type="text" required="required" pattern="[a-zA-Z0-9]{6,}" th:value="${employee.password}" th:field="*{password}">
-    <br/>
-    <button type="submit">Создать</button>
-    <button type="reset">Очистить</button>
-</form>
-
-<footer>
-    <div>
-        <p>Коза слабее льва и тигра, но коза в цирке не выступает!</p>
+<div class = "tables">
+    <div class = "new_info">
+        <form method="put" th:object="${employee}" th:action="@{/upd_employee(creator=${creator.id})}">
+            <br/>
+            <label class = "new_info_text">
+                ФИО
+            </label>
+            <input style="margin-left:150px;" type="text" required="required" th:value="${employee.name}" th:field="*{name}">
+            <br/>
+            <br/>
+            <label class = "new_info_text">
+                Логин
+            </label>
+            <input style="margin-left:140px;" type="text" required="required" th:value="${employee.login}" th:field="*{login}">
+            <br/>
+            <br/>
+            <label class = "new_info_text">
+                Пароль
+            </label>
+            <input style="margin-left:130px;" type="text" required="required" pattern="[a-zA-Z0-9]{6,}" th:value="${employee.password}" th:field="*{password}">
+            <br/>
+            <br/>
+            <button class = "new_info_button"  type="submit">Создать</button>
+            <button class = "new_info_button"  type="reset">Очистить</button>
+        </form>
     </div>
-</footer>
+</div>
+
+<div class = "down">
+    <div>
+        <p class = "down_text">Коза слабее льва и тигра, но коза в цирке не выступает!</p>
+    </div>
+</div>
 </body>
 </html>

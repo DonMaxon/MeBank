@@ -6,7 +6,7 @@
     <link th:href="@{/css/style.css}" rel="stylesheet"/>
 </head>
 <body>
-<header>
+<header style="z-index: 999999">
     <div >
         <nav>
             <div class="up">
@@ -41,12 +41,12 @@
 <br/>
 <br/>
 
-<div class="tables">
-<h2 class="just_center">По популярности среди клиентов</h2>
+<table class="tables">
+<tr><td><h2 class="just_center">По популярности среди клиентов</h2></td></tr>
     <br/>
-<h3 class="just_center">Вклады</h3>
+    <tr><td><h3 class="just_center">Вклады</h3></td></tr>
     <br/>
-<table class="table">
+    <tr><td><table class="table">
     <tr>
         <th>№</th>
         <th>Название вклада</th>
@@ -58,13 +58,15 @@
         <td th:utext="${dep[1]}">Число клиентов</td>
     </tr>
 </table>
-    <br/>
+    </td>
+    </tr>
     <br/>
     <br/>
 
-<h3 class="just_center">Кредиты</h3>
+
+    <tr><td><h3 class="just_center">Кредиты</h3></td></tr>
     <br/>
-<table class="table">
+    <tr><td><table class="table">
     <tr>
         <th>№</th>
         <th>Название кредита</th>
@@ -76,16 +78,16 @@
         <td th:utext="${crd[1]}">Число клиентов</td>
     </tr>
 </table>
-
-    <br/>
+    </td>
+    </tr>
 <br/>
 <br/>
 
-<h2 class="just_center">По доходности</h2>
+    <tr><td><h2 class="just_center">По доходности</h2></td></tr>
     <br/>
-<h3 class="just_center">Вклады</h3>
+    <tr><td><h3 class="just_center">Вклады</h3></td></tr>
     <br/>
-<table class="table">
+    <tr><td><table class="table">
     <tr>
         <th>№</th>
         <th>Название вклада</th>
@@ -97,12 +99,13 @@
         <td th:utext="${dep[1]}">Доходность</td>
     </tr>
 </table>
+    </td>
+    </tr>
     <br/>
     <br/>
+    <tr><td><h3 class="just_center">Кредиты</h3></td></tr>
     <br/>
-<h3 class="just_center">Кредиты</h3>
-    <br/>
-<table class="table">
+    <tr><td><table class="table">
     <tr>
         <th>№</th>
         <th>Название кредита</th>
@@ -114,13 +117,8 @@
         <td th:utext="${crd[1]}">Доходность</td>
     </tr>
 </table>
-</div>
-
-
-<div class = "down">
-    <div>
-        <p class = "down_text">Коза слабее льва и тигра, но коза в цирке не выступает!</p>
-    </div>
-</div>
+    </td>
+    </tr>
+</table>
 </body>
 </html>

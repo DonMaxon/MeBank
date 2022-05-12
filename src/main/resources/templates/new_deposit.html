@@ -5,7 +5,7 @@
     <link th:href="@{/css/style.css}" rel="stylesheet"/>
 </head>
 <body>
-<header>
+<header style="z-index: 999999">
     <div >
         <nav>
             <div class="up">
@@ -31,10 +31,9 @@
     </h1>
 </div>
 
-<div class = "admin_info">
-<p class = "admin_info_text">Список доступных вкладов</p>
-</div>
-<div class = "tables">
+<table class = "tables">
+    <tr><td><p class = "admin_info_text">Список доступных вкладов</p></td></tr>
+    <tr><td>
 <table class="table">
     <tr>
         <th>Название вклада</th>
@@ -52,10 +51,12 @@
     </tr>
 
 </table>
+    </td>
+    </tr>
     <br/>
     <br/>
     <br/>
-    <div class = "new_info">
+    <tr><td><div class = "new_info">
         <form method="post" th:object="${deposit}" th:action="@{/new_dep(client=${client.id})}">
             <label class = "new_info_text">
                 Тип вклада
@@ -81,15 +82,9 @@
             <button class = "new_info_button" type="reset">Очистить</button>
         </form>
     </div>
-</div>
+    </td>
+    </tr>
 
-
-
-
-<div class = "down">
-    <div>
-        <p class = "down_text">Коза слабее льва и тигра, но коза в цирке не выступает!</p>
-    </div>
-</div>
+</table>
 </body>
 </html>
