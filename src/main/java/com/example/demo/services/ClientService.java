@@ -4,6 +4,9 @@ import com.example.demo.entity.Client;
 import com.example.demo.exceptions.NotFoundException;
 import com.example.demo.repositories.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -11,7 +14,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class ClientService {
+public class ClientService{
     @Autowired
     private final ClientRepository clientRepository;
 
@@ -44,5 +47,6 @@ public class ClientService {
         clientRepository.findAll().forEach(res::add);
         return res;
     }
+
 
 }

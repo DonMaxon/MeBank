@@ -4,12 +4,15 @@ import com.example.demo.entity.Admin;
 import com.example.demo.exceptions.NotFoundException;
 import com.example.demo.repositories.AdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
 @Service
-public class AdminService {
+public class AdminService{
 
     @Autowired
     private final AdminRepository adminRepository;
@@ -36,5 +39,6 @@ public class AdminService {
     public void deleteAll(){
         adminRepository.deleteAll();
     }
+
 
 }

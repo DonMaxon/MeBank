@@ -2,6 +2,9 @@ package com.example.demo.entity;
 
 import com.example.demo.deserializers.AdminDeserializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import org.springframework.security.core.CredentialsContainer;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.*;
@@ -9,7 +12,7 @@ import java.util.*;
 @JsonDeserialize(using = AdminDeserializer.class)
 @Entity
 @Table(name = "Admin")
-public class Admin {
+public class Admin implements UserDetails, CredentialsContainer {
 
     @Id
     private UUID id;
@@ -20,7 +23,7 @@ public class Admin {
     private  String  login;
     @Column(name = "password", nullable = false)
     private String password;
-    @OneToMany(mappedBy = "admin",  cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "admin",  cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Employee> employees;
     @OneToMany(mappedBy = "admin",  cascade = CascadeType.ALL)
     private List<Info> infos;
@@ -65,8 +68,38 @@ public class Admin {
         this.login = login;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return login;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 
     public void setPassword(String password) {
@@ -111,5 +144,10 @@ public class Admin {
                 ", password='" + password + '\'' +
                 ", employees=" + employees +
                 '}';
+    }
+
+    @Override
+    public void eraseCredentials() {
+
     }
 }

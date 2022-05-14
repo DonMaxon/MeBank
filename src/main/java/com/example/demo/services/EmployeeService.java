@@ -4,6 +4,9 @@ import com.example.demo.entity.Employee;
 import com.example.demo.exceptions.NotFoundException;
 import com.example.demo.repositories.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -43,4 +46,6 @@ public class EmployeeService {
     public void deleteAll(){
         employeeRepository.deleteAll();
     }
+
+
 }

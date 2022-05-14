@@ -5,6 +5,7 @@ import com.example.demo.repositories.ClientRepository;
 import com.example.demo.services.*;
 import com.example.demo.utils.DepCredUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -33,6 +34,37 @@ public class WebController {
     public String index(Model model) {
         return "index";
     }
+
+    @GetMapping("/afterLogin")
+    public String test(Model model){
+        Object user = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        try{
+            Admin admin = (Admin) user;
+            model.addAttribute(admin);
+            return "main_admin";
+        }
+        catch (ClassCastException e){
+
+        }
+        try{
+            Employee employee = (Employee) user;
+            model.addAttribute(employee);
+            return "main_employee";
+        }
+        catch (ClassCastException e){
+
+        }
+        try{
+            Client client = (Client) user;
+            model.addAttribute(client);
+            return "main_client";
+        }
+        catch (ClassCastException e){
+
+        }
+        return "index";
+    }
+
 
     @GetMapping("/error")
     public String error(Model model) { return "error"; }

@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="ru" xmlns:th="http://www.thymeleaf.org/">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <meta charset="UTF-8">
-    <title>Авторизация</title>
+    <title>MeBank authorization</title>
     <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <http pattern="/resources/**" security="none" />
 </head>
 <body>
 <header style="z-index: 999999">
@@ -23,44 +24,48 @@
         </nav>
     </div>
 </header>
+<div th:if="${param.error}">
+    Invalid username and password.
+</div>
+<div th:if="${param.logout}">
+    You have been logged out.
+</div>
 
 <div class = "tables">
     <div class = "new_info">
-        <form>
+        <form  th:action="@{/index}" method="post" role="form">
             <h1 class="just_center">Авторизация</h1>
             <br/>
             <br/>
-        <div>
+            <div>
                 <div>
                     <label class = "new_info_text">
                         Логин
                     </label>
-                    <input style="margin-left:120px;" type="text" placeholder="Логин" required="required">
+                    <input style="margin-left:120px;" type="name" class = "form-control" name="username">
                 </div>
-            <br/>
-            <br/>
+                <br/>
+                <br/>
                 <div>
                     <label class = "new_info_text">
                         Пароль
                     </label>
-                    <input style="margin-left:110px;"type="text" placeholder="Пароль" required="required">
+                    <input style="margin-left:110px;" type="name" class = "form-control" name="password">
                 </div>
-            <br/>
-            <br/>
-                <div class="just_center">
-                    <a>
-                        Войти
-                    </a>
-                </div>
-        </div>
+                <br/>
+                <br/>
+                <button class = "new_info_button" style = "margin-left:180px;" type="submit">Войти</button>
+            </div>
         </form>
     </div>
 </div>
+
 
 <div class = "down">
     <div>
         <p class = "down_text">Коза слабее льва и тигра, но коза в цирке не выступает!</p>
     </div>
 </div>
+
 </body>
 </html>

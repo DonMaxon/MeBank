@@ -4,6 +4,9 @@ import com.example.demo.deserializers.EmployeeDeserializer;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import org.springframework.security.core.CredentialsContainer;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.*;
@@ -11,7 +14,7 @@ import java.util.*;
 @JsonDeserialize(using = EmployeeDeserializer.class)
 @Entity
 @Table(name = "Employee")
-public class Employee {
+public class Employee implements UserDetails, CredentialsContainer {
 
     @Id
     private UUID id;
@@ -69,8 +72,38 @@ public class Employee {
         this.login = login;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return login;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 
     public void setPassword(String password) {
@@ -126,5 +159,10 @@ public class Employee {
                 ", admin=" + admin +
                 ", clients=" + clients +
                 '}';
+    }
+
+    @Override
+    public void eraseCredentials() {
+
     }
 }
