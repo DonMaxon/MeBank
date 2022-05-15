@@ -20,7 +20,10 @@ public class DepositService {
     }
 
     public void save(Deposit deposit) {
-        depositRepository.save(deposit);
+        if (!(deposit.getSumm()>deposit.getInfo().getMaxSumm() || deposit.getSumm()<deposit.getInfo().getMinSumm())){
+            depositRepository.save(deposit);
+        }
+
     }
 
     public void delete(UUID id){

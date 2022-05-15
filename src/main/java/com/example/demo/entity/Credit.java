@@ -16,8 +16,7 @@ public class Credit {
 
     @Id
     private UUID id;
-    @Column(name = "summ", nullable = false)
-    private double summ;
+
     @Column(name = "start_date", nullable = false)
     private Date openDate;
     @Column(name = "end_date", nullable = false)
@@ -36,6 +35,8 @@ public class Credit {
     @JoinColumn(name = "info")
     @JsonIgnore
     private Info info;
+    @Column(name = "summ", nullable = false)
+    private double summ;
     @OneToMany(mappedBy = "credit",  cascade = CascadeType.ALL)
     private List<Pay> pays;
 

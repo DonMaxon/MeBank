@@ -21,7 +21,7 @@ public class Info {
     private UUID id;
     @Column(name = "type", nullable = false)
     private Type type;
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false, unique = true)
     private String name;
     @Column(name = "min_summ")
     private double minSumm;
