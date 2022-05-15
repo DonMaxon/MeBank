@@ -37,7 +37,7 @@
 
 <div class = "tables">
     <div class = "new_info">
-        <form method="put" th:object="${employee}" th:action="@{/upd_employee(creator=${creator.id})}">
+        <form th:method="put" th:object="${employee}" th:action="@{/upd_employee(creator=${creator.id},employee=${employee.id})}">
             <br/>
             <label class = "new_info_text">
                 ФИО
@@ -57,7 +57,7 @@
             <input style="margin-left:130px;" type="text" required="required" pattern="[a-zA-Z0-9]{6,}" th:value="${employee.password}" th:field="*{password}">
             <br/>
             <br/>
-            <button class = "new_info_button"  type="submit">Создать</button>
+            <button class = "new_info_button"  type="submit">Принять изменения</button>
             <button class = "new_info_button"  type="reset">Очистить</button>
         </form>
     </div>

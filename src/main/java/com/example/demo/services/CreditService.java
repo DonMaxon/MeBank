@@ -21,10 +21,13 @@ public class CreditService {
     }
 
     public void save(Credit credit) {
-        if (!(credit.getSumm()>credit.getInfo().getMaxSumm() || credit.getSumm()<credit.getInfo().getMinSumm())){
-            creditRepository.save(credit);
+        if (credit.getPays().isEmpty()) {
+            if (!(credit.getSumm() > credit.getInfo().getMaxSumm() || credit.getSumm() < credit.getInfo().getMinSumm())) {
+                creditRepository.save(credit);
+            }
+            return;
         }
-
+        creditRepository.save(credit);
     }
 
     public void delete(UUID id){

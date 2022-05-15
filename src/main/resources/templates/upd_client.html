@@ -37,7 +37,7 @@
 
 <div class = "tables">
     <div class = "new_info">
-<form method="put" th:object="${client}" th:action="@{/upd_client(client=${client.id})}">
+<form th:method="put" th:object="${client}" th:action="@{/upd_client(client=${client.id},employee=${employee.id})}">
     <label class = "new_info_text">
         ФИО
     </label>
@@ -65,7 +65,7 @@
     <label class = "new_info_text">
         Дата выдачи паспорта
     </label>
-    <input style="margin-left:10px;" type="date" required="required" th:value="${#dates.format(client.passportIssueDate, 'dd.mm.yyyy')}" th:field="*{passportSeries}">
+    <input style="margin-left:10px;" type="date" required="required" th:value="${{client.passportIssueDate}}" th:field="*{passportIssueDate}">
     <br/>
     <br/>
     <label class = "new_info_text">

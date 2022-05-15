@@ -39,7 +39,7 @@
     <label class = "new_info_text">
         Сумма
     </label>
-    <input style="margin-left:130px;" type="number" placeholder="10000" required="required" th:field="*{cash}" min="1">
+    <input style="margin-left:130px;" type="number" placeholder="10000" required="required" th:field="*{cash}" min="1", step="0.01">
     <br/>
     <br/>
     <button class = "new_info_button" type="submit">Внести выплату</button>

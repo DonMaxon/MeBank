@@ -5,11 +5,16 @@ import com.example.demo.repositories.ClientRepository;
 import com.example.demo.services.*;
 import com.example.demo.utils.DepCredUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 @Controller
@@ -227,10 +232,32 @@ public class WebController {
         model.addAttribute("employee", employeeService.findById(id));
         return "upd_client";
     }
+    @PostMapping("upd_client")
+    public String updClient(@RequestParam("client") UUID uuid, @RequestParam("employee") UUID id, Model model, @ModelAttribute Client client) {
+        Client old = clientService.findById(client.getId());
+        client.setDeposits(old.getDeposits());
+        client.setCredits(old.getCredits());
+        client.setEmployee(old.getEmployee());
+        clientService.save(client);
+        return "redirect:/clients?employee="+id.toString();
+    }
     @GetMapping("del_client")
     public String delClient(@RequestParam("client") UUID uuid, @RequestParam("employee") UUID id, Model model) {
+        if (clientService.findById(uuid).getCredits().size()>0){
+            for (Credit credit: clientService.findById(uuid).getCredits()){
+                if (credit.isActive()){
+                    return "redirect:/clients?employee="+id.toString();
+                }
+            }
+        }
+        for (Credit credit: clientService.findById(uuid).getCredits()){
+            creditService.delete(credit.getId());
+        }
+        for (Deposit deposit: clientService.findById(uuid).getDeposits()){
+            depositService.delete(deposit.getId());
+        }
         clientService.delete(uuid);
-        return "redirect:/clients?employee="+id.toString();
+        return "redirect:/del_client?employee="+id.toString();
     }
     @GetMapping("delete_info")
     public String delInfo(@RequestParam("info") UUID uuid, @RequestParam("admin") UUID id, Model model) {
@@ -250,12 +277,36 @@ public class WebController {
         return "upd_employee";
     }
     @PostMapping("upd_employee")
-    public String updEmpParams(@RequestParam("creator") UUID id, Model model, @ModelAttribute Employee employee) {
+    public String updEmpParams(@RequestParam("creator") UUID id, @RequestParam("employee") UUID uuid, Model model, @ModelAttribute Employee employee) {
+        Employee old = employeeService.findById(uuid);
+        employee.setClients(old.getClients());
+        employee.setAdmin(old.getAdmin());
+        employeeService.save(employee);
         return "redirect:/all_employees?admin="+id.toString();
     }
     @GetMapping("del_employee")
     public String delEmp(@RequestParam("employee") UUID uuid, @RequestParam("admin") UUID id, Model model) {
+        List<Employee> employees = employeeService.findAll();
+        if (employees.size()==1){
+            return "redirect:/all_employees?admin="+id.toString();
+        }
+        Employee to_del = employeeService.findById(uuid);
+        int index = 0;
+        if (employees.get(0).getId().equals(uuid)){
+            employees.get(1).getClients().addAll(to_del.getClients());
+            index = 1;
+        }
+        else{
+            employees.get(0).getClients().addAll(to_del.getClients());
+        }
+        for (Client client: to_del.getClients()) {
+            client.setEmployee(employees.get(index));
+            clientService.save(client);
+        }
+        to_del.setClients(new ArrayList<>());
+        employeeService.save(to_del);
         employeeService.delete(uuid);
+        employeeService.save(employees.get(index));
         return "redirect:/all_employees?admin="+id.toString();
     }
     @GetMapping("new_employee")
@@ -295,10 +346,24 @@ public class WebController {
     }
     @PostMapping("new_pay")
     public String newPay(@RequestParam("credit") UUID uuid, Model model, @ModelAttribute Pay pay) {
-        pay.setId(UUID.randomUUID());
-        pay.setCredit(creditService.findById(uuid));
-        pay.setDate(new Date());
-        payService.save(pay);
+        Credit credit = creditService.findById(uuid);
+        if (!(credit.getSumm()-pay.getCash()<0)) {
+            pay.setId(UUID.randomUUID());
+            pay.setCredit(credit);
+            pay.setDate(new Date());
+            payService.save(pay);
+            if (credit.getPays().size()==1) {
+                LocalDate date1 = LocalDate.ofInstant(credit.getOpenDate().toInstant(), ZoneId.systemDefault());
+                LocalDate date2 = LocalDate.ofInstant(credit.getEndDate().toInstant(),ZoneId.systemDefault());
+                credit.setSumm(Math.round(credit.getSummOfNextPay() * (ChronoUnit.MONTHS.between(date1, date2)-1) * 100) / 100.);
+            }
+            credit.setSumm(credit.getSumm() - pay.getCash());
+            credit.setLastPayDate(pay.getDate());
+            credit.setSummOfNextPay(Math.min(credit.getSumm(), credit.getSummOfNextPay()));
+            if (!(credit.getSumm() > 0))
+                credit.setActive(false);
+            creditService.save(credit);
+        }
         return "redirect:/credits?client="+pay.getCredit().getClient().getId().toString();
     }
     @GetMapping("del_credit")
@@ -307,5 +372,11 @@ public class WebController {
         if (credit.getSumm()==0)
             creditService.delete(uuid);
         return "redirect:/credits?client="+credit.getClient().getId().toString();
+    }
+    @GetMapping("del_deposit")
+    public String delDeposit(@RequestParam("deposit") UUID uuid, Model model) {
+        Deposit deposit = depositService.findById(uuid);
+        depositService.delete(uuid);
+        return "redirect:/credits?client="+deposit.getClient().getId().toString();
     }
 }

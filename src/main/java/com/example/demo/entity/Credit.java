@@ -63,15 +63,15 @@ public class Credit {
 
     public Credit(DepCredUtil util, Client clt, Info inf) {
         id = UUID.randomUUID();
-        summ = util.getSumm();
         Calendar cal = Calendar.getInstance();
+        summ = util.getSumm();
         openDate = cal.getTime();
         cal.add(Calendar.MONTH, util.getMonths());
         endDate = cal.getTime();
         lastPayDate = (Date)openDate.clone();
         info = inf;
         double r = info.getRate()/12/100;
-        summOfNextPay = Math.round(summ*r*Math.pow(1+r, util.getMonths())/(Math.pow(1+r, util.getMonths())-1)*100)/100.;
+        summOfNextPay = Math.round(util.getSumm()*r*Math.pow(1+r, util.getMonths())/(Math.pow(1+r, util.getMonths())-1)*100)/100.;
         isActive = true;
         client = clt;
         pays = new ArrayList<>();

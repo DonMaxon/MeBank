@@ -40,6 +40,7 @@
             <th>Текущая сумма</th>
             <th>Дата открытия</th>
             <th>Дата окончания</th>
+            <th>Сумма по окончании срока</th>
             <th>Процентная ставка</th>
             <th>Валюта</th>
             <th>Закрытие</th>
@@ -51,7 +52,7 @@
             <td th:utext="${dep.endDate}">Дата окончания</td>
             <td th:utext="${dep.info.rate}">Процентная ставка</td>
             <td th:utext="${dep.info.currency}">Валюта</td>
-            <td class="delete_text">Удалить</td>
+            <td><a class="delete_text" th:href="@{/del_deposit(deposit=${dep.id})}">Удалить</a></td>
         </tr>
 
     </table>
