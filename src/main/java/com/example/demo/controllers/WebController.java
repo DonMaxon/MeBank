@@ -257,7 +257,7 @@ public class WebController {
             depositService.delete(deposit.getId());
         }
         clientService.delete(uuid);
-        return "redirect:/del_client?employee="+id.toString();
+        return "redirect:/clients?employee="+id.toString();
     }
     @GetMapping("delete_info")
     public String delInfo(@RequestParam("info") UUID uuid, @RequestParam("admin") UUID id, Model model) {
