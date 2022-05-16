@@ -23,7 +23,7 @@ public class Admin implements UserDetails, CredentialsContainer {
     private  String  login;
     @Column(name = "password", nullable = false)
     private String password;
-    @OneToMany(mappedBy = "admin",  cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "admin",  cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Employee> employees;
     @OneToMany(mappedBy = "admin",  cascade = CascadeType.ALL)
     private List<Info> infos;
