@@ -166,7 +166,7 @@ public class WebController {
     public String updInfoParams(@RequestParam("info") UUID id, @RequestParam("admin") UUID uuid, Model model, @ModelAttribute Info info) {
         Info toUpd = infoService.findById(id);
         info.setAdmin(adminService.findById(uuid));
-        info.setType(Info.Type.DEPOSIT);
+        info.setType(toUpd.getType());
         try {
             infoService.delete(id);
         }
@@ -377,6 +377,6 @@ public class WebController {
     public String delDeposit(@RequestParam("deposit") UUID uuid, Model model) {
         Deposit deposit = depositService.findById(uuid);
         depositService.delete(uuid);
-        return "redirect:/credits?client="+deposit.getClient().getId().toString();
+        return "redirect:/deposits?client="+deposit.getClient().getId().toString();
     }
 }
